@@ -81,7 +81,38 @@
         //     }
         // });
     }
+    
+    function GetPlannedRoute() {
+        // Get the checkbox
+        var checkBox = document.getElementById("defaultCheck1");
         
+        // If the checkbox is checked, display the output text
+        if (checkBox.checked == true){
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/plannedroute_data.csv").then(function(data) {
+                var list = [];
+                var dynamic = "";
+                var len = data.length;
+                for (i=0; i < len; i++) {
+                    dynamic = new Microsoft.Maps.Location(data[i].lat_noise, data[i].long_noise);
+                    list.push(dynamic);
+                }
+                // console.log(list);
+                var line = new Microsoft.Maps.Polyline(list, {
+                    strokeColor: 'blue',
+                    strokeThickness: 2,
+                });
+                map.entities.push(line);
+            });
+        } else {
+                for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                    var polyline = map.entities.get(i);
+                        if (polyline instanceof Microsoft.Maps.Polyline) {
+                            map.entities.removeAt(i);
+                        }
+                }
+        }
+    }
+
 
     //will need to send vessel name to this function
     function GetActualRoute() {
@@ -185,7 +216,7 @@
     <main>
         <h1>MAERSK KIMI</h1>
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"  onclick="GetPlannedRoute()">
                 <label class="form-check-label" for="defaultCheck1">
                     Current Planned Journey
                 </label>
