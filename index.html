@@ -239,6 +239,9 @@
                     Vessels in the Vincity
                 </label>
             </div>
+        
+    </main>
+    <aside>
         <script src="http://d3js.org/d3.v3.min.js"></script>
         <script type="text/javascript"charset="utf-8">
             d3.text("VesselData.csv", function(data) {
@@ -254,10 +257,7 @@
                             .append("td")
                             .text(function(d) { return d; });
                 });
-            </script>
-    </main>
-    <aside>
-        
+            </script>    
 	</aside>
 
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
