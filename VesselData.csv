@@ -1,18 +1,18 @@
-﻿Vessel Name,IMO,Call Sign,Gross_Tonnage,Vessel_Type,PortOfRegistry,BuiltDate,Flag,Classification_Society_Code,Age (years),Age (months),Flag_Changes,Ownership Changes,Valuation Changes,Valuation Change Scale,Laid Ups,Loss Of Hire Days,Avg Speed,Annual Miles,Avg Journey Distances,Port Visits (number of different ports visited),Port Visits (in general),Zone Visits (in general),Zone Visits (restricted),No. Of Times Device Switched Off,Duration of Device Switched Off (hrs),Number of Deviations from ETA
-Maersk Kimi,9162227,PDHO,80942,Container Carrier,ROTTERDAM,1998-01-01T00:00:00Z,Netherlands,LR,21,252,5,1,5,Decreased,3,80,12,72236,800,13,98,120,8,0,0,12
-BERLIAN EKUATOR,9265548,HPYK,22209,LPG Tanker,Singapore,1998-01-01T00:00:00Z,Singapore,ABS,21,252,2,3,2,Neutral,3,91,16,49834,769,12,52,67,3,5,24,7
-DOHA,9085637,JNCI,111184,LNG Tanker,HONG KONG,1999-01-01T00:00:00Z,Hong Kong,LR,20,240,2,4,4,Neutral,4,68,13.5,121481,6501,7,19,25,0,1,7,1
-GAS DIANA,9194969,3FNY3,46021,LPG Tanker,HONG KONG,2000-01-01T00:00:00Z,Hong Kong,ABS,20,240,2,2,3,Neutral,5,98,9.8,85162,188,16,22,30,0,1,2,2
-HELIOS LEADER,9476745,7JFI,60212,Container Carrier,HONG KONG,1999-01-01T00:00:00Z,Hong Kong,ABS,20,240,2,6,6,Neutral,5,55,12.9,103520,4948,12,41,48,5,2,3,2
-JINGU,9021423,3FBA,42164,Container Carrier,HONG KONG,1992-01-01T00:00:00Z,Hong Kong,ABS,20,240,3,3,7,Decreased,3,57,16.1,96111,8080,15,38,50,4,0,0,5
-SHOHJIN,9073701,3FUX9,50308,Container Carrier,Norfolk,1999-01-01T00:00:00Z,United States of America,ABS,20,240,3,2,4,Increased,6,23,14.2,105047,930,16,49,58,5,3,150,7
-TAITAR NO.1,9403669,3FJB7,118634,Tanker,Singapore,2009-01-01T00:00:00Z,Singapore,LR,19,228,2,5,5,Decreased,7,32,18,121910,4223,2,24,29,3,1,6,3
-TAITAR NO.2,9403645,3EXZ,118634,Tanker,Norfolk,2009-01-01T00:00:00Z,United States of America,ABS,19,228,2,2,3,Neutral,8,62,15.2,119033,5372,2,24,27,0,0,0,3
-TAITAR NO.3,9403671,3FMD5,118634,Tanker,Singapore,2010-01-01T00:00:00Z,Singapore,LR,19,228,2,3,2,Neutral,3,39,18.8,138989,5399,2,26,29,1,1,6,4
-TOWADA,9321213,7JXI,159967,Crude Oil Tanker ,Singapore,2002-01-01T00:00:00Z,Singapore,ABS,17,204,3,1,2,Increased,2,32,13.8,85865,6658,13,24,33,3,0,0,2
-TOYO,9304667,H3ZA,160098,Crude Oil Tanker ,HONG KONG,2001-01-01T00:00:00Z,Hong Kong,BV,18,216,2,2,2,Neutral,2,44,15.4,93750,6367,11,36,45,2,3,3,3
-TSUGARU,9454498,7JVF,160152,Crude Oil Tanker ,HONG KONG,2001-01-01T00:00:00Z,Hong Kong,ABS,18,216,3,1,2,Neutral,1,19,9.9,86458,7441,15,26,34,4,1,1,2
-Maersk Palermo,9168207,PDHW,31333,Container Carrier,ROTTERDAM,1998-01-01T00:00:00Z,Netherlands,LR,21,252,1,2,1,Decreased,5,45,13.7,83442,2986,11,64,67,0,3,14,8
-Maersk Vega,9294082,PPTF,3760,Supply Vessel,Rio de Janeiro,2006-01-01T00:00:00Z,Brazil,LR,13,156,1,2,4,Decreased,1,41,9.3,16913,1730,3,23,29,2,1,9,5
-Maersk Ventura,9294094,PPTL,3760,Supply Vessel,Rio de Janeiro,2006-01-01T00:00:00Z,Brazil,LR,13,156,1,4,5,Neutral,6,29,6.9,8826,1730,2,22,25,1,1,3,6
-MCC Palawan,9332705,DUA3280,9957,Container Carrier,Manila,2007-01-01T00:00:00Z,Philippines,UNK_DNK,12,144,3,5,2,Increased,4,95,12,60377,7345,6,106,140,0,1,3,3
+﻿Vessel Name,IMO,Call Sign,Gross_Tonnage,Vessel_Type,PortOfRegistry,BuiltDate,Flag,Classification_Society_Code
+Maersk Kimi,9162227,PDHO,80942,Container Carrier,ROTTERDAM,1998-01-01T00:00:00Z,Netherlands,LR
+BERLIAN EKUATOR,9265548,HPYK,22209,LPG Tanker,Singapore,1998-01-01T00:00:00Z,Singapore,ABS
+DOHA,9085637,JNCI,111184,LNG Tanker,HONG KONG,1999-01-01T00:00:00Z,Hong Kong,LR
+GAS DIANA,9194969,3FNY3,46021,LPG Tanker,HONG KONG,2000-01-01T00:00:00Z,Hong Kong,ABS
+HELIOS LEADER,9476745,7JFI,60212,Container Carrier,HONG KONG,1999-01-01T00:00:00Z,Hong Kong,ABS
+JINGU,9021423,3FBA,42164,Container Carrier,HONG KONG,1992-01-01T00:00:00Z,Hong Kong,ABS
+SHOHJIN,9073701,3FUX9,50308,Container Carrier,Norfolk,1999-01-01T00:00:00Z,United States of America,ABS
+TAITAR NO.1,9403669,3FJB7,118634,Tanker,Singapore,2009-01-01T00:00:00Z,Singapore,LR
+TAITAR NO.2,9403645,3EXZ,118634,Tanker,Norfolk,2009-01-01T00:00:00Z,United States of America,ABS
+TAITAR NO.3,9403671,3FMD5,118634,Tanker,Singapore,2010-01-01T00:00:00Z,Singapore,LR
+TOWADA,9321213,7JXI,159967,Crude Oil Tanker ,Singapore,2002-01-01T00:00:00Z,Singapore,ABS
+TOYO,9304667,H3ZA,160098,Crude Oil Tanker ,HONG KONG,2001-01-01T00:00:00Z,Hong Kong,BV
+TSUGARU,9454498,7JVF,160152,Crude Oil Tanker ,HONG KONG,2001-01-01T00:00:00Z,Hong Kong,ABS
+Maersk Palermo,9168207,PDHW,31333,Container Carrier,ROTTERDAM,1998-01-01T00:00:00Z,Netherlands,LR
+Maersk Vega,9294082,PPTF,3760,Supply Vessel,Rio de Janeiro,2006-01-01T00:00:00Z,Brazil,LR
+Maersk Ventura,9294094,PPTL,3760,Supply Vessel,Rio de Janeiro,2006-01-01T00:00:00Z,Brazil,LR
+MCC Palawan,9332705,DUA3280,9957,Container Carrier,Manila,2007-01-01T00:00:00Z,Philippines,UNK_DNK
