@@ -8,9 +8,9 @@
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <!-- d3.js -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
     <!-- sheetJS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+    <!-- d3.js -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
     <title>Vessel Geo Monitoring</title>
 
@@ -239,8 +239,7 @@
                     Vessels in the Vincity
                 </label>
             </div>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
         <script type="text/javascript"charset="utf-8">
             d3.text("VesselData.csv", function(data) {
                 var parsedCSV = d3.csv.parseRows(data);
