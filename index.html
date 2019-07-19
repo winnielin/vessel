@@ -244,6 +244,7 @@
         <script type="text/javascript"charset="utf-8">
             d3.text("VesselData.csv", function(data) {
                 var parsedCSV = d3.csv.parseRows(data);
+                console.log(parsedCSV);
                     var container = d3.select("body")
                         .append("table")
                         .selectAll("tr")
