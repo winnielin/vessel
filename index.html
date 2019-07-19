@@ -93,7 +93,7 @@
                 var dynamic = "";
                 var len = data.length;
                 for (i=0; i < len; i++) {
-                    dynamic = new Microsoft.Maps.Location(data[i].lat_noise, data[i].long_noise);
+                    dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
                     list.push(dynamic);
                 }
                 // console.log(list);
