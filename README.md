@@ -10,7 +10,7 @@
 4. check how many zones a vessel crossed by checking points from the route
 5. how many times planned schedule to cross the zone -> show zone + alert (zone call)
 6. current location generate alert (if huge deviation -> reason)  
-7. generate planned schedule from actual one
+7. generate planned schedule from actual one  
    -random noise (v)  
    -change on destination  
 
