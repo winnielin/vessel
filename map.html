@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <!-- Bootstrap js-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- sheetJS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+    <!-- d3.js -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+    <title>Vessel Geo Monitoring</title>
+
+    <script type='text/javascript'>
+    var map, polygons;
+
+    function GetMap() {
+        map = new Microsoft.Maps.Map('#myMap', {
+            center: new Microsoft.Maps.Location(20.901126, 59.930796),
+            mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+            zoom: 5
+        });
+        //Create array of planned schedule
+        // var coords = [new Microsoft.Maps.Location(22.287945, 114.18135), new Microsoft.Maps.Location(22.477, 113.912), new Microsoft.Maps.Location(1.3855, 103.541)];
+
+        // // Create a polyline for planned schedule
+        // var line = new Microsoft.Maps.Polyline(coords, {
+        //     strokeColor: 'blue',
+        //     strokeThickness: 2,
+        // });
+        
+        // // Add the polyline to map
+        // map.entities.push(line);
+
+        // //Create custom Pushpin for ports
+        // var pin1 = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(22.287945, 114.18135), {
+        //     title: 'HKHKG',
+        //     subTitle: 'Hong Kong',
+        //     text: '1'
+        // });
+
+        // var pin2 = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(22.477, 113.912), {
+        //     title: 'CNSHK',
+        //     subTitle: 'Shekou',
+        //     text: '2'
+        // });
+
+        // var pin3 = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(1.3855, 103.541), {
+        //     title: 'MYTPP',
+        //     subTitle: 'Tanjung Pelepas',
+        //     text: '3'
+        // });
+
+        // //Add the pushpin to the map
+        // map.entities.push(pin1);
+        // map.entities.push(pin2);
+        // map.entities.push(pin3);
+
+        //Marine area
+        // Microsoft.Maps.loadModule('Microsoft.Maps.GeoXml', function () {
+        //     var layer = new Microsoft.Maps.GeoXmlLayer('http://geo.vliz.be/geoserver/wms?request=GetMap&service=wms&version=1.1.1&srs=EPSG:4326&layers=MarineRegions:iho&width=800&height=207&bbox=102.238472104104,-3.22872316782812,122.151298801884,25.5672843458959&styles=gazetteer_red&Format=KML&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Eid%3C%2FPropertyName%3E%3CLiteral%3E49%3C%2FLiteral%3E%3C%2FPropertyIsEqualTo%3E');
+        //     map.layers.insert(layer);
+        // });
+        
+        
+        //Create custom Pushpin current location for the vessel
+        var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(25.90372,56.8122));
+
+        //Add the pushpin to the map
+        map.entities.push(pin);
+
+        // //Load the Spatial Math module.
+        // Microsoft.Maps.loadModule("Microsoft.Maps.SpatialMath", function () {
+        //     //Generate some random polygons and add then to the map with labels.
+        //     polygons = Microsoft.Maps.TestDataGenerator.getPolygons(5, map.getBounds());
+        //     for (var i = 0; i < polygons.length; i++) {
+        //         addPolygonWithLabel(polygons[i], 'Polygon ' + i);
+        //     }
+        // });
+    }
+    
+    function GetPlannedRoute() {
+        // Get the checkbox
+        var checkBox = document.getElementById("defaultCheck1");
+        
+        // If the checkbox is checked, display the output text
+        if (checkBox.checked == true){
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherPlanned.csv").then(function(data) {
+                var list = [];
+                var dynamic = "";
+                var len = data.length;
+                for (i=0; i < len; i++) {
+                    dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                    list.push(dynamic);
+                }
+                // console.log(list);
+                var line = new Microsoft.Maps.Polyline(list, {
+                    strokeColor: 'blue',
+                    strokeThickness: 2,
+                });
+                map.entities.push(line);
+            });
+        } else {
+                for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                    var polyline = map.entities.get(i);
+                        if (polyline instanceof Microsoft.Maps.Polyline) {
+                            map.entities.removeAt(i);
+                        }
+                }
+        }
+    }
+
+
+    //will need to send vessel name to this function
+    function GetActualRoute() {
+        // Get the checkbox
+        var checkBox = document.getElementById("defaultCheck2");
+        
+        // If the checkbox is checked, display the output text
+        if (checkBox.checked == true){
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeather.csv").then(function(data) {
+                var list = [];
+                var dynamic = "";
+                var len = data.length;
+                for (i=0; i < len; i++) {
+                    dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                    list.push(dynamic);
+                }
+                // console.log(list);
+                var line = new Microsoft.Maps.Polyline(list, {
+                    strokeColor: 'red',
+                    strokeThickness: 2,
+                });
+                map.entities.push(line);
+            });
+        } else {
+                for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                    var polyline = map.entities.get(i);
+                        if (polyline instanceof Microsoft.Maps.Polyline) {
+                            map.entities.removeAt(i);
+                        }
+                }
+        }
+    }
+
+    //will need to send vessel name to this function
+    function GetZoneCrossed() {
+        // Get the checkbox
+        var checkBox = document.getElementById("defaultCheck3");
+        
+        // If the checkbox is checked, display the output text
+        if (checkBox.checked == true){
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/GeoZonesCode.csv").then(function(data) {
+                var list = [];
+                var zone = "";
+                var len = data.length;
+                for (i=0; i < len; i++) {
+                    if(data[i].Name=="IRAN")
+                    {
+                    zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                    // console.log(zone);
+                    list.push(zone);
+                    
+                    }
+                }
+                // console.log(list);
+                var polygon = new Microsoft.Maps.Polygon(list, {
+                    fillColor: 'rgba(0, 255, 0, 0.5)',
+                    strokeColor: 'red',
+                    strokeThickness: 2,
+                });
+                map.entities.push(polygon);
+            });
+        } else {
+                for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                    var polygon = map.entities.get(i);
+                        if (polygon instanceof Microsoft.Maps.Polygon) {
+                            map.entities.removeAt(i);
+                        }
+                }
+        }
+    }
+        
+    // function addPolygonWithLabel(polygon, label) {
+    //     //Add the polygon to the map.
+    //     map.entities.push(polygon);
+    //     //Add a click event to the polygon which will remove it from the map.
+    //     Microsoft.Maps.Events.addHandler(polygon, 'click', function (e) { removePolygon(e.target) });
+    //     //Calculate the centroid of the polygon.
+    //     var centroid = Microsoft.Maps.SpatialMath.Geometry.centroid(polygon);
+    //     //Create a pushpin that has a transparent icon and a title property set to the label value.
+    //     var labelPin = new Microsoft.Maps.Pushpin(centroid, {
+    //         icon: '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>',
+    //         title: label
+    //     });
+    //     //Store a reference to the label pushpin in the polygon metadata.
+    //     polygon.metadata = { label: labelPin };    
+    //     //Add the label pushpin to the map.
+    //     map.entities.push(labelPin);
+    // }
+    // function removePolygon(polygon) {
+    //     if (polygon.metadata && polygon.metadata.label) {
+    //         map.entities.remove(polygon.metadata.label);
+    //     }
+    //     map.entities.remove(polygon);
+    // }
+    </script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&setLang=en&setMkt=en-GB&key=AtG0h65a58rN_XG9CBwF21YBrAk82GzkMrzCgf9nlc0KCzdaSY_W4fSOBf3uZA_V' async defer></script>
+</head>
+
+<body>    
+    <div class="container">
+    <rside>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Vessels
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">JINGU</a>
+              <a class="dropdown-item" href="#">MAERSK KIMI</a>
+              <a class="dropdown-item" href="#">SHOHJIN</a>
+            </div>
+        </div>        
+    </rside>
+    <main>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"  onclick="GetPlannedRoute()">
+                <label class="form-check-label" for="defaultCheck1">
+                    Current Planned Journey
+                </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" onclick="GetActualRoute()">
+                <label class="form-check-label" for="defaultCheck2">
+                    Actual Route
+                </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" onclick="GetZoneCrossed()">
+                <label class="form-check-label" for="defaultCheck3">
+                    Zone Crossed
+                </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                <label class="form-check-label" for="defaultCheck4">
+                    Vessels in the Vincity
+                </label>
+            </div>
+    </main>
+    <lside>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+        <script type="text/javascript"charset="utf-8">
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/VesselData.csv").then(function(data) {
+                    console.log(data.IMO === "9162227");
+                    var container = d3.select("aside")
+                        .append("table")
+                        .selectAll("tr")
+                            .data(parsedCSV).enter()
+                            .append("tr")
+                        .selectAll("td")
+                            .data(function(d) { return d; }).enter()
+                            .append("td")
+                            .text(function(d) { return d; });
+                });
+            </script>    
+	</lside>
+
+    <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
+    </div>
+</body>
+
+</html>
