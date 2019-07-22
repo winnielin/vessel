@@ -46,8 +46,10 @@ ALL NEED READING CSV FILE!!!
 Intro 200  
 
 Conceptual Work 1600  
--???  
--???  
+
+-structure  
+-abstraction  
+-concepts  
 
 Conclusion 200  
 
@@ -56,7 +58,7 @@ Conclusion 200
 Intro 400  
 
 Subject area (technical or business area) 2000  
-  -marine insurance claims  N
+  -marine insurance claims N  
   -lack of competition and dynamic pricing S  
   -the effects of big data on insurance S  
   -visualisation helping decision making W   
@@ -67,7 +69,7 @@ Working process 800
   -stories (use cases) S  
   -scenario and hypothesis N  
   -user interface W  
-  -method/analytical tools used & considered  
+  -method/analytical tools used & considered -> bing maps & power BI   
   
 Reflection 400  
   -project  
