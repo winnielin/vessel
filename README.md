@@ -56,14 +56,17 @@ Conclusion 200
 Intro 400  
 
 Subject area (technical or business area) 2000  
-  -marine insurance & lack of competition and dynamic pricing  
-  -the effects of big data on insurance  
-  -visualisation helping decision making  
-  -modelling risk  
+  -marine insurance claims  N
+  -lack of competition and dynamic pricing S  
+  -the effects of big data on insurance S  
+  -visualisation helping decision making W   
+  -modelling risk  NA
   
 Working process 800  
-  -data generation  
-  -user interface  
+  -data generation and data mining R  
+  -stories (use cases) S  
+  -scenario and hypothesis N  
+  -user interface W  
   -method/analytical tools used & considered  
   
 Reflection 400  
