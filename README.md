@@ -43,13 +43,17 @@ ALL NEED READING CSV FILE!!!
 
 ### Team Report 2000
 
-Intro 200  
-
-Conceptual Work 1600  
+Introduction 200  
 
 -structure  
 -abstraction  
--concepts  
+-concepts
+
+Conceptual Work 1600  
+Project description (Problem to solve)  
+Exploratory Data Analysis  
+Hypothesis and Methods  
+Result  
 
 Conclusion 200  
 
@@ -69,7 +73,7 @@ Working process 800
   -stories (use cases) S  
   -scenario and hypothesis N  
   -user interface W  
-  -method/analytical tools used & considered -> bing maps & power BI   
+  -method/analytical tools used & considered -> bing maps, html & power BI W
   
 Reflection 400  
   -project  
