@@ -4,40 +4,39 @@
 
 ### Bing Maps
 
-1. ask for more zones data (e.g. HRA)
-2. direction for vessel
-3. mouse event for different layers (ship speed, temperature, latitude, longitude)
-4. check how many zones a vessel crossed by checking points from the route
-5. how many times planned schedule to cross the zone -> show zone + alert (zone call)
+1. ask for more zones data (e.g. HRA)  
+2. direction for vessel  
+3. how to untick route then remove only specific polyline from the map  
+4. check how many zones a vessel crossed by checking points from the route  
+5. how many times planned schedule to cross the zone -> show zone + alert (zone call)  
 6. current location generate alert (if huge deviation -> reason)  
-7. generate planned schedule from actual one  
-   -random noise (v)  
-   -change on destination  
-
 
 ### Template
 
-ALL NEED READING CSV FILE!!!  
-1. read csv file and show the basic information of the selected vessel  
+1. receive vessel name than read csv file and show the basic information of the selected vessel  
 2. notification block read from csv file  
-3. a block for important past details or events relating to the vessel (flag changes, ownership changes, valuation changes)   
-4. a block for recent news from nearby ports and other marine activities relevant  
-5. date selector (a date or a period)
+3. date selector (a date or a period)  
 
-### Other Visualisations
+#### Vessel Page (23 Jul)
 
-1. d3.js  
-2. c3.js  
-3.
+1. add mouse event for different layers (ship speed, temperature, latitude, longitude)  
+2. change planned schedule to another port (diff icon) because of war  
+3. show vessels in vincity  
+4. value change types?  
+5. the block of important details should put on the top of the page  
 
-## Problems
-1. untick route to remove from the map
-2.
-3.
+#### Fleet Page (24 Jul)
 
-## Questions
-1. how to combine scenario with map/webpage? e.g. smuggling/ environment hazard
-2. 
+1. fleet interaction table which can be selected then show on the map  
+2. heat map for passage plan  
+3. show typhoon or war zone
+
+
+### Other Visualisations (25 Jul)
+
+1. YoY interactive table for the Data Model
+2. d3.js  
+3. c3.js
 
 ## Report
 
@@ -70,7 +69,7 @@ Subject area (technical or business area) 2000
   
 Working process 800  
   -data generation and data mining R  
-  -stories (use cases) S  
+  -storyboarding (use cases) S  
   -scenario and hypothesis N  
   -user interface W  
   -method/analytical tools used & considered -> bing maps, html & power BI W
