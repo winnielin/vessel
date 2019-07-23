@@ -28,6 +28,8 @@
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://insurwave.com/images/favicon-32x32.png">  
+  <link rel="icon" type="image/png" sizes="16x16" href="https://insurwave.com/images/favicon-16x16.png">
   <!-- CSS Files -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
@@ -53,7 +55,7 @@
           <div class="sidebar-wrapper">
             <ul class="nav">
               <li class="nav-item ">
-                <a class="nav-link" href="#0"> <!-- -->
+                <a class="nav-link" href="index.html"> <!-- -->
                   <i class="material-icons">dashboard</i>
                   <p>My Fleet</p>
                 </a>
@@ -168,7 +170,7 @@
                 <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Maersk Kimi</a>
+            <a class="navbar-brand" id="vesselName" title="Maersk Kimi" href="#pablo">Maersk Kimi</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -231,99 +233,130 @@
       </nav>
       <!-- End Navbar -->
       <div class="content">
+        <div class="content">
           <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="card ">
-                        <div class="card-header card-header-success card-header-icon">
-                          <div class="card-icon">
-                            <i class="material-icons"></i>
-                          </div>
-                          <h4 class="card-title">Vessel Information</h4>
-                        </div>    
-                        <div class="card-body">
-                          <p>IMO: <b>9162227</b><br>
-                                Call Sign: <b>PDHO</b><br>
-                                Flag: <b>Netherlands</b><br>
-                                Vessel Type: <b>Container Carrier</b><br>
-                                Gross Tonnage: <b>80942</b><br>
-                                Deadweight: <b>88669 t</b>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card ">
-                          <div class="card-header card-header-rose card-header-text">
-                            <div class="card-text">
-                              <h4 class="card-title">Attributes</h4>
-                            </div>
-                          </div>
-                          <div class="card-body ">
-                            <form method="get" action="/" class="form-horizontal">
-                                <div class="col-sm-12 col-sm-offset-1 checkbox-radios">
-                                  <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"  onclick="GetPlannedRoute()"> Planned Journey
-                                      <span class="form-check-sign">
-                                        <span class="check"></span>
-                                      </span>
-                                </div>
-                                <div class="form-check">
-                                      <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" onclick="GetActualRoute()"> Actual Route
-                                        <span class="form-check-sign">
-                                          <span class="check"></span>
-                                        </span>
-                                </div>
-                                <div class="form-check">
-                                        <label class="form-check-label">
-                                          <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" onclick="GetZoneCrossed()"> Zone Crossed
-                                          <span class="form-check-sign">
-                                            <span class="check"></span>
-                                          </span>
-                                </div>
-                                <div class="form-check">
-                                          <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck4"> Vessels in the Vincity
-                                            <span class="form-check-sign">
-                                              <span class="check"></span>
-                                            </span>
-                                </div>
-                              </form>      
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-            <!--  end card -->
             <div class="row">
-            <div class="col-md-12">
-              <div class="card ">
-                <div class="card-header card-header-text card-header-rose">
-                  <div class="card-text">
-                    <h4 class="card-title">Satellite Map</h4>
+              <div class="col-md-6">
+                <div class="card ">
+                  <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons"></i>
+                    </div>
+                    <h4 class="card-title">Vessel Information</h4> 
+                  </div>    
+                  <div class="card-body">
+                    <p>IMO: <b>9162227</b><br>
+                      Call Sign: <b>PDHO</b><br>
+                      Flag: <b>Netherlands</b><br>
+                      Vessel Type: <b>Container Carrier</b><br>
+                      Gross Tonnage: <b>80942</b><br>
+                      Deadweight: <b>88669 t</b>
+                    </p>
+                   </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card ">
+                  <div class="card-header card-header-rose card-header-text">
+                    <div class="card-text">
+                      <h4 class="card-title">Attributes</h4>
+                    </div>
+                  </div>
+                  <div class="card-body ">
+                    <form method="get" action="/" class="form-horizontal">
+                      <div class="col-sm-12 col-sm-offset-1 checkbox-radios">
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"  onclick="GetPlannedRoute()"> Planned Journey
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                        </div>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" onclick="GetActualRoute()"> Actual Route
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                        </div>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" onclick="GetZoneCrossed()"> Zone Crossed
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                        </div>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck4"> Vessels in the Vincity
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                        </div>
+                    </form>      
+                  </div>
+                </div>
+              </div>
+            </div>
+                  <!--  end card -->
+            <div class="row">
+              <div class="col-md-8">
+                <div class="card ">
+                  <div class="card-header card-header-text card-header-rose">
+                    <div class="card-text">
+                    <h4 class="card-title">Map</h4>
                   </div>
                 </div>
                 <div class="card-body ">
                   <h4 class="card-title"></h4>
                   <div id="myMap" class="map map-big"></div>
                 </div>
+                </div>
               </div>
-            </div>
-                        <div class="row">
+              <div class="col-md-4">
+                <div class="card ">
+                  <div class="card-header card-header-text card-header-rose">
+                    <div class="card-text">
+                    <h4 class="card-title">Notifications</h4>
+                    </div>
+                  </div>
+                  <div class="card-body ">
+                      <div class="alert alert-info">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <i class="material-icons">close</i>
+                          </button>
+                          <span>
+                            <b> Info - </b> This is a regular notification made with ".alert-info"</span>
+                        </div>
+                    <div class="alert alert-warning">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="material-icons">close</i>
+                        </button>
+                        <span>
+                          <b> Warning - </b> This is a regular notification made with ".alert-warning"</span>
+                      </div>
+                      <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="material-icons">close</i>
+                        </button>
+                        <span>
+                          <b> Danger - </b> This is a regular notification made with ".alert-danger"</span>
+                      </div>
+                  </div>
+                </div>
+              </div>
                           <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="card card-stats">
                               <div class="card-header card-header-warning card-header-icon">
                                 <div class="card-icon">
                                   <i class="material-icons">weekend</i>
                                 </div>
-                                <p class="card-category">Bookings</p>
-                                <h3 class="card-title">184</h3>
+                                <p class="card-category">Flag Changes</p>
+                                <h3 class="card-title">5</h3>
                               </div>
                               <div class="card-footer">
                                 <div class="stats">
-                                  <i class="material-icons text-danger">warning</i>
-                                  <a href="#pablo">Get More Space...</a>
+                                  <i class="material-icons">local_offer</i> Tracked from MarineTraffic
                                 </div>
                               </div>
                             </div>
@@ -334,12 +367,12 @@
                                 <div class="card-icon">
                                   <i class="material-icons">equalizer</i>
                                 </div>
-                                <p class="card-category">Website Visits</p>
-                                <h3 class="card-title">75.521</h3>
+                                <p class="card-category">Ownership Changes</p>
+                                <h3 class="card-title">1</h3>
                               </div>
                               <div class="card-footer">
                                 <div class="stats">
-                                  <i class="material-icons">local_offer</i> Tracked from Google Analytics
+                                  <i class="material-icons">local_offer</i> Tracked from MarineTraffic
                                 </div>
                               </div>
                             </div>
@@ -350,8 +383,8 @@
                                 <div class="card-icon">
                                   <i class="material-icons">store</i>
                                 </div>
-                                <p class="card-category">Revenue</p>
-                                <h3 class="card-title">$34,245</h3>
+                                <p class="card-category">Valuation Changes</p>
+                                <h3 class="card-title">5</h3>
                               </div>
                               <div class="card-footer">
                                 <div class="stats">
@@ -366,8 +399,8 @@
                                 <div class="card-icon">
                                   <i class="fa fa-twitter"></i>
                                 </div>
-                                <p class="card-category">Followers</p>
-                                <h3 class="card-title">+245</h3>
+                                <p class="card-category">Age</p>
+                                <h3 class="card-title">252 months</h3>
                               </div>
                               <div class="card-footer">
                                 <div class="stats">
@@ -376,15 +409,16 @@
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <h3>Manage Listings</h3>
-                        <br>
-                        <div class="row">
+            </div>
+            <!-- <br>
+            <h3>Latest News</h3>
+            <br> -->
+            <div class="row">
                           <div class="col-md-4">
                             <div class="card card-product">
                               <div class="card-header card-header-image" data-header-animation="true">
                                 <a href="#pablo">
-                                  <img class="img" src="../assets/img/card-2.jpg">
+                                  <img class="img" src="https://static.vesselfinder.net/images/media/ea23cdbd3c8c5f7e75f573d7c14d1ab8.jpg">
                                 </a>
                               </div>
                               <div class="card-body">
@@ -403,18 +437,18 @@
                                   </button>
                                 </div>
                                 <h4 class="card-title">
-                                  <a href="#pablo">Cozy 5 Stars Apartment</a>
+                                  <a href="#pablo">Bulk Carrier CK Bluebell attacked by pirates near Singapore Strait</a>
                                 </h4>
                                 <div class="card-description">
-                                  The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona.
+                                    A South Korean freighter was attacked by pirates near the Singapore Strait on Monday (July 22), reported Yonhap news agency, quoting government officials in Busan.
                                 </div>
                               </div>
                               <div class="card-footer">
                                 <div class="price">
-                                  <h4>$899/night</h4>
+                                  <h4></h4>
                                 </div>
                                 <div class="stats">
-                                  <p class="card-category"><i class="material-icons">place</i> Barcelona, Spain</p>
+                                  <p class="card-category"><i class="material-icons">place</i> Singapore</p>
                                 </div>
                               </div>
                             </div>
@@ -423,7 +457,7 @@
                             <div class="card card-product">
                               <div class="card-header card-header-image" data-header-animation="true">
                                 <a href="#pablo">
-                                  <img class="img" src="../assets/img/card-3.jpg">
+                                  <img class="img" src="https://ichef.bbci.co.uk/news/624/cpsprodpb/F4A1/production/_107952626_stena_tanker_gulf_640map-nc-3.png">
                                 </a>
                               </div>
                               <div class="card-body">
@@ -442,66 +476,66 @@
                                   </button>
                                 </div>
                                 <h4 class="card-title">
-                                  <a href="#pablo">Office Studio</a>
+                                  <a href="#pablo">Iran tanker seizure: Radio exchanges reveal Iran-UK confrontation</a>
                                 </h4>
                                 <div class="card-description">
-                                  The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the night life in London, UK.
+                                    A recording has emerged of radio exchanges between a Royal Navy frigate and Iranian armed forces vessels, moments before a UK-flagged oil tanker was seized in the Gulf on Friday.
                                 </div>
                               </div>
                               <div class="card-footer">
                                 <div class="price">
-                                  <h4>$1.119/night</h4>
+                                  <h4></h4>
                                 </div>
                                 <div class="stats">
-                                  <p class="card-category"><i class="material-icons">place</i> London, UK</p>
+                                  <p class="card-category"><i class="material-icons">place</i>Iran</p>
                                 </div>
                               </div>
                             </div>
                           </div>
                           <div class="col-md-4">
-                            <div class="card card-product">
-                              <div class="card-header card-header-image" data-header-animation="true">
-                                <a href="#pablo">
-                                  <img class="img" src="../assets/img/card-1.jpg">
-                                </a>
-                              </div>
-                              <div class="card-body">
-                                <div class="card-actions text-center">
-                                  <button type="button" class="btn btn-danger btn-link fix-broken-card">
-                                    <i class="material-icons">build</i> Fix Header!
-                                  </button>
-                                  <button type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="View">
-                                    <i class="material-icons">art_track</i>
-                                  </button>
-                                  <button type="button" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="Edit">
-                                    <i class="material-icons">edit</i>
-                                  </button>
-                                  <button type="button" class="btn btn-danger btn-link" rel="tooltip" data-placement="bottom" title="Remove">
-                                    <i class="material-icons">close</i>
-                                  </button>
+                              <div class="card card-product">
+                                <div class="card-header card-header-image" data-header-animation="true">
+                                  <a href="#pablo">
+                                    <img class="img" src="https://ichef.bbci.co.uk/news/660/cpsprodpb/165D3/production/_107830619_reuters.jpg">
+                                  </a>
                                 </div>
-                                <h4 class="card-title">
-                                  <a href="#pablo">Beautiful Castle</a>
-                                </h4>
-                                <div class="card-description">
-                                  The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.
+                                <div class="card-body">
+                                  <div class="card-actions text-center">
+                                    <button type="button" class="btn btn-danger btn-link fix-broken-card">
+                                      <i class="material-icons">build</i> Fix Header!
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="View">
+                                      <i class="material-icons">art_track</i>
+                                    </button>
+                                    <button type="button" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="Edit">
+                                      <i class="material-icons">edit</i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-link" rel="tooltip" data-placement="bottom" title="Remove">
+                                      <i class="material-icons">close</i>
+                                    </button>
+                                  </div>
+                                  <h4 class="card-title">
+                                    <a href="#pablo">Threat level raised to 'critical' for UK ships in Iranian waters</a>
+                                  </h4>
+                                  <div class="card-description">
+                                      The UK has raised the threat to British shipping in Iranian waters in the Gulf to the highest level - where the risk of attack is "critical".
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="card-footer">
-                                <div class="price">
-                                  <h4>$459/night</h4>
-                                </div>
-                                <div class="stats">
-                                  <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>
+                                <div class="card-footer">
+                                  <div class="price">
+                                    <h4></h4>
+                                  </div>
+                                  <div class="stats">
+                                    <p class="card-category"><i class="material-icons">place</i>Iran</p>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <footer class="footer">
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
                     <div class="container-fluid">
                       <nav class="float-left">
                         <ul>
@@ -535,10 +569,10 @@
                         <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
                       </div>
                     </div>
-                  </footer>
-                </div>
-              </div>
-              <div class="fixed-plugin">
+      </footer>
+    </div>
+    </div>
+    <div class="fixed-plugin">
                 <div class="dropdown show-dropdown">
                   <a href="#" data-toggle="dropdown">
                     <i class="fa fa-cog fa-2x"> </i>
@@ -639,7 +673,7 @@
                     </li>
                   </ul>
                 </div>
-              </div>
+    </div>
               <!--   Core JS Files   -->
               <script src="assets/js/core/jquery.min.js"></script>
               <script src="assets/js/core/popper.min.js"></script>
@@ -677,7 +711,10 @@
               <script src="../assets/js/plugins/bootstrap-notify.js"></script>
               <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
               <script src="../assets/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
-              <script type='text/javascript'>
+              <!-- d3.js -->
+              <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+
+              <script>
                 var map, polygons;
             
                 function GetMap() {
@@ -744,46 +781,49 @@
                     //     }
                     // });
                 }
+              </script>
+              <script>
                 function GetPlannedRoute() {
-        // Get the checkbox
-        var checkBox = document.getElementById("defaultCheck1");
+                // Get the checkbox
+                var checkBox = document.getElementById("defaultCheck1");
         
-        // If the checkbox is checked, display the output text
-        if (checkBox.checked == true){
-            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherPlanned.csv").then(function(data) {
-                var list = [];
-                var dynamic = "";
-                var len = data.length;
-                for (i=0; i < len; i++) {
+                // If the checkbox is checked, display the output text
+                if (checkBox.checked == true){
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherPlanned.csv").then(function(data) {
+                  var list = [];
+                  var dynamic = "";
+                  var len = data.length;
+                  for (i=0; i < len; i++) {
                     dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
                     list.push(dynamic);
-                }
-                // console.log(list);
-                var line = new Microsoft.Maps.Polyline(list, {
+                  }
+                  // console.log(list);
+                  var line = new Microsoft.Maps.Polyline(list, {
                     strokeColor: 'blue',
                     strokeThickness: 2,
-                });
-                map.entities.push(line);
-            });
-        } else {
-                for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                  });
+                  map.entities.push(line);
+                  });
+                } else {
+                  for (var i = map.entities.getLength() - 1; i >= 0; i--) {
                     var polyline = map.entities.get(i);
                         if (polyline instanceof Microsoft.Maps.Polyline) {
                             map.entities.removeAt(i);
                         }
+                  }
                 }
-        }
-    }
-
-
-    //will need to send vessel name to this function
-    function GetActualRoute() {
-        // Get the checkbox
-        var checkBox = document.getElementById("defaultCheck2");
+                }
+              </script>
+              <script>
+            //will need to send vessel name to this function
+            function GetActualRoute() {
+            // console.log(document.getElementById("vesselName").title);
+            // Get the checkbox
+            var checkBox = document.getElementById("defaultCheck2");
         
-        // If the checkbox is checked, display the output text
-        if (checkBox.checked == true){
-            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeather.csv").then(function(data) {
+            // If the checkbox is checked, display the output text
+            if (checkBox.checked == true){
+                d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeather.csv").then(function(data) {
                 var list = [];
                 var dynamic = "";
                 var len = data.length;
@@ -798,7 +838,7 @@
                 });
                 map.entities.push(line);
             });
-        } else {
+            } else {
                 for (var i = map.entities.getLength() - 1; i >= 0; i--) {
                     var polyline = map.entities.get(i);
                         if (polyline instanceof Microsoft.Maps.Polyline) {
@@ -807,7 +847,9 @@
                 }
         }
     }
-
+  </script>
+  <script>
+  
     //will need to send vessel name to this function
     function GetZoneCrossed() {
         // Get the checkbox
