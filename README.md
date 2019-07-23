@@ -43,11 +43,17 @@ ALL NEED READING CSV FILE!!!
 
 ### Team Report 2000
 
-Intro 200  
+Introduction 200  
+
+-structure  
+-abstraction  
+-concepts
 
 Conceptual Work 1600  
--???  
--???  
+Project description (Problem to solve)  
+Exploratory Data Analysis  
+Hypothesis and Methods  
+Result  
 
 Conclusion 200  
 
@@ -56,15 +62,18 @@ Conclusion 200
 Intro 400  
 
 Subject area (technical or business area) 2000  
-  -marine insurance & lack of competition and dynamic pricing  
-  -the effects of big data on insurance  
-  -visualisation helping decision making  
-  -modelling risk  
+  -marine insurance claims N  
+  -lack of competition and dynamic pricing S  
+  -the effects of big data on insurance S  
+  -visualisation helping decision making W   
+  -modelling risk  NA
   
 Working process 800  
-  -data generation  
-  -user interface  
-  -method/analytical tools used & considered  
+  -data generation and data mining R  
+  -stories (use cases) S  
+  -scenario and hypothesis N  
+  -user interface W  
+  -method/analytical tools used & considered -> bing maps, html & power BI W
   
 Reflection 400  
   -project  
