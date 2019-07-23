@@ -2,7 +2,15 @@
 
 ## Coding To Do
 
-### Bing Maps
+### Vessel Page (23 Jul)
+
+1. add mouse event for different layers (ship speed, temperature, latitude, longitude)  
+2. change planned schedule to another port (diff icon) because of war  
+3. show vessels in vincity  
+4. value change types?  
+5. the block of important details should put on the top of the page  
+
+#### Bing Maps
 
 1. ask for more zones data (e.g. HRA)  
 2. direction for vessel  
@@ -11,32 +19,23 @@
 5. how many times planned schedule to cross the zone -> show zone + alert (zone call)  
 6. current location generate alert (if huge deviation -> reason)  
 
-### Template
+#### Template
 
 1. receive vessel name than read csv file and show the basic information of the selected vessel  
 2. notification block read from csv file  
 3. date selector (a date or a period)  
 
-#### Vessel Page (23 Jul)
-
-1. add mouse event for different layers (ship speed, temperature, latitude, longitude)  
-2. change planned schedule to another port (diff icon) because of war  
-3. show vessels in vincity  
-4. value change types?  
-5. the block of important details should put on the top of the page  
-
-#### Fleet Page (24 Jul)
+### Fleet Page (24 Jul)
 
 1. fleet interaction table which can be selected then show on the map  
 2. heat map for passage plan  
 3. show typhoon or war zone
 
-
 ### Other Visualisations (25 Jul)
 
-1. YoY interactive table for the Data Model
+1. YoY interactive table for the Data Model  
 2. d3.js  
-3. c3.js
+3. c3.js  
 
 ## Report
 
