@@ -723,6 +723,12 @@
                         mapTypeId: Microsoft.Maps.MapTypeId.aerial,
                         zoom: 5
                     });
+
+                    //Add mouse events to the map.
+                    Microsoft.Maps.Events.addHandler(map, 'click', function () { 
+                      //do what???
+                      highlight('mapClick'); });
+                      
                     //Create array of planned schedule
                     // var coords = [new Microsoft.Maps.Location(22.287945, 114.18135), new Microsoft.Maps.Location(22.477, 113.912), new Microsoft.Maps.Location(1.3855, 103.541)];
             
