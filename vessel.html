@@ -696,7 +696,7 @@
               <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
               <script src="assets/js/plugins/bootstrap-tagsinput.js"></script>
               <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-              <script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
+              <script src="assets/js/plugins/jasny-bootstrap.min.js"></script>
               <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
               <script src="assets/js/plugins/nouislider.min.js"></script>
               <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
@@ -706,11 +706,11 @@
               <!--  Bing Maps Plugin    -->
               <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&setLang=en&setMkt=en-GB&key=AtG0h65a58rN_XG9CBwF21YBrAk82GzkMrzCgf9nlc0KCzdaSY_W4fSOBf3uZA_V' async defer></script>
               <!-- Chartist JS -->
-              <script src="../assets/js/plugins/chartist.min.js"></script>
+              <script src="assets/js/plugins/chartist.min.js"></script>
               <!--  Notifications Plugin    -->
-              <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+              <script src="assets/js/plugins/bootstrap-notify.js"></script>
               <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-              <script src="../assets/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
+              <script src="assets/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
               <!-- d3.js -->
               <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
 
@@ -724,23 +724,6 @@
                         zoom: 5
                     });
 
-                    //Add mouse events to the map.
-                    Microsoft.Maps.Events.addHandler(map, 'click', function () { 
-                      //do what???
-                      highlight('mapClick'); });
-                      
-                    //Create array of planned schedule
-                    // var coords = [new Microsoft.Maps.Location(22.287945, 114.18135), new Microsoft.Maps.Location(22.477, 113.912), new Microsoft.Maps.Location(1.3855, 103.541)];
-            
-                    // // Create a polyline for planned schedule
-                    // var line = new Microsoft.Maps.Polyline(coords, {
-                    //     strokeColor: 'blue',
-                    //     strokeThickness: 2,
-                    // });
-                    
-                    // // Add the polyline to map
-                    // map.entities.push(line);
-            
                     // //Create custom Pushpin for ports
                     // var pin1 = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(22.287945, 114.18135), {
                     //     title: 'HKHKG',
@@ -777,15 +760,6 @@
             
                     //Add the pushpin to the map
                     map.entities.push(pin);
-            
-                    // //Load the Spatial Math module.
-                    // Microsoft.Maps.loadModule("Microsoft.Maps.SpatialMath", function () {
-                    //     //Generate some random polygons and add then to the map with labels.
-                    //     polygons = Microsoft.Maps.TestDataGenerator.getPolygons(5, map.getBounds());
-                    //     for (var i = 0; i < polygons.length; i++) {
-                    //         addPolygonWithLabel(polygons[i], 'Polygon ' + i);
-                    //     }
-                    // });
                 }
               </script>
               <script>
@@ -794,30 +768,97 @@
                 var checkBox = document.getElementById("defaultCheck1");
         
                 // If the checkbox is checked, display the output text
-                if (checkBox.checked == true){
-                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherPlanned.csv").then(function(data) {
-                  var list = [];
-                  var dynamic = "";
-                  var len = data.length;
-                  for (i=0; i < len; i++) {
-                    dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-                    list.push(dynamic);
-                  }
-                  // console.log(list);
-                  var line = new Microsoft.Maps.Polyline(list, {
-                    strokeColor: 'blue',
-                    strokeThickness: 2,
-                  });
-                  map.entities.push(line);
-                  });
-                } else {
-                  for (var i = map.entities.getLength() - 1; i >= 0; i--) {
-                    var polyline = map.entities.get(i);
+                  if (checkBox.checked == true){
+                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherPlanned.csv")
+                      .then(function(data) {
+                    var list = [];
+                    var dynamic = "";
+                    var pin;
+                    var len = data.length;
+                    for (i=0; i < len; i++) {
+                      //Add location point to polyline
+                      dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                      list.push(dynamic);
+
+                      if (i>0) {
+                        if(data[i].Direction !== data[i-1].Direction) {
+                          pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude));
+                          infobox = new Microsoft.Maps.Infobox(pin, {
+                                    visible: false
+                                    });
+                          //Assign the infobox to a map instance.
+                          infobox.setMap(map);
+                          //Store some metadata with the pushpin.
+                          pin.metadata = {
+                            title: data[i].Latitude + ", " + data[i].Longitude,
+                            description: "Ship Speed: " + data[i].Speed 
+                                       + "<br/>Temperature: " + data[i].Temperature
+                          };
+                          map.entities.push(pin);
+                          //Add mouse events to the pushpin
+                          Microsoft.Maps.Events.addHandler(pin, 'click', function (e) {
+                            if (e.targetType == "pushpin") {
+                            console.log(e.target.getLocation());
+                          // if (e.target.metadata) {
+                          //Set the infobox options with the metadata of the pushpin.
+                            infobox.setOptions({
+                            location: e.target.getLocation(),
+                            title: e.target.metadata.title,
+                            description: e.target.metadata.description,
+                            visible: true
+                            });
+                            }                        
+                          });
+                        }
+                      } else {
+                        pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude));
+                          infobox = new Microsoft.Maps.Infobox(pin, {
+                                    visible: false
+                                    });
+                          //Assign the infobox to a map instance.
+                          infobox.setMap(map);
+                          //Store some metadata with the pushpin.
+                          pin.metadata = {
+                             title: pin.getLocation().Latitude,
+                             description: 'Pin discription'
+                          };
+                          map.entities.push(pin);
+                          //Add mouse events to the pushpin
+                          Microsoft.Maps.Events.addHandler(pin, 'click', function (e) {
+                            if (e.targetType == "pushpin") {
+                            console.log(e.target.getLocation());
+                          // if (e.target.metadata) {
+                          //Set the infobox options with the metadata of the pushpin.
+                            infobox.setOptions({
+                            location: e.target.getLocation(),
+                            title: e.target.metadata.title,
+                            description: e.target.metadata.description,
+                            visible: true
+                            });
+                            }                        
+                          });
+                      }
+                    }
+                      var line = new Microsoft.Maps.Polyline(list, {
+                      strokeColor: 'blue',
+                      strokeThickness: 2,
+                      });
+                      map.entities.push(line);
+                    });
+
+                  } else {
+                    for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                      var polyline = map.entities.get(i);
                         if (polyline instanceof Microsoft.Maps.Polyline) {
                             map.entities.removeAt(i);
                         }
+                      var pushpin = map.entities.get(i);
+                        if (polyline instanceof Microsoft.Maps.Pushpin) {
+                            map.entities.removeAt(i);
+                        }
+                      
+                    }
                   }
-                }
                 }
               </script>
               <script>
