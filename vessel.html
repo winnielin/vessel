@@ -764,12 +764,62 @@
               </script>
               <script>
                 function GetPlannedRoute() {
+                // console.log(document.getElementById("vesselName").title);
+                // Get the checkbox
+               var checkBox = document.getElementById("defaultCheck2");
+          
+                // If the checkbox is checked, display the output text
+                if (checkBox.checked == true){
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherPlanned.csv")
+                  .then(function(data) {
+                  var list = [];
+                  var dynamic = "";
+                  var len = data.length;
+                  for (i=0; i < len; i++) {
+                      dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                      list.push(dynamic);
+                  }
+                  // console.log(list);
+                  var line = new Microsoft.Maps.Polyline(list, {
+                      strokeColor: 'red',
+                      strokeThickness: 1,
+                  });
+                  map.entities.push(line);
+              });
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherPlanned.csv")
+                  .then(function(data) {
+                  var list = [];
+                  var dynamic = "";
+                  var len = data.length;
+                  for (i=0; i < len; i++) {
+                      dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                      list.push(dynamic);
+                  }
+                  // console.log(list);
+                  var line = new Microsoft.Maps.Polyline(list, {
+                      strokeColor: 'red',
+                      strokeThickness: 1,
+                  });
+                  map.entities.push(line);
+              });
+              } else {
+                  for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                      var polyline = map.entities.get(i);
+                          if (polyline instanceof Microsoft.Maps.Polyline) {
+                              map.entities.removeAt(i);
+                          }
+                  }
+          }
+      }
+    </script>
+              <script>
+                function GetActualRoute() {
                 // Get the checkbox
                 var checkBox = document.getElementById("defaultCheck1");
         
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
-                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherPlanned.csv")
+                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherActual.csv")
                       .then(function(data) {
                     var list = [];
                     var dynamic = "";
@@ -791,9 +841,10 @@
                           //Store some metadata with the pushpin.
                           pin.metadata = {
                             title: data[i].Latitude + ", " + data[i].Longitude,
-                            description: "Ship Speed: " + data[i].Speed + " nt</br>"
+                            description: "Date: " + data[i].Date + "</br>"
+                                       + "Ship Speed: " + data[i].Speed + " nt</br>"
                                        + "Temperature: " + data[i].Temperature + " °C</br>"
-                                       + "Wind Speed: " + data[i].Wind_Speed + "m/s"
+                                       + "Wind Speed: " + data[i].Wind_Speed + " m/s"
                           };
                           map.entities.push(pin);
                           //Add mouse events to the pushpin
@@ -842,7 +893,7 @@
                     }
                       var line = new Microsoft.Maps.Polyline(list, {
                       strokeColor: 'blue',
-                      strokeThickness: 2,
+                      strokeThickness: 1,
                       });
                       map.entities.push(line);
                     });
@@ -862,40 +913,7 @@
                   }
                 }
               </script>
-              <script>
-            //will need to send vessel name to this function
-            function GetActualRoute() {
-            // console.log(document.getElementById("vesselName").title);
-            // Get the checkbox
-            var checkBox = document.getElementById("defaultCheck2");
-        
-            // If the checkbox is checked, display the output text
-            if (checkBox.checked == true){
-                d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherActual.csv").then(function(data) {
-                var list = [];
-                var dynamic = "";
-                var len = data.length;
-                for (i=0; i < len; i++) {
-                    dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-                    list.push(dynamic);
-                }
-                // console.log(list);
-                var line = new Microsoft.Maps.Polyline(list, {
-                    strokeColor: 'red',
-                    strokeThickness: 2,
-                });
-                map.entities.push(line);
-            });
-            } else {
-                for (var i = map.entities.getLength() - 1; i >= 0; i--) {
-                    var polyline = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Polyline) {
-                            map.entities.removeAt(i);
-                        }
-                }
-        }
-    }
-  </script>
+              
   <script>
   
     //will need to send vessel name to this function
@@ -922,7 +940,7 @@
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'rgba(0, 255, 0, 0.5)',
                     strokeColor: 'red',
-                    strokeThickness: 2,
+                    strokeThickness: 1,
                 });
                 map.entities.push(polygon);
             });
