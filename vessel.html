@@ -724,12 +724,7 @@
                         zoom: 5
                     });
 
-                    // //Create custom Pushpin for ports
-                    // var pin1 = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(22.287945, 114.18135), {
-                    //     title: 'HKHKG',
-                    //     subTitle: 'Hong Kong',
-                    //     text: '1'
-                    // });
+                    
             
                     // var pin2 = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(22.477, 113.912), {
                     //     title: 'CNSHK',
@@ -786,28 +781,33 @@
                   });
                   map.entities.push(line);
               });
-                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherPlanned.csv")
+
+                //Create custom Pushpin for ports
+                    
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/PlannedPorts.csv")
                   .then(function(data) {
-                  var list = [];
-                  var dynamic = "";
-                  var len = data.length;
-                  for (i=0; i < len; i++) {
-                      dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-                      list.push(dynamic);
-                  }
-                  // console.log(list);
-                  var line = new Microsoft.Maps.Polyline(list, {
-                      strokeColor: 'red',
-                      strokeThickness: 1,
+                    var pin;
+                    var len = data.length;
+                    for (i=0; i < len; i++) {
+                      pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude), {
+                      icon: 'assets/img/plannedPort.svg',
+                      title: data[i].LOcode,
+                      subTitle: data[i].Port_Name,
+                      text: data[i].Voyage + " Leg " + data[i].Leg
+                      });
+                    }
+                    map.entities.push(pin);
                   });
-                  map.entities.push(line);
-              });
               } else {
                   for (var i = map.entities.getLength() - 1; i >= 0; i--) {
                       var polyline = map.entities.get(i);
-                          if (polyline instanceof Microsoft.Maps.Polyline) {
-                              map.entities.removeAt(i);
-                          }
+                        if (polyline instanceof Microsoft.Maps.Polyline) {
+                            map.entities.removeAt(i);
+                        }
+                      var polyline = map.entities.get(i);
+                        if (polyline instanceof Microsoft.Maps.Pushpin) {
+                            map.entities.removeAt(i);
+                        }
                   }
           }
       }
