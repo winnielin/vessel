@@ -2,17 +2,15 @@
 
 ## Coding To Do
 
-### Vessel Page (23 Jul)
+### Vessel Page (24 Jul)
 
-1. add mouse event for different layers (ship speed, temperature, latitude, longitude)  
-2. change planned schedule to another port (diff icon) because of war  
-3. show vessels in vincity  
-4. value change types?  
-5. the block of important details should put on the top of the page  
+1. show vessels in vincity  
+2. value change types?  
+3. the block of important details should put on the top of the page  
 
 #### Bing Maps
 
-1. ask for more zones data (e.g. HRA)  
+1. ask for more zones data (HRA & EAST_SAUDI_ARABIA_TTW)  
 2. direction for vessel  
 3. how to untick route then remove only specific polyline from the map  
 4. check how many zones a vessel crossed by checking points from the route  
@@ -25,13 +23,13 @@
 2. notification block read from csv file  
 3. date selector (a date or a period)  
 
-### Fleet Page (24 Jul)
+### Fleet Page (25 Jul)
 
 1. fleet interaction table which can be selected then show on the map  
 2. heat map for passage plan  
 3. show typhoon or war zone
 
-### Other Visualisations (25 Jul)
+### Other Visualisations (26 Jul)
 
 1. YoY interactive table for the Data Model  
 2. d3.js  
