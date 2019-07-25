@@ -791,8 +791,9 @@
                           //Store some metadata with the pushpin.
                           pin.metadata = {
                             title: data[i].Latitude + ", " + data[i].Longitude,
-                            description: "Ship Speed: " + data[i].Speed 
-                                       + "<br/>Temperature: " + data[i].Temperature
+                            description: "Ship Speed: " + data[i].Speed + " nt</br>"
+                                       + "Temperature: " + data[i].Temperature + " °C</br>"
+                                       + "Wind Speed: " + data[i].Wind_Speed + "m/s"
                           };
                           map.entities.push(pin);
                           //Add mouse events to the pushpin
