@@ -842,7 +842,9 @@
                           });
                         }
                       } else {
-                        pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude));
+                        pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude), {
+                          icon: 'assets/img/historicalPoint.png'
+                        });
                           infobox = new Microsoft.Maps.Infobox(pin, {
                                     visible: false
                                     });
