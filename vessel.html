@@ -70,7 +70,7 @@
                     <div class="collapse show" id="maersk">
                       <ul class="nav">
                         <li class="nav-item active ">
-                          <a class="nav-link" href="maerskkimi.html">
+                          <a class="nav-link" href="vessel.html">
                             <span class="sidebar-mini"> K </span>
                             <span class="sidebar-normal"> Maersk Kimi </span>
                           </a>
@@ -724,25 +724,6 @@
                         zoom: 5
                     });
 
-                    
-            
-                    // var pin2 = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(22.477, 113.912), {
-                    //     title: 'CNSHK',
-                    //     subTitle: 'Shekou',
-                    //     text: '2'
-                    // });
-            
-                    // var pin3 = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(1.3855, 103.541), {
-                    //     title: 'MYTPP',
-                    //     subTitle: 'Tanjung Pelepas',
-                    //     text: '3'
-                    // });
-            
-                    // //Add the pushpin to the map
-                    // map.entities.push(pin1);
-                    // map.entities.push(pin2);
-                    // map.entities.push(pin3);
-            
                     //Marine area
                     // Microsoft.Maps.loadModule('Microsoft.Maps.GeoXml', function () {
                     //     var layer = new Microsoft.Maps.GeoXmlLayer('http://geo.vliz.be/geoserver/wms?request=GetMap&service=wms&version=1.1.1&srs=EPSG:4326&layers=MarineRegions:iho&width=800&height=207&bbox=102.238472104104,-3.22872316782812,122.151298801884,25.5672843458959&styles=gazetteer_red&Format=KML&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Eid%3C%2FPropertyName%3E%3CLiteral%3E49%3C%2FLiteral%3E%3C%2FPropertyIsEqualTo%3E');
@@ -761,7 +742,7 @@
                 function GetPlannedRoute() {
                 // console.log(document.getElementById("vesselName").title);
                 // Get the checkbox
-               var checkBox = document.getElementById("defaultCheck2");
+               var checkBox = document.getElementById("defaultCheck1");
           
                 // If the checkbox is checked, display the output text
                 if (checkBox.checked == true){
@@ -783,12 +764,12 @@
               });
 
                 //Create custom Pushpin for ports
-                    
                   d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/PlannedPorts.csv")
                   .then(function(data) {
                     var pin;
                     var len = data.length;
                     for (i=0; i < len; i++) {
+                      console.log(data[i].Latitude);
                       pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude), {
                       icon: 'assets/img/plannedPort.svg',
                       title: data[i].LOcode,
@@ -815,7 +796,7 @@
               <script>
                 function GetActualRoute() {
                 // Get the checkbox
-                var checkBox = document.getElementById("defaultCheck1");
+                var checkBox = document.getElementById("defaultCheck2");
         
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
