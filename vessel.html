@@ -769,15 +769,14 @@
                     var pin;
                     var len = data.length;
                     for (i=0; i < len; i++) {
-                      console.log(data[i].Latitude);
                       pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude), {
-                      icon: 'assets/img/plannedPort.svg',
-                      title: data[i].LOcode,
-                      subTitle: data[i].Port_Name,
-                      text: data[i].Voyage + " Leg " + data[i].Leg
+                      icon: 'assets/img/plannedPort.png',
+                      title: data[i].LOcode
+                      // subTitle: data[i].Port_Name,
+                      // text: data[i].Voyage + " Leg " + data[i].Leg
                       });
+                      map.entities.push(pin);
                     }
-                    map.entities.push(pin);
                   });
               } else {
                   for (var i = map.entities.getLength() - 1; i >= 0; i--) {
