@@ -719,7 +719,7 @@
             
                 function GetMap() {
                     map = new Microsoft.Maps.Map('#myMap', {
-                        center: new Microsoft.Maps.Location(20.901126, 59.930796),
+                        center: new Microsoft.Maps.Location(20.901126, 61.930796),
                         mapTypeId: Microsoft.Maps.MapTypeId.aerial,
                         zoom: 5
                     });
@@ -757,8 +757,8 @@
                   }
                   // console.log(list);
                   var line = new Microsoft.Maps.Polyline(list, {
-                      strokeColor: 'red',
-                      strokeThickness: 1,
+                      strokeColor: 'blue',
+                      strokeThickness: 2,
                   });
                   map.entities.push(line);
               });
@@ -809,7 +809,7 @@
                       //Add location point to polyline
                       dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
                       list.push(dynamic);
-
+                      
                       if (i>0) {
                         if(data[i].Direction !== data[i-1].Direction) {
                           pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude));
@@ -830,7 +830,6 @@
                           //Add mouse events to the pushpin
                           Microsoft.Maps.Events.addHandler(pin, 'click', function (e) {
                             if (e.targetType == "pushpin") {
-                            console.log(e.target.getLocation());
                           // if (e.target.metadata) {
                           //Set the infobox options with the metadata of the pushpin.
                             infobox.setOptions({
@@ -872,11 +871,16 @@
                       }
                     }
                       var line = new Microsoft.Maps.Polyline(list, {
-                      strokeColor: 'blue',
-                      strokeThickness: 1,
+                      strokeColor: 'red',
+                      strokeThickness: 2,
                       });
                       map.entities.push(line);
                     });
+                    pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(27.035, 49.6795), {
+                      icon: 'assets/img/changedPort.png',
+                      title: 'SAJUB'
+                      });
+                      map.entities.push(pin);
 
                   } else {
                     for (var i = map.entities.getLength() - 1; i >= 0; i--) {
