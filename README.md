@@ -7,6 +7,7 @@
 1. show vessels in vincity  
 2. value change types?  
 3. the block of important details should put on the top of the page  
+4. adjust the icon  
 
 ### Fleet Page  
 
