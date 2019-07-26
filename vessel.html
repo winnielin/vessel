@@ -821,14 +821,14 @@
                           //Store some metadata with the pushpin.
                           pin.metadata = {
                             title: data[i].Latitude + ", " + data[i].Longitude,
-                            description: "Date: " + data[i].Date + "</br>"
-                                       + "Ship Speed: " + data[i].Speed + " nt</br>"
+                            description: "Ship Speed: " + data[i].Speed + " nt</br>"
                                        + "Temperature: " + data[i].Temperature + " °C</br>"
-                                       + "Wind Speed: " + data[i].Wind_Speed + " m/s"
+                                       + "Wind Speed: " + data[i].Wind_Speed + " m/s" + "</br>"
+                                       + "Date: " + data[i].Date
                           };
                           map.entities.push(pin);
                           //Add mouse events to the pushpin
-                          Microsoft.Maps.Events.addHandler(pin, 'click', function (e) {
+                          Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
                             if (e.targetType == "pushpin") {
                           // if (e.target.metadata) {
                           //Set the infobox options with the metadata of the pushpin.
@@ -860,7 +860,7 @@
                           };
                           map.entities.push(pin);
                           //Add mouse events to the pushpin
-                          Microsoft.Maps.Events.addHandler(pin, 'click', function (e) {
+                          Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
                             if (e.targetType == "pushpin") {
                             console.log(e.target.getLocation());
                           // if (e.target.metadata) {
@@ -950,14 +950,17 @@
                       d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/VesselinVincity.csv")
                       .then(function(data) {
                         var len = data.length;
-                        for (i=0; i < len; i++) {
+                        for (i=1; i < len; i++) {
                           var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude), {
                             icon: 'assets/img/vesselinVincity.png'
                           });
                           map.entities.push(pin);
                         }
-                    });
-                  }
+                      });
+                    }
+                    else {
+
+                    }
                   }
                 </script>
               <script>
