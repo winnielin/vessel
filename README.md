@@ -2,16 +2,10 @@
 
 ## Coding To Do
 
-### Vessel Page
-
-1. show vessels in vincity  
-2. value change types?  
-3. the block of important details should put on the top of the page  
-
 ### Fleet Page  
 
-1. fleet interaction table which can be selected then show on the map  
-2. heat map for passage plan  
+1. fleet interaction table which can be selected then show vessel & passage plan on the map  
+2. heat map tile layer  
 3. show typhoon or war zone
 4. YoY interactive table for the Data Model
 5. c3.js (or d3.js)  
@@ -30,6 +24,12 @@
 1. receive vessel name than read csv file and show the basic information of the selected vessel  
 2. notification block read from csv file  
 3. date selector (a date or a period)  
+
+### Vessel Page
+
+1. vessels in vincity - alert & csv download btn  
+2. value change types?  
+3. the block of important details should put on the top of the page  
 
 ## Report
 
