@@ -732,7 +732,10 @@
                     
                     
                     //Create custom Pushpin current location for the vessel
-                    var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(25.90372,56.8122));
+                    var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(25.90372,56.8122),
+                    {
+                      icon: 'assets/img/vesselCurrentLoc.png',
+                    });
             
                     //Add the pushpin to the map
                     map.entities.push(pin);
@@ -812,7 +815,9 @@
                       
                       if (i>0) {
                         if(data[i].Direction !== data[i-1].Direction) {
-                          pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude));
+                          pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude), {
+                          icon: 'assets/img/historicalPoint.png'
+                          });
                           infobox = new Microsoft.Maps.Infobox(pin, {
                                     visible: false
                                     });
@@ -852,8 +857,11 @@
                           infobox.setMap(map);
                           //Store some metadata with the pushpin.
                           pin.metadata = {
-                             title: pin.getLocation().Latitude,
-                             description: 'Pin discription'
+                            title: data[i].Latitude + ", " + data[i].Longitude,
+                            description: "Date: " + data[i].Date + "</br>"
+                                       + "Ship Speed: " + data[i].Speed + " nt</br>"
+                                       + "Temperature: " + data[i].Temperature + " °C</br>"
+                                       + "Wind Speed: " + data[i].Wind_Speed + " m/s"
                           };
                           map.entities.push(pin);
                           //Add mouse events to the pushpin
