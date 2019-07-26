@@ -288,7 +288,7 @@
                         </div>
                         <div class="form-check">
                           <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck4"> Vessels in the Vincity
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" onclick="GetVesselinVincity()"> Vessels in the Vincity (15 miles)
                               <span class="form-check-sign">
                                 <span class="check"></span>
                               </span>
@@ -719,7 +719,7 @@
             
                 function GetMap() {
                     map = new Microsoft.Maps.Map('#myMap', {
-                        center: new Microsoft.Maps.Location(20.901126, 61.930796),
+                        center: new Microsoft.Maps.Location(22.201126, 61.930796),
                         mapTypeId: Microsoft.Maps.MapTypeId.aerial,
                         zoom: 5
                     });
@@ -758,7 +758,6 @@
                       dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
                       list.push(dynamic);
                   }
-                  // console.log(list);
                   var line = new Microsoft.Maps.Polyline(list, {
                       strokeColor: 'blue',
                       strokeThickness: 2,
@@ -947,6 +946,8 @@
                 }
         }
     }
+
+    
         
     // function addPolygonWithLabel(polygon, label) {
     //     //Add the polygon to the map.
@@ -972,6 +973,40 @@
     //     map.entities.remove(polygon);
     // }
               </script>
+              <script>
+                  var map, polygons;
+              
+                  function GetVesselinVincity() {
+                      
+  
+                    // Get the checkbox
+                     var checkBox = document.getElementById("defaultCheck1");
+          
+                    // If the checkbox is checked, display the output text
+                    if (checkBox.checked == true){
+                      d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherPlanned.csv")
+                      .then(function(data) {
+                        var len = data.length;
+                        for (i=0; i < len; i++) {
+                          var pin = new Microsoft.Maps.Pushpin(data[i].Latitude, data[i].Longitude), {
+                            
+                          };
+                          map.entities.push(pin);
+                        }
+                    });
+
+                      
+                      
+                      //Create custom Pushpin current location for the vessel
+                      var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(25.90372,56.8122),
+                      {
+                        icon: 'assets/img/vesselinVincity8.png',
+                      });
+              
+                      //Add the pushpin to the map
+                      map.entities.push(pin);
+                  }
+                </script>
               <script>
                 $(document).ready(function() {
                   $().ready(function() {
