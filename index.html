@@ -396,7 +396,7 @@
   <script src="assets/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
   <!-- d3.js -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
-  <script type="text/javascript" src="http://d3js.org/d3.v2.min.js"></script>
+  <!-- <script type="text/javascript" src="http://d3js.org/d3.v2.min.js"></script> -->
   <script>
   var map, polygons;
   var usgsEarthquakeUrl = 'https://raw.githubusercontent.com/winnielin/vessel/master/redSea.json';
@@ -517,8 +517,27 @@
                       strokeThickness: 2,
                       });
                       map.entities.push(line);
+
                     });
                     
+                    d3.csv("https://github.com/winnielin/vessel/blob/master/WarZones_fleet.csv").then(function(data) {
+                      var list = [];
+                      var zone = "";
+                      var len = data.length;
+                      for (i=0; i < len; i++) {
+                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                        // console.log(zone);
+                        list.push(zone);
+                    
+                      }
+                
+                var polygon = new Microsoft.Maps.Polygon(list, {
+                    fillColor: 'rgba(0, 255, 0, 0.5)',
+                    strokeColor: 'red',
+                    strokeThickness: 1,
+                });
+                map.entities.push(polygon);
+            });
 
                   } else {
                     for (var i = map.entities.getLength() - 1; i >= 0; i--) {
