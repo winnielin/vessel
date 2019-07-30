@@ -5,15 +5,16 @@
 ### Fleet Page  
 
 1. fleet interaction table which can be selected then show vessel & passage plan on the map  
-2. heat map tile layer  
-3. show typhoon or war zone
+2. heat map tile layer - show war zone (typhoon)  
+3. add newpage.html  
+  
 4. YoY interactive table for the Data Model
-5. c3.js (or d3.js)  
 
 #### Bing Maps  
 
-1. ask M for more zones data (HRA & EAST_SAUDI_ARABIA_TTW) / (YEMEN, SAUDI_ARABIA, ERITREA_HRA). 
+1. show more zones data (HRA & EAST_SAUDI_ARABIA_TTW) / (YEMEN, SAUDI_ARABIA, ERITREA_HRA)  
 2. how to untick route then remove only specific polyline from the map (IPrimitive)  
+  
 3. check how many zones a vessel crossed by checking points from the route  
 4. how many times planned schedule to cross the zone -> show zone + alert (zone call)  
 5. current location generate alert (if huge deviation -> reason)  
@@ -21,7 +22,7 @@
 
 #### Template
 
-1. receive vessel name than read csv file and show the basic information of the selected vessel  
+1. receive vessel name then read csv file and show the basic information of the selected vessel  
 2. notification block read from csv file  
 3. date selector (a date or a period)  
 
@@ -58,7 +59,7 @@ Subject area (technical or business area) 2000
   -lack of competition and dynamic pricing S  
   -the effects of big data on insurance S  
   -visualisation helping decision making W   
-  -modelling risk  NA
+  -modelling risk R  
   
 Working process 800  
   -data generation and data mining R  
