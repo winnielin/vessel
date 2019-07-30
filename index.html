@@ -520,7 +520,64 @@
 
                     });
                     
-                    d3.csv("https://github.com/winnielin/vessel/blob/master/WarZones_fleet.csv").then(function(data) {
+                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/WarZones_SA.csv").then(function(data) {
+                      var list = [];
+                      var zone = "";
+                      var len = data.length;
+                      for (i=0; i < len; i++) {
+                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                        // console.log(zone);
+                        list.push(zone);
+                    
+                      }
+                
+                var polygon = new Microsoft.Maps.Polygon(list, {
+                    fillColor: 'rgba(0, 255, 0, 0.5)',
+                    strokeColor: 'red',
+                    strokeThickness: 1,
+                });
+                map.entities.push(polygon);
+            });
+
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/WarZones_HRA.csv").then(function(data) {
+                      var list = [];
+                      var zone = "";
+                      var len = data.length;
+                      for (i=0; i < len; i++) {
+                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                        // console.log(zone);
+                        list.push(zone);
+                    
+                      }
+                
+                var polygon = new Microsoft.Maps.Polygon(list, {
+                    fillColor: 'rgba(0, 255, 0, 0.5)',
+                    strokeColor: 'red',
+                    strokeThickness: 1,
+                });
+                map.entities.push(polygon);
+            });
+
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/WarZones_ERITREA.csv").then(function(data) {
+                      var list = [];
+                      var zone = "";
+                      var len = data.length;
+                      for (i=0; i < len; i++) {
+                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                        // console.log(zone);
+                        list.push(zone);
+                    
+                      }
+                
+                var polygon = new Microsoft.Maps.Polygon(list, {
+                    fillColor: 'rgba(0, 255, 0, 0.5)',
+                    strokeColor: 'red',
+                    strokeThickness: 1,
+                });
+                map.entities.push(polygon);
+            });
+
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/WarZones_YEMEN.csv").then(function(data) {
                       var list = [];
                       var zone = "";
                       var len = data.length;
