@@ -396,6 +396,7 @@
   <script src="assets/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
   <!-- d3.js -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+  <script type="text/javascript" src="http://d3js.org/d3.v2.min.js"></script>
   <script>
   var map, polygons;
   var usgsEarthquakeUrl = 'https://raw.githubusercontent.com/winnielin/vessel/master/redSea.json';
@@ -406,17 +407,17 @@
                     zoom: 4
                 });
 
-                //Load the GeoJSON and HeatMap modules.
-                Microsoft.Maps.loadModule(['Microsoft.Maps.GeoJson', 'Microsoft.Maps.HeatMap'], function () {
-                Microsoft.Maps.GeoJson.readFromUrl(usgsEarthquakeUrl, function (shapes) {
-                  var heatmap = new Microsoft.Maps.HeatMapLayer(shapes, { radius: 5 });
-                  map.layers.insert(heatmap);
-                  });
-                });
+                // //Load the GeoJSON and HeatMap modules.
+                // Microsoft.Maps.loadModule(['Microsoft.Maps.GeoJson', 'Microsoft.Maps.HeatMap'], function () {
+                // Microsoft.Maps.GeoJson.readFromUrl(usgsEarthquakeUrl, function (shapes) {
+                //   var heatmap = new Microsoft.Maps.HeatMapLayer(shapes, { radius: 5 });
+                //   map.layers.insert(heatmap);
+                //   });
+                // });
 
                 // Marine area
                 // Microsoft.Maps.loadModule('Microsoft.Maps.GeoXml', function () {
-                //     var layer = new Microsoft.Maps.GeoXmlLayer('http://geo.vliz.be/geoserver/wfs?request=getfeature&service=wfs&version=1.1.0&typename=MarineRegions:iho&outputformat=GML3&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Eid%3C%2FPropertyName%3E%3CLiteral%3E37%3C%2FLiteral%3E%3C%2FPropertyIsEqualTo%3E');
+                //     var layer = new Microsoft.Maps.GeoXmlLayer('http://geo.vliz.be/geoserver/wfs?request=getfeature&service=wfs&version=1.1.0&typename=MarineRegions:iho&outputformat=GML3&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Eid%3C%2FPropertyName%3E%3CLiteral%3E37%3C%2FLiteral%3E%3C%2FPropertyIsEqualTo%3Ehttps://raw.githubusercontent.com/winnielin/vessel/master/redSea.xml');
                 //     console.log(layer);
                 //     map.layers.insert(layer);
                 // });

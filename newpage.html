@@ -6,7 +6,7 @@
 <style type="text/css">
 
 body {
-  font: 11px sans-serif;
+  font: 10px sans-serif;
 }
 
 .axis path,
@@ -50,7 +50,7 @@ body {
     var margin = {top: 20, right: 20, bottom: 30, left: 70},
         w = 860 - margin.left - margin.right,
         h = 500 - margin.top - margin.bottom,
-        x = d3.time.scale().range([0,w]),
+        x = d3.time.scale().range([0,w-150]),
         y = d3.scale.linear().range([h, 0]);
         parseDate = d3.time.format("%Y").parse;
         
@@ -78,6 +78,8 @@ body {
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom")
+        .ticks(d3.time.years, 1)
+        .tickFormat(d3.time.format('%Y'))
        svg.append("svg:g")
         .attr("class", "x axis");
 
@@ -94,7 +96,7 @@ body {
 			    
 // put data from csv into vessels variable
 //run redraw function that will refresh whenever a new data series is selected 
-d3.csv("https://raw.githubusercontent.com/nataliaokuneva/data_vessel/master/finaldata.csv", function(csv) {
+d3.csv("https://raw.githubusercontent.com/nataliaokuneva/data_vessel/master/data.csv", function(csv) {
 		vessels = csv;
         redraw();
     });
@@ -176,13 +178,13 @@ function redraw() {
       .attr("d", function(d) { return line(d.values); })
       .style("stroke", function(d) { return color(d.name); });
 
-    // create lables for each vessel
+    // create labels for each vessel
     // set their position to that of the last year and stat
     vesselEnter.append("text")
      .attr("class", "names")
      .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
      .attr("transform", function(d) { return "translate(" + x(d.value.year) + "," + y(d.value.stat) + ")"; })
-     .attr("x", 4)
+     .attr("x", 2)
      .attr("dy", ".35em")
      .text(function(d) { return d.name; });
 
@@ -204,43 +206,129 @@ function redraw() {
       d3.transition(svg).select(".x.axis")
             .attr("transform", "translate(0," + h + ")")
           .call(xAxis);
-          
+
 // that concludes redraw()
+// add mouse
+
+     var mouseG = svg.append("g")
+       .attr("class", "mouse-over-effects");
+
+     mouseG.append("path") // this is the black vertical line to follow mouse
+        .attr("class", "mouse-line")
+        .style("stroke", "black")
+        .style("stroke-width", "1px")
+        .style("opacity", "0");
+
+    var lines = document.getElementsByClassName('line');
+
+    var mousePerLine = mouseG.selectAll('.mouse-per-line')
+        .data(vessels)
+        .enter()
+        .append("g")
+        .attr("class", "mouse-per-line");
+
+    mousePerLine.append("circle")
+        .attr("r", 7)
+        .style("stroke", function(d, i) {
+    return z(i);
+    })
+        .style("fill", "none")
+        .style("stroke-width", "1px")
+        .style("opacity", "0");
+
+    mousePerLine.append("text")
+        .attr("transform", "translate(10,3)");
+
+    mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
+        .attr('width', width) // can't catch mouse events on a g element
+        .attr('height', height)
+        .attr('fill', 'none')
+        .attr('pointer-events', 'all')
+        .on('mouseout', function() { // on mouse out hide line, circles and text
+    d3.select(".mouse-line")
+      .style("opacity", "0");
+    d3.selectAll(".mouse-per-line circle")
+      .style("opacity", "0");
+    d3.selectAll(".mouse-per-line text")
+      .style("opacity", "0");
+    })
+      .on('mouseover', function() { // on mouse in show line, circles and text
+    d3.select(".mouse-line")
+      .style("opacity", "1");
+    d3.selectAll(".mouse-per-line circle")
+      .style("opacity", "1");
+    d3.selectAll(".mouse-per-line text")
+      .style("opacity", "1");
+    })
+      .on('mousemove', function() { // mouse moving over canvas
+    var mouse = d3.mouse(this);
+    d3.select(".mouse-line")
+      .attr("d", function() {
+        var d = "M" + mouse[0] + "," + height;
+        d += " " + mouse[0] + "," + 0;
+        return d;
+      });
+
+    d3.selectAll(".mouse-per-line")
+      .attr("transform", function(d, i) {
+        console.log(width / mouse[0])
+        var xDate = x.invert(mouse[0]),
+          bisect = d3.bisector(function(d) {
+            return d[0];
+          }).right;
+        var idx = bisect(d.stat, xDate);
+
+        var beginning = 0,
+          end = lines[i].getTotalLength(),
+          target = null;
+
+        while (true) {
+          target = Math.floor((beginning + end) / 2);
+          var pos = lines[i].getPointAtLength(target);
+          if ((target === end || target === beginning) && pos.x !== mouse[0]) {
+            break;
+          }
+          if (pos.x > mouse[0]) end = target;
+          else if (pos.x < mouse[0]) beginning = target;
+          else break; //position found
+        }
+
+        d3.select(this).select('text')
+          .text(y.invert(pos.y).toFixed(2));
+
+        return "translate(" + mouse[0] + "," + pos.y + ")";
+      });
+  });
 }
+
+
+
 
 // automatically change value after a few seconds
 var timeout = setTimeout(function() {
   menu.property("value", "ZONE").node().focus();
   change();
-}, 7000);
-
+}, 7000);    
+        
 // highlighting two groups of vessels
 function maersklight() {
     var chkbox = document.getElementById("maersk");
     if (chkbox.checked) {
-        document.getElementById("Maersk Kimi").style.cssText = "opacity:1;",
-        document.getElementById("Maersk Palermo").style.cssText = "opacity:1;",
         document.getElementById("Maersk Vega").style.cssText = "opacity:1;",
-        document.getElementById("Maersk Ventura").style.cssText = "opacity:1;"
+        document.getElementById("Maersk Palermo").style.cssText = "opacity:1;"
     } else { 
-        document.getElementById("Maersk Kimi").style.cssText = "",
-        document.getElementById("Maersk Palermo").style.cssText = "",
         document.getElementById("Maersk Vega").style.cssText = "",
-        document.getElementById("Maersk Ventura").style.cssText = "";
+        document.getElementById("Maersk Palermo").style.cssText = ""
     }};
     
 function nyklight() {
     var chkbox = document.getElementById("nyk")
     if (chkbox.checked) {
-        document.getElementById("Berlian Ekuator").style.cssText = "opacity:1;",
         document.getElementById("Gas Diana").style.cssText = "opacity:1;",
-        document.getElementById("Towada").style.cssText = "opacity:1;",
-        document.getElementById("Shohjin").style.cssText = "opacity:1;"
+        document.getElementById("Towada").style.cssText = "opacity:1;"
     } else { 
-        document.getElementById("Berlian Ekuator").style.cssText = "",
         document.getElementById("Gas Diana").style.cssText = "",
-        document.getElementById("Towada").style.cssText = "",
-        document.getElementById("Shohjin").style.cssText = "";
+        document.getElementById("Towada").style.cssText = ""
     }};
 
 	</script>
