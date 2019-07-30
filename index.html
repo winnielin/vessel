@@ -398,7 +398,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
   <script>
   var map, polygons;
-            
+  var usgsEarthquakeUrl = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson';
             function GetMap() {
                 map = new Microsoft.Maps.Map('#myMap', {
                     center: new Microsoft.Maps.Location(23.34454, 40.66896),
@@ -406,9 +406,18 @@
                     zoom: 4
                 });
 
-                //Marine area
+                //Load the GeoJSON and HeatMap modules.
+                Microsoft.Maps.loadModule(['Microsoft.Maps.GeoJson', 'Microsoft.Maps.HeatMap'], function () {
+                Microsoft.Maps.GeoJson.readFromUrl(usgsEarthquakeUrl, function (shapes) {
+                  var heatmap = new Microsoft.Maps.HeatMapLayer(shapes, { radius: 5 });
+                  map.layers.insert(heatmap);
+                  });
+                });
+
+                // Marine area
                 // Microsoft.Maps.loadModule('Microsoft.Maps.GeoXml', function () {
-                //     var layer = new Microsoft.Maps.GeoXmlLayer('http://geo.vliz.be/geoserver/wms?request=GetMap&service=wms&version=1.1.1&srs=EPSG:4326&layers=MarineRegions:iho&width=800&height=207&bbox=102.238472104104,-3.22872316782812,122.151298801884,25.5672843458959&styles=gazetteer_red&Format=KML&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Eid%3C%2FPropertyName%3E%3CLiteral%3E49%3C%2FLiteral%3E%3C%2FPropertyIsEqualTo%3E');
+                //     var layer = new Microsoft.Maps.GeoXmlLayer('http://geo.vliz.be/geoserver/wfs?request=getfeature&service=wfs&version=1.1.0&typename=MarineRegions:iho&outputformat=GML3&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Eid%3C%2FPropertyName%3E%3CLiteral%3E37%3C%2FLiteral%3E%3C%2FPropertyIsEqualTo%3E');
+                //     console.log(layer);
                 //     map.layers.insert(layer);
                 // });
                 
@@ -481,8 +490,7 @@
                           //Store some metadata with the pushpin.
                           pin.metadata = {
                             title: data[i].Latitude + ", " + data[i].Longitude,
-                            description: "Date: " + data[i].Date + "</br>"
-                                       + "Ship Speed: " + data[i].Speed + " nt</br>"
+                            description: "Ship Speed: " + data[i].Speed + " nt</br>"
                                        + "Temperature: " + data[i].Temperature + " °C</br>"
                                        + "Wind Speed: " + data[i].Wind_Speed + " m/s"
                           };
@@ -505,6 +513,212 @@
                     }
                       var line = new Microsoft.Maps.Polyline(list, {
                       strokeColor: 'red',
+                      strokeThickness: 2,
+                      });
+                      map.entities.push(line);
+                    });
+                    
+
+                  } else {
+                    for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                      var polyline = map.entities.get(i);
+                        if (polyline instanceof Microsoft.Maps.Polyline) {
+                            map.entities.removeAt(i);
+                        }
+                      var pushpin = map.entities.get(i);
+                        if (polyline instanceof Microsoft.Maps.Pushpin) {
+                            map.entities.removeAt(i);
+                        }
+                      
+                    }
+                  }
+                }
+                function GetJinguRoute() {
+                // Get the checkbox
+                var checkBox = document.getElementById("defaultCheck2");
+        
+                // If the checkbox is checked, display the output text
+                  if (checkBox.checked == true){
+                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherJINGU.csv")
+                      .then(function(data) {
+                    var list = [];
+                    var dynamic = "";
+                    var pin;
+                    var len = data.length;
+                    for (i=0; i < len; i++) {
+                      //Add location point to polyline
+                      dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                      list.push(dynamic);
+                      if (i>0) {
+                        if(data[i].Direction !== data[i-1].Direction) {
+                          pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude), {
+                          icon: 'assets/img/historicalPoint.png'
+                          });
+                          infobox = new Microsoft.Maps.Infobox(pin, {
+                                    visible: false
+                                    });
+                          //Assign the infobox to a map instance.
+                          infobox.setMap(map);
+                          //Store some metadata with the pushpin.
+                          pin.metadata = {
+                            title: data[i].Latitude + ", " + data[i].Longitude,
+                            description: "Ship Speed: " + data[i].Speed + " nt</br>"
+                                       + "Temperature: " + data[i].Temperature + " °C</br>"
+                                       + "Wind Speed: " + data[i].Wind_Speed + " m/s"
+                          };
+                          map.entities.push(pin);
+                          //Add mouse events to the pushpin
+                          Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
+                            if (e.targetType == "pushpin") {
+                          // if (e.target.metadata) {
+                          //Set the infobox options with the metadata of the pushpin.
+                            infobox.setOptions({
+                            location: e.target.getLocation(),
+                            title: e.target.metadata.title,
+                            description: e.target.metadata.description,
+                            visible: true
+                            });
+                            }                        
+                          });
+                        }
+                      } else {
+                        pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude), {
+                          icon: 'assets/img/historicalPoint.png'
+                        });
+                          infobox = new Microsoft.Maps.Infobox(pin, {
+                                    visible: false
+                                    });
+                          //Assign the infobox to a map instance.
+                          infobox.setMap(map);
+                          //Store some metadata with the pushpin.
+                          pin.metadata = {
+                            title: data[i].Latitude + ", " + data[i].Longitude,
+                            description: "Ship Speed: " + data[i].Speed + " nt</br>"
+                                       + "Temperature: " + data[i].Temperature + " °C</br>"
+                                       + "Wind Speed: " + data[i].Wind_Speed + " m/s"
+                          };
+                          map.entities.push(pin);
+                          //Add mouse events to the pushpin
+                          Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
+                            if (e.targetType == "pushpin") {
+                            console.log(e.target.getLocation());
+                          // if (e.target.metadata) {
+                          //Set the infobox options with the metadata of the pushpin.
+                            infobox.setOptions({
+                            location: e.target.getLocation(),
+                            title: e.target.metadata.title,
+                            description: e.target.metadata.description,
+                            visible: true
+                            });
+                            }                        
+                          });
+                      }
+                    }
+                      var line = new Microsoft.Maps.Polyline(list, {
+                      strokeColor: 'blue',
+                      strokeThickness: 2,
+                      });
+                      map.entities.push(line);
+                    });
+                    
+
+                  } else {
+                    for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                      var polyline = map.entities.get(i);
+                        if (polyline instanceof Microsoft.Maps.Polyline) {
+                            map.entities.removeAt(i);
+                        }
+                      var pushpin = map.entities.get(i);
+                        if (polyline instanceof Microsoft.Maps.Pushpin) {
+                            map.entities.removeAt(i);
+                        }
+                      
+                    }
+                  }
+                }
+                function GetShohjinRoute() {
+                // Get the checkbox
+                var checkBox = document.getElementById("defaultCheck3");
+        
+                // If the checkbox is checked, display the output text
+                  if (checkBox.checked == true){
+                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherSHOHJIN.csv")
+                      .then(function(data) {
+                    var list = [];
+                    var dynamic = "";
+                    var pin;
+                    var len = data.length;
+                    for (i=0; i < len; i++) {
+                      //Add location point to polyline
+                      dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                      list.push(dynamic);
+                      if (i>0) {
+                        if(data[i].Direction !== data[i-1].Direction) {
+                          pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude), {
+                          icon: 'assets/img/historicalPoint.png'
+                          });
+                          infobox = new Microsoft.Maps.Infobox(pin, {
+                                    visible: false
+                                    });
+                          //Assign the infobox to a map instance.
+                          infobox.setMap(map);
+                          //Store some metadata with the pushpin.
+                          pin.metadata = {
+                            title: data[i].Latitude + ", " + data[i].Longitude,
+                            description: "Ship Speed: " + data[i].Speed + " nt</br>"
+                                       + "Temperature: " + data[i].Temperature + " °C</br>"
+                                       + "Wind Speed: " + data[i].Wind_Speed + " m/s"
+                          };
+                          map.entities.push(pin);
+                          //Add mouse events to the pushpin
+                          Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
+                            if (e.targetType == "pushpin") {
+                          // if (e.target.metadata) {
+                          //Set the infobox options with the metadata of the pushpin.
+                            infobox.setOptions({
+                            location: e.target.getLocation(),
+                            title: e.target.metadata.title,
+                            description: e.target.metadata.description,
+                            visible: true
+                            });
+                            }                        
+                          });
+                        }
+                      } else {
+                        pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude), {
+                          icon: 'assets/img/historicalPoint.png'
+                        });
+                          infobox = new Microsoft.Maps.Infobox(pin, {
+                                    visible: false
+                                    });
+                          //Assign the infobox to a map instance.
+                          infobox.setMap(map);
+                          //Store some metadata with the pushpin.
+                          pin.metadata = {
+                            title: data[i].Latitude + ", " + data[i].Longitude,
+                            description: "Ship Speed: " + data[i].Speed + " nt</br>"
+                                       + "Temperature: " + data[i].Temperature + " °C</br>"
+                                       + "Wind Speed: " + data[i].Wind_Speed + " m/s"
+                          };
+                          map.entities.push(pin);
+                          //Add mouse events to the pushpin
+                          Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
+                            if (e.targetType == "pushpin") {
+                            console.log(e.target.getLocation());
+                          // if (e.target.metadata) {
+                          //Set the infobox options with the metadata of the pushpin.
+                            infobox.setOptions({
+                            location: e.target.getLocation(),
+                            title: e.target.metadata.title,
+                            description: e.target.metadata.description,
+                            visible: true
+                            });
+                            }                        
+                          });
+                      }
+                    }
+                      var line = new Microsoft.Maps.Polyline(list, {
+                      strokeColor: 'green',
                       strokeThickness: 2,
                       });
                       map.entities.push(line);
