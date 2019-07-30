@@ -398,7 +398,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
   <script>
   var map, polygons;
-  var usgsEarthquakeUrl = 'http://geo.vliz.be/geoserver/wfs?request=getfeature&service=wfs&version=1.1.0&typename=MarineRegions:iho&outputformat=GML3&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Eid%3C%2FPropertyName%3E%3CLiteral%3E37%3C%2FLiteral%3E%3C%2FPropertyIsEqualTo%3E';
+  var usgsEarthquakeUrl = 'https://raw.githubusercontent.com/winnielin/vessel/master/redSea.json';
             function GetMap() {
                 map = new Microsoft.Maps.Map('#myMap', {
                     center: new Microsoft.Maps.Location(23.34454, 40.66896),
