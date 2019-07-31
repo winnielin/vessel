@@ -490,7 +490,7 @@
         
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
-                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherKIMI.csv")
+                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherKIMI.csv")
                       .then(function(data) {
                     var list = [];
                     var dynamic = "";
@@ -566,7 +566,7 @@
                       }
                     }
 
-                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/WarZones_SA.csv").then(function(data) {
+                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SA.csv").then(function(data) {
                       var list = [];
                       var zone = "";
                       var len = data.length;
@@ -585,7 +585,7 @@
                 map.entities.push(polygon);
             });
 
-            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/WarZones_HRA.csv").then(function(data) {
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_HRA.csv").then(function(data) {
                       var list = [];
                       var zone = "";
                       var len = data.length;
@@ -604,7 +604,7 @@
                 map.entities.push(polygon);
             });
 
-            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/WarZones_ERITREA.csv").then(function(data) {
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ERITREA.csv").then(function(data) {
                       var list = [];
                       var zone = "";
                       var len = data.length;
@@ -623,7 +623,7 @@
                 map.entities.push(polygon);
             });
 
-            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/WarZones_YEMEN.csv").then(function(data) {
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_YEMEN.csv").then(function(data) {
                       var list = [];
                       var zone = "";
                       var len = data.length;
@@ -671,7 +671,7 @@
         
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
-                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherJINGU.csv")
+                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherJINGU.csv")
                       .then(function(data) {
                     var list = [];
                     var dynamic = "";
@@ -774,7 +774,7 @@
         
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
-                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherSHOHJIN.csv")
+                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherSHOHJIN.csv")
                       .then(function(data) {
                     var list = [];
                     var dynamic = "";

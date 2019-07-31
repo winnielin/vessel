@@ -747,7 +747,7 @@
           
                 // If the checkbox is checked, display the output text
                 if (checkBox.checked == true){
-                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherPlanned.csv")
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherPlanned.csv")
                   .then(function(data) {
                   var list = [];
                   var dynamic = "";
@@ -764,7 +764,7 @@
               });
 
                 //Create custom Pushpin for ports
-                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/PlannedPorts.csv")
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/PlannedPorts.csv")
                   .then(function(data) {
                     var pin;
                     var len = data.length;
@@ -797,7 +797,7 @@
         
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
-                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/BasicPositionHistoryWithWeatherActual.csv")
+                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherActual.csv")
                       .then(function(data) {
                     var list = [];
                     var dynamic = "";
@@ -908,7 +908,7 @@
         
         // If the checkbox is checked, display the output text
         if (checkBox.checked == true){
-            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/GeoZonesCode.csv").then(function(data) {
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/GeoZonesCode.csv").then(function(data) {
                 var list = [];
                 var zone = "";
                 var len = data.length;
@@ -947,7 +947,7 @@
                         center: new Microsoft.Maps.Location(25.90372, 56.8122),
                         zoom: 9
                       });
-                      d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/VesselinVincity.csv")
+                      d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/VesselinVincity.csv")
                       .then(function(data) {
                         var len = data.length;
                         for (i=1; i < len; i++) {
