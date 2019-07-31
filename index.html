@@ -190,7 +190,12 @@
                   <div class="card-icon">
                     <i class="material-icons">assignment</i>
                   </div>
-                  <h4 class="card-title">My Fleet</h4>
+                  <h4 class="card-title">My Fleet&nbsp;&nbsp;
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-info">Planned</button>
+                        <button type="button" class="btn btn-info">Actual</button>
+                      </div>
+                    </h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -199,6 +204,7 @@
                         <tr>
                           <th class="text-center">#</th>
                           <th></th>
+                          <th>Client</th>
                           <th>Vessel Name</th>
                           <th >IMO</th>
                           <th>Call Sign</th>
@@ -221,6 +227,7 @@
                               </label>
                             </div>
                           </td>
+                          <td>M</td>
                           <td>Maersk Kimi</td>
                           <td >9162227</td>
                           <td>PDHO</td>
@@ -241,6 +248,7 @@
                               </label>
                             </div>
                           </td>
+                          <td>M</td>
                           <td>BERLIAN EKUATOR</td>
                           <td>9265541</td>
                           <td>HPYK</td>
@@ -261,6 +269,7 @@
                               </label>
                             </div>
                           </td>
+                          <td>M</td>
                           <td>DOHA</td>
                           <td>9085637</td>
                           <td>JNCI</td>
@@ -281,6 +290,7 @@
                               </label>
                             </div>
                           </td>
+                          <td>N</td>
                           <td>JINGU</td>
                           <td>9021423</td>
                           <td>3FBA</td>
@@ -301,6 +311,7 @@
                               </label>
                             </div>
                           </td>
+                          <td>N</td>
                           <td>SHOHJIN</td>
                           <td>9073701</td>
                           <td>3FUX9</td>
@@ -317,19 +328,61 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
               <div class="card ">
-                <div class="card-header card-header-text card-header-rose">
-                  <div class="card-text">
-                  <h4 class="card-title">Map</h4>
-                </div>
-              </div>
+                  <div class="card-header card-header-rose card-header-icon">
+                      <div class="card-icon">
+                        <i class="material-icons">map</i>
+                      </div>
+                      <h4 class="card-title">
+                          <div class="form-check">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" value="">Show weather
+                                <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div>
+                      </h4>
+                    </div>
               <div class="card-body ">
                 <h4 class="card-title"></h4>
                 <div id="myMap" class="map map-big"></div>
               </div>
               </div>
             </div>
+            <div class="col-md-4">
+                <div class="card ">
+                  <div class="card-header card-header-text card-header-rose">
+                    <div class="card-text">
+                    <h4 class="card-title">Notifications</h4>
+                    </div>
+                  </div>
+                  <div class="card-body ">
+                      <div class="alert alert-info">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <i class="material-icons">close</i>
+                          </button>
+                          <span>
+                            <b> Info - </b> This is the route of Maersk Kimi from 14 Jun to 1 Jul.</span>
+                        </div>
+                    <div class="alert alert-warning">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="material-icons">close</i>
+                        </button>
+                        <span>
+                          <b> Warning - </b> The route of Maersk Kimi diversed from the planned schedule on 17/06/2019 21:03:37.</span>
+                      </div>
+                      <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="material-icons">close</i>
+                        </button>
+                        <span>
+                          <b> Danger - </b> The route of Kimi is crossing the restricted zone - HRA.</span>
+                      </div>
+                  </div>
+                </div>
+              </div>
       </div>
       </div>
       <footer class="footer">
@@ -512,14 +565,7 @@
                           });
                       }
                     }
-                      var line = new Microsoft.Maps.Polyline(list, {
-                      strokeColor: 'red',
-                      strokeThickness: 2,
-                      });
-                      map.entities.push(line);
 
-                    });
-                    
                     d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/WarZones_SA.csv").then(function(data) {
                       var list = [];
                       var zone = "";
@@ -595,6 +641,15 @@
                 });
                 map.entities.push(polygon);
             });
+                      var line = new Microsoft.Maps.Polyline(list, {
+                      strokeColor: 'red',
+                      strokeThickness: 2,
+                      });
+                      map.entities.push(line);
+
+                    });
+                    
+                    
 
                   } else {
                     for (var i = map.entities.getLength() - 1; i >= 0; i--) {
