@@ -4,7 +4,7 @@
 
 ### Fleet Page  
 
-1. fleet interaction table which can be selected then show vessel & passage plan on the map -> increase to 15/16 vessels  
+1. fleet table - add scrollbar and increase to 15/16 vessels  
 2. heat map layer - show weather info ???  
 3. combine chart into index.html -> just create chart.html and use the same outline  
 4. add notification block with table and button by the side of the map
@@ -42,7 +42,6 @@
 
 #### Template
 
-1. add scrollbar on table  
 ~~1. receive vessel name then read csv file and show the basic information of the selected vessel~~  
 ~~2. notification block read from csv file~~  
 ~~3. date selector (a date or a period)~~  
