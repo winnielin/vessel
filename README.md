@@ -33,7 +33,7 @@
 
 #### Bing Maps  
 
-1. show more zones data -> don't just copy paste  
+1. show more zones data -> 想不出來怎麼寫=_=
 2. how to untick route then remove only specific polyline from the map (different layer)    
 ~~3. check how many zones a vessel crossed by checking points from the route~~  
 ~~4. how many times planned schedule to cross the zone -> show zone + alert (zone call)~~  
