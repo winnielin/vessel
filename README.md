@@ -42,7 +42,7 @@
 
 #### Template
 
-1. add scrollbar on table
+1. add scrollbar on table  
 ~~1. receive vessel name then read csv file and show the basic information of the selected vessel~~  
 ~~2. notification block read from csv file~~  
 ~~3. date selector (a date or a period)~~  
