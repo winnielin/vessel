@@ -159,6 +159,12 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
+              <div class="navbar-minimize">
+                  <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+                    <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+                    <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+                  </button>
+              </div>
             <a class="navbar-brand" href="#pablo">My Fleet</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -566,81 +572,63 @@
                       }
                     }
 
-                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SA.csv").then(function(data) {
-                      var list = [];
-                      var zone = "";
-                      var len = data.length;
-                      for (i=0; i < len; i++) {
-                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-                        // console.log(zone);
-                        list.push(zone);
                     
-                      }
+            // d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_HRA.csv").then(function(data) {
+            //           var list = [];
+            //           var zone = "";
+            //           var len = data.length;
+            //           for (i=0; i < len; i++) {
+            //             zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+            //             // console.log(zone);
+            //             list.push(zone);
+                    
+            //           }
                 
-                var polygon = new Microsoft.Maps.Polygon(list, {
-                    fillColor: 'rgba(0, 255, 0, 0.5)',
-                    strokeColor: 'red',
-                    strokeThickness: 1,
-                });
-                map.entities.push(polygon);
-            });
+            //     var polygon = new Microsoft.Maps.Polygon(list, {
+            //         fillColor: 'rgba(0, 255, 0, 0.5)',
+            //         strokeColor: 'red',
+            //         strokeThickness: 1,
+            //     });
+            //     map.entities.push(polygon);
+            // });
 
-            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_HRA.csv").then(function(data) {
-                      var list = [];
-                      var zone = "";
-                      var len = data.length;
-                      for (i=0; i < len; i++) {
-                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-                        // console.log(zone);
-                        list.push(zone);
+            // d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ERITREA.csv").then(function(data) {
+            //           var list = [];
+            //           var zone = "";
+            //           var len = data.length;
+            //           for (i=0; i < len; i++) {
+            //             zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+            //             // console.log(zone);
+            //             list.push(zone);
                     
-                      }
+            //           }
                 
-                var polygon = new Microsoft.Maps.Polygon(list, {
-                    fillColor: 'rgba(0, 255, 0, 0.5)',
-                    strokeColor: 'red',
-                    strokeThickness: 1,
-                });
-                map.entities.push(polygon);
-            });
+            //     var polygon = new Microsoft.Maps.Polygon(list, {
+            //         fillColor: 'rgba(0, 255, 0, 0.5)',
+            //         strokeColor: 'red',
+            //         strokeThickness: 1,
+            //     });
+            //     map.entities.push(polygon);
+            // });
 
-            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ERITREA.csv").then(function(data) {
-                      var list = [];
-                      var zone = "";
-                      var len = data.length;
-                      for (i=0; i < len; i++) {
-                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-                        // console.log(zone);
-                        list.push(zone);
+            // d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_YEMEN.csv").then(function(data) {
+            //           var list = [];
+            //           var zone = "";
+            //           var len = data.length;
+            //           for (i=0; i < len; i++) {
+            //             zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+            //             // console.log(zone);
+            //             list.push(zone);
                     
-                      }
+            //           }
                 
-                var polygon = new Microsoft.Maps.Polygon(list, {
-                    fillColor: 'rgba(0, 255, 0, 0.5)',
-                    strokeColor: 'red',
-                    strokeThickness: 1,
-                });
-                map.entities.push(polygon);
-            });
-
-            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_YEMEN.csv").then(function(data) {
-                      var list = [];
-                      var zone = "";
-                      var len = data.length;
-                      for (i=0; i < len; i++) {
-                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-                        // console.log(zone);
-                        list.push(zone);
-                    
-                      }
-                
-                var polygon = new Microsoft.Maps.Polygon(list, {
-                    fillColor: 'rgba(0, 255, 0, 0.5)',
-                    strokeColor: 'red',
-                    strokeThickness: 1,
-                });
-                map.entities.push(polygon);
-            });
+            //     var polygon = new Microsoft.Maps.Polygon(list, {
+            //         fillColor: 'rgba(0, 255, 0, 0.5)',
+            //         strokeColor: 'red',
+            //         strokeThickness: 1,
+            //     });
+            //     map.entities.push(polygon);
+            // });
                       var line = new Microsoft.Maps.Polyline(list, {
                       strokeColor: 'red',
                       strokeThickness: 2,
@@ -648,6 +636,34 @@
                       map.entities.push(line);
 
                     });
+                  
+            //         d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SA.csv").then(function(data) {
+            //           var i = 0;
+            //           if(data[i].Sequence==0)
+            //           {
+            //             var name = data[i].Name;
+            //             console.log(name);
+            //             var list = [];
+            //             var zone;
+                        
+            //             for (i; name == data[i].Name ; i++) {
+            //             zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                        
+            //             list.push(zone);
+            //             }
+                        
+            //             var polygon = new Microsoft.Maps.Polygon(list, {
+            //             fillColor: 'rgba(0, 255, 0, 0.5)',
+            //             strokeColor: 'red',
+            //             strokeThickness: 1,
+            //           });
+            //           map.entities.push(polygon);
+            //         }
+                
+                
+            // });
+
+
                     
                     
 
