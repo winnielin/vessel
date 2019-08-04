@@ -4,10 +4,11 @@
 
 ### Fleet Page  
 
-1. fleet table - add scrollbar and increase to 15/16 vessels  
-2. heat map layer - show weather info ???  
-3. combine chart into index.html -> just create chart.html and use the same outline  
-4. add notification block with table and button by the side of the map
+1. combine chart into index.html -> just create chart.html and use the same outline  
+2. planned or actual vessel event
+3. show restricted zones
+4. notification - approval button function  
+5. heat map layer - show weather info ???  
 5. on the map ->show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
 6. a block with political and piracy events  
 7. how to use zone entry & exit data  
@@ -17,7 +18,7 @@
 1. select vessels from the table then add data into chart  
 2. age slider, vessel type & shipphing company selector  
 3. valuation chart - stacked bar & line  
-4. mileage + port visits + 
+4. mileage + port visits +  
 5. restricted zone visits - by zone -> total accepted, change more/less  
 6. some claims, premium, value information message by side  
 
@@ -33,12 +34,11 @@
 
 #### Bing Maps  
 
-1. show more zones data -> 想不出來怎麼寫=_=
-2. how to untick route then remove only specific polyline from the map (different layer)    
-~~3. check how many zones a vessel crossed by checking points from the route~~  
-~~4. how many times planned schedule to cross the zone -> show zone + alert (zone call)~~  
-~~5. current location generate alert (if huge deviation -> reason)~~  
-6. direction for vessel  
+1. how to untick route then remove only specific polyline from the map (different layer)    
+~~2. check how many zones a vessel crossed by checking points from the route~~  
+~~3. how many times planned schedule to cross the zone -> show zone + alert (zone call)~~  
+~~4. current location generate alert (if huge deviation -> reason)~~  
+5. direction for vessel  
 
 #### Template
 
