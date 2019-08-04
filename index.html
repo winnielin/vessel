@@ -365,12 +365,72 @@
                     </div>
                   </div>
                   <div class="card-body ">
-                      <div class="alert alert-info">
+                      <div class="alert alert-primary" data-notify="container">
+                          <i class="material-icons" data-notify="icon">notifications</i>
                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <i class="material-icons">close</i>
                           </button>
-                          <span>
-                            <b> Info - </b> This is the route of Maersk Kimi from 14 Jun to 1 Jul.</span>
+                          <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
+                          <span data-notify="message"><b> Current Postition</b>
+                              <div class="table-responsive">
+                                  <table class="table">
+                                    <thead class="">
+                                      <th>
+                                        Zone
+                                      </th>
+                                      <th>
+                                        Expected Duration
+                                      </th>
+                                      <th>
+                                        Multiple Entries/Exits
+                                      </th>
+                                      <th>
+                                        Prior Approval
+                                      </th>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>
+                                          SA
+                                        </td>
+                                        <td>
+                                          2 Days
+                                        </td>
+                                        <td>
+                                          N
+                                        </td>
+                                        <td class="td-actions text-right">
+                                            <button type="button" rel="tooltip" class="btn btn-success">
+                                              <i class="material-icons">check</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-danger">
+                                              <i class="material-icons">close</i>
+                                            </button>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          HRA
+                                        </td>
+                                        <td>
+                                          8 Days
+                                        </td>
+                                        <td>
+                                          Y
+                                        </td>
+                                        <td class="td-actions text-right">
+                                            <button type="button" rel="tooltip" class="btn btn-success">
+                                              <i class="material-icons">check</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-danger">
+                                              <i class="material-icons">close</i>
+                                            </button>
+                                          </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                          </span>
                         </div>
                     <div class="alert alert-warning">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -571,6 +631,11 @@
                           });
                       }
                     }
+                    
+                    // create notification
+                    var div = document.getElementByID("kimi-notification");
+                    var tbl=document.createElement('table');
+                    div.appendchild()
 
                     
             // d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_HRA.csv").then(function(data) {
