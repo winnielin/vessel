@@ -1,0 +1,284 @@
+<html>
+<head>
+<meta charset ="utf-8">
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+
+<style>
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 960px;
+  height: 500px;
+  position: relative;
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+    position: center;
+}
+
+text{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+text {
+  font: 10px sans-serif;
+}
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path{
+  fill: none;
+  stroke: #000;
+}
+
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis .tick line {
+  stroke-width: 1;
+  stroke: rgba(0, 0, 0, 0.2);
+}
+
+.axisHorizontal path{
+  fill: none;
+}
+
+.axisHorizontal line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axisHorizontal .tick line {
+  stroke-width: 1;
+  stroke: rgba(0, 0, 0, 0.2);
+}
+.x.axis path {
+  display: none;
+}
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Selection Category -->
+<p id="menu"><b>Fleet Valuation Information</b><br><br><b>Select reported year: </b>
+
+<select class="opt">
+  <option value="CC">2018</option>
+  <option value="DD">2019</option>
+</select> 
+
+<svg width="750" height="500"></svg>
+
+<script>
+
+var speed = 0;
+
+d3.csv("https://raw.githubusercontent.com/nataliaokuneva/data_vessel/master/claim.csv").then(function(data) {
+
+    chart(data, "CC")
+
+    d3.selectAll(".opt").on("change", function() {
+        speed = 750;
+        chart.update(data, this.value)
+    })
+
+});
+
+function chart(data, input) {
+
+    var z = d3.scaleOrdinal()
+        .range(["#99CCFF","#3399FF","#0066CC"]);
+    
+    // Create a tooltip
+    var tip = d3.tip().attr('class', 'd3-tip').direction('e').offset([0,5])
+            .html(function(d) {
+                return d.value;
+            });
+
+    var svg = d3.select("svg"),
+        margin = {top: 35, right: 35, bottom: 35, left: 35},
+        width = +svg.attr("width") - margin.left - margin.right,
+        height = +svg.attr("height") - margin.top - margin.bottom;
+
+    var keys = data.columns.slice(1, 4);
+
+    var x0 = d3.scaleBand()
+        .domain(data.map(d => d.State))
+        .range([margin.left, width - margin.right])
+        .padding(0.1);
+
+    var x1 = d3.scaleBand()
+        .domain(keys)
+        .rangeRound([0, x0.bandwidth()]);
+
+    var y = d3.scaleLinear()
+        .range([height, margin.top]);
+
+    svg.append("g")
+        .attr("class", "x-axis");
+
+    svg.append("g")
+      .attr("class", "y-axis");
+      
+
+    // Handmade legend
+    svg.append("rect").attr("x",width-135).attr("y",height-417).attr("width", 13).attr('height', 13).style("fill", "#99CCFF")
+    svg.append("rect").attr("x",width-135).attr("y",height-402).attr("width", 13).attr('height', 13).style("fill", "#3399FF")
+    svg.append("rect").attr("x",width-135).attr("y",height-387).attr("width", 13).attr('height', 13).style("fill", "#0066CC")
+
+    svg.append("text").attr("x", width-115).attr("y", height-410).text("Valuation, USD").style("font-size", "15px").attr("alignment-baseline","middle")
+    svg.append("text").attr("x", width-115).attr("y", height-394).text("Premium, USD").style("font-size", "15px").attr("alignment-baseline","middle")
+    svg.append("text").attr("x", width-115).attr("y", height-378).text("Claim, USD").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    var xAxis = g => g
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x0)
+            .tickSizeOuter(0))
+
+    var yAxis = g => g
+        .attr("transform", 
+            "translate(" + margin.left + ",0)")
+        .call(d3.axisLeft(y).ticks(null, "s"))
+
+    svg.call(tip);
+
+    update(data, input);
+
+    function update(data, input) {
+
+        var copy = [];
+
+        keys.forEach(function(t) {
+            t = t.slice(0, -2)
+            copy.push(t)
+        })
+
+        y.domain([0, d3.max(data, function(d) {
+            return d3.max(copy, function(key) {
+                return d3.sum([d[key + input]])
+            }); 
+        })]).nice();
+
+        var barGroups = svg.selectAll(".layer")
+            .data(data, d => d.State);
+
+        barGroups.exit().remove();
+
+        barGroups.enter().append("g")
+            .classed('layer', true);
+
+        svg.selectAll(".layer").transition().duration(speed)
+            .attr("transform", function(d, i) {
+                return "translate(" + x0(d.State) + ",0)";
+            });
+
+        var bars = svg.selectAll(".layer").selectAll(".bars")
+            .data(function(d) { 
+                return copy.map(function(key) {
+                    return {key: key + input, value: d[key + input]}; 
+                }); 
+            });
+
+        bars = bars
+            .enter()
+        .append("rect")
+            .attr("class", "bars")
+            .attr("x", d => x1(d.key))
+            .attr("width", x1.bandwidth())
+            .attr("fill", d => z(d.key))
+            .merge(bars);
+
+        bars.transition().duration(speed)
+            .attr("height", d => height - y(d["value"]))
+            .attr("y", d => y(d.value))
+
+        svg.selectAll(".x-axis").transition().duration(speed)
+            .call(xAxis);
+        
+        svg.selectAll(".y-axis").transition().duration(speed)
+            .call(yAxis);
+
+        svg.call(zoom);
+
+
+        function zoom(group) {
+        
+            var extent = [
+                [margin.left, margin.top], 
+                [width - margin.right, height - margin.top]
+            ];
+            
+            group.call(d3.zoom()
+                .scaleExtent([1, 2])
+                .translateExtent(extent)
+                .extent(extent)
+                .on("zoom", zoomed));
+            
+            function zoomed() {
+        
+                x0.range(
+                    [margin.left, width - margin.right]
+                    .map(d => d3.event.transform.applyX(d)));
+                x1.rangeRound([0, x0.bandwidth()]);
+        
+                group.selectAll(".layer")
+                    .attr("transform", function(d) { 
+                        return "translate(" + x0(d.State) + ",0)"; 
+                    });
+                group.selectAll(".bars")
+                    .attr("x", function(d) { 
+                        return x1(d.key)
+                    })
+                    .attr("width", x1.bandwidth());
+        
+                group.selectAll(".x-axis")
+                    .call(xAxis);
+            }
+        }
+
+    }
+
+    chart.update = update;   
+};
+
+
+</script>
+
+</body>
+</html> 

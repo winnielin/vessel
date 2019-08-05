@@ -820,11 +820,12 @@
                           infobox.setMap(map);
                           //Store some metadata with the pushpin.
                           pin.metadata = {
-                            title: data[i].Latitude + ", " + data[i].Longitude,
-                            description: "Ship Speed: " + data[i].Speed + " nt</br>"
+                            title: "Vessel 100M Cargo 1B",
+                            description: "Location: " + data[i].Latitude + ", " + data[i].Longitude + "</br>"
+                                       + "Date: " + data[i].Date + "</br>"
+                                       + "Ship Speed: " + data[i].Speed + " nt</br>"
                                        + "Temperature: " + data[i].Temperature + " °C</br>"
-                                       + "Wind Speed: " + data[i].Wind_Speed + " m/s" + "</br>"
-                                       + "Date: " + data[i].Date
+                                       + "Wind Speed: " + data[i].Wind_Speed + " m/s"
                           };
                           map.entities.push(pin);
                           //Add mouse events to the pushpin
@@ -852,8 +853,9 @@
                           infobox.setMap(map);
                           //Store some metadata with the pushpin.
                           pin.metadata = {
-                            title: data[i].Latitude + ", " + data[i].Longitude,
-                            description: "Date: " + data[i].Date + "</br>"
+                            title: "Vessel 100M Cargo 1B",
+                            description: "Location: " + data[i].Latitude + ", " + data[i].Longitude + "</br>"
+                                       + "Date: " + data[i].Date + "</br>"
                                        + "Ship Speed: " + data[i].Speed + " nt</br>"
                                        + "Temperature: " + data[i].Temperature + " °C</br>"
                                        + "Wind Speed: " + data[i].Wind_Speed + " m/s"
@@ -956,11 +958,39 @@
                           });
                           map.entities.push(pin);
                         }
+
+                        //Load the spatial math module
+                        Microsoft.Maps.loadModule("Microsoft.Maps.SpatialMath", function () {
+                        var center = map.getCenter();
+                        //Create an accuracy circle
+                        var circle = createCircle(center, 17, 'rgba(0,0,150,0.3)');
+                        map.entities.push(circle);
+                        });
                       });
+
+                        //Create a pushpin that has a transparent icon and a title property set to the label value.
+                        var center = map.getCenter();
+                        var labelPin = new Microsoft.Maps.Pushpin(center, {
+                          icon: '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>',
+                          title: "300M"
+                        });
+                        
+                        //Store a reference to the label pushpin in the polygon metadata.
+                        circle.metadata = { label: labelPin };    
+
+                        //Add the label pushpin to the map.
+                        map.entities.push(labelPin);
+                      
                     }
                     else {
 
                     }
+                  }
+
+                  function createCircle(center, radius, color) {
+                  //Calculate the locations for a regular polygon that has 36 locations which will rssult in an approximate circle.
+                    var locs = Microsoft.Maps.SpatialMath.getRegularPolygon(center, radius, 36, Microsoft.Maps.SpatialMath.DistanceUnits.Miles);
+                    return new Microsoft.Maps.Polygon(locs, { fillColor: color, strokeThickness: 0 });
                   }
                 </script>
               <script>

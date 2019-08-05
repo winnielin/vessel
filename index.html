@@ -56,6 +56,10 @@
             </a>
           </li>
           <li class="nav-item ">
+              <a class="nav-link" href="chart.html"> <!-- -->
+                <i class="material-icons">show_chart</i>
+                <p>Fleet Analysis</p>
+              </a>
                 <a class="nav-link" data-toggle="collapse" href="#maersk">
                   <i class="material-icons">image</i>
                   <p> Maersk
@@ -590,7 +594,83 @@
                     <h4 class="card-title">Notifications</h4>
                     </div>
                   </div>
-                  <div class="card-body " id="notification"></div>
+                  <div class="card-body " id="notification">
+                  <div class="alert alert-primary" data-notify="container">
+                      <i class="material-icons" data-notify="icon">notifications</i>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="material-icons">close</i>
+                      </button>
+                      <span data-notify="message"><b>Maersk Kimi</b>
+                          <div class="table-responsive">
+                              <table class="table">
+                                <thead class="">
+                                  <th>
+                                    Zone
+                                  </th>
+                                  <th>
+                                    Expected Duration
+                                  </th>
+                                  <th>
+                                    Zone Type
+                                  </th>
+                                  <th>
+                                    Multiple Entries/Exits
+                                  </th>
+                                  <th>
+                                    Prior Approval
+                                  </th>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                      SA
+                                    </td>
+                                    <td>
+                                      2 Days
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                      N
+                                    </td>
+                                    <td class="td-actions text-right">
+                                        <button type="button" rel="tooltip" class="btn btn-success">
+                                          <i class="material-icons">check</i>
+                                        </button>
+                                        <button type="button" rel="tooltip" class="btn btn-danger">
+                                          <i class="material-icons">close</i>
+                                        </button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      HRA
+                                    </td>
+                                    <td>
+                                      8 Days
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                      Y
+                                    </td>
+                                    <td class="td-actions text-right">
+                                        <button type="button" rel="tooltip" class="btn btn-success">
+                                          <i class="material-icons">check</i>
+                                        </button>
+                                        <button type="button" rel="tooltip" class="btn btn-danger">
+                                          <i class="material-icons">close</i>
+                                        </button>
+                                      </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                      </span>
+                    </div>
+                  </div>		                         
                 </div>
               </div>
       </div>
@@ -775,143 +855,98 @@
                           });
                       }
                     }
+                        
+            //show zones        
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_HRA.csv").then(function(data) {
+                      var list = [];
+                      var zone = "";
+                      var len = data.length;
+                      for (i=0; i < len; i++) {
+                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                        list.push(zone);
                     
-                    // create notification
-                    
-                    // var div1 = document.createElement('div');
-                    // div1.classList.add("alert alert-primary");
-                    // div1.setAttribute("data-notify", "container");
-                    // var i1 = document.createElement('i');
-                    // i1.classList.add("material-icons");
-                    // i1.setAttribute("data-notify", "icon");
-                    // i1.textContent = "notifications";
-                    // div1.appendChild(i1);
-
-                    // var btn1 = document.createElement('button');
-                    // btn1.setAttribute("type", "button");
-                    // btn1.classList.add("close");
-                    // btn1.setAttribute("data-dismiss", "alert");
-                    // btn1.setAttribute("aria-label", "Close");
-                    // var i2 = document.createElement('i');
-                    // i2.classList.add("material-icons");
-                    // i2.textContent = "close";
-                    // btn1.appendChild(i2);
-                    // div1.appendChild(btn1);
-
-                    // var span1 = document.createElement('span');
-                    // span1.setAttribute("data-notify", "icon");
-                    // span1.classList.add("now-ui-icons ui-1_bell-53");
-                    // div1.appendChild(span1);
-
-                    // var span2 = document.createElement('span');
-                    // span2.setAttribute("data-notify", "message");
-                    // var div2 = document.createElement('div');
-                    // div2.classList.add("table-responsive");
-                    // var thead = document.createElement('thead');
-
-
-
-
-
-
-                    // var div3 = document.getElementByID("kimi-notification");
-                    // div3.appendchild()
-
-                    
-                    
-            // d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_HRA.csv").then(function(data) {
-            //           var list = [];
-            //           var zone = "";
-            //           var len = data.length;
-            //           for (i=0; i < len; i++) {
-            //             zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-            //             // console.log(zone);
-            //             list.push(zone);
-                    
-            //           }
+                      }
                 
-            //     var polygon = new Microsoft.Maps.Polygon(list, {
-            //         fillColor: 'rgba(0, 255, 0, 0.5)',
-            //         strokeColor: 'red',
-            //         strokeThickness: 1,
-            //     });
-            //     map.entities.push(polygon);
-            // });
+                var polygon = new Microsoft.Maps.Polygon(list, {
+                    fillColor: 'transparent',
+                    strokeColor: 'blue',
+                    strokeThickness: 2,
+                });
+                map.entities.push(polygon);
+            });
 
-            // d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ERITREA.csv").then(function(data) {
-            //           var list = [];
-            //           var zone = "";
-            //           var len = data.length;
-            //           for (i=0; i < len; i++) {
-            //             zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-            //             // console.log(zone);
-            //             list.push(zone);
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ERITREA.csv").then(function(data) {
+                      var list = [];
+                      var zone = "";
+                      var len = data.length;
+                      for (i=0; i < len; i++) {
+                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                        list.push(zone);
                     
-            //           }
+                      }
                 
-            //     var polygon = new Microsoft.Maps.Polygon(list, {
-            //         fillColor: 'rgba(0, 255, 0, 0.5)',
-            //         strokeColor: 'red',
-            //         strokeThickness: 1,
-            //     });
-            //     map.entities.push(polygon);
-            // });
+                var polygon = new Microsoft.Maps.Polygon(list, {
+                    fillColor: 'transparent',
+                    strokeColor: 'blue',
+                    strokeThickness: 2,
+                });
+                map.entities.push(polygon);
+            });
 
-            // d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_YEMEN.csv").then(function(data) {
-            //           var list = [];
-            //           var zone = "";
-            //           var len = data.length;
-            //           for (i=0; i < len; i++) {
-            //             zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-            //             // console.log(zone);
-            //             list.push(zone);
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_YEMEN.csv").then(function(data) {
+                      var list = [];
+                      var zone = "";
+                      var len = data.length;
+                      for (i=0; i < len; i++) {
+                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                        list.push(zone);
                     
-            //           }
+                      }
                 
-            //     var polygon = new Microsoft.Maps.Polygon(list, {
-            //         fillColor: 'rgba(0, 255, 0, 0.5)',
-            //         strokeColor: 'red',
-            //         strokeThickness: 1,
-            //     });
-            //     map.entities.push(polygon);
-            // });
-                      var line = new Microsoft.Maps.Polyline(list, {
+                var polygon = new Microsoft.Maps.Polygon(list, {
+                    fillColor: 'transparent',
+                    strokeColor: 'blue',
+                    strokeThickness: 2,
+                });
+                map.entities.push(polygon);
+            });
+                    
+                  
+                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SA.csv").then(function(data) {
+                      var list = [];
+                      var zone = "";
+                      var len = data.length;
+                      for (i=0; i < len; i++) {
+                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                        list.push(zone);
+                    
+                      }
+                
+                var polygon = new Microsoft.Maps.Polygon(list, {
+                    fillColor: 'transparent',
+                    strokeColor: 'blue',
+                    strokeThickness: 2,
+                });
+                map.entities.push(polygon);
+            });
+                    var line = new Microsoft.Maps.Polyline(list, {
                       strokeColor: 'red',
                       strokeThickness: 2,
                       });
                       map.entities.push(line);
 
+                    }); 
+
+                    //vessel in vincity
+                    //Load the spatial math module
+                    Microsoft.Maps.loadModule("Microsoft.Maps.SpatialMath", function () {
+                      
+                      var loc = new Microsoft.Maps.Location(position.coords.latitude, position.coords.longitude);
+                      //Create an accuracy circle
+                      var path = Microsoft.Maps.SpatialMath.getRegularPolygon(loc, position.coords.accuracy, 36,  Microsoft.Maps.SpatialMath.Meters);
+                      var poly = new Microsoft.Maps.Polygon(path);
+                      map.entities.push(poly);
                     });
-                  
-            //         d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SA.csv").then(function(data) {
-            //           var i = 0;
-            //           if(data[i].Sequence==0)
-            //           {
-            //             var name = data[i].Name;
-            //             console.log(name);
-            //             var list = [];
-            //             var zone;
-                        
-            //             for (i; name == data[i].Name ; i++) {
-            //             zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-                        
-            //             list.push(zone);
-            //             }
-                        
-            //             var polygon = new Microsoft.Maps.Polygon(list, {
-            //             fillColor: 'rgba(0, 255, 0, 0.5)',
-            //             strokeColor: 'red',
-            //             strokeThickness: 1,
-            //           });
-            //           map.entities.push(polygon);
-            //         }
-                
-                
-            // });
-
-
-                    
-                    
 
                   } else {
                     for (var i = map.entities.getLength() - 1; i >= 0; i--) {
@@ -927,6 +962,8 @@
                     }
                   }
                 }
+
+
                 function GetJinguRoute() {
                 // Get the checkbox
                 var checkBox = document.getElementById("defaultCheck2");
@@ -1133,6 +1170,7 @@
                     }
                   }
                 }
+        
   </script>
   <script>
   $(document).ready(function(){
@@ -1148,6 +1186,12 @@
               "<div class=\"table-responsive\"><table class=\"table\"><thead class=\"\">" +
               "<th>Zone</th><th>Expected Duration</th><th>Multiple Entries/Exits</th><th>Prior Approval</th></thead>" + 
               "<tbody><tr><td>SA</td><td>2 Days</td><td>N</td>" + 
+              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
+              "<tr><td>YEMEN</td><td>1 Day</td><td>Y</td>" + 
+              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
+              "<tr><td>ERITREA_HRA</td><td>2 Days</td><td>Y</td>" + 
               "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
               "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
               "<tr><td>HRA</td><td>8 Days</td><td>Y</td>" +

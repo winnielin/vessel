@@ -2,35 +2,33 @@
 
 ## Coding To Do
 
+### Vessel Page
+
+1. vessels in vincity - alert  
+2. deviation notification popup on the map  
+3. made red sth (heatmap) at deviation - extreme weather  
+4. zone overlayed - show all JWC
+6. vincity - 1B label, notification: 15 vessels, value 1B, near warzone Iran  
+7. zone visits graph put somewhere for a vessel  
+
 ### Fleet Page  
 
-1. combine chart into index.html -> just create chart.html and use the same outline  
-2. planned or actual vessel event
-3. show restricted zones
-4. notification - approval button function  
-5. heat map layer - show weather info ???  
-5. on the map ->show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
-6. a block with political and piracy events  
-7. how to use zone entry & exit data  
+1. planned or actual vessel event  
+2. remove specific polygons -> layer???
+2. notification - approval button function  
+3. heat map layer - show weather info ???  
+4. on the map ->show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
+5. a block with political and piracy events  
+6. how to use zone entry & exit data  
 
 ### d3.js chart page
 
 1. select vessels from the table then add data into chart  
-2. age slider, vessel type & shipphing company selector  
+2. age slider, vessel type & shipping company selector  
 3. valuation chart - stacked bar & line  
 4. mileage + port visits +  
 5. restricted zone visits - by zone -> total accepted, change more/less  
 6. some claims, premium, value information message by side  
-
-### Vessel Page
-
-1. vessels in vincity - alert & csv download btn  
-2. deviation notification popup on the map  
-3. made red sth (heatmap) at deviation - extreme weather  
-4. zone overlayed - show all JWC
-5. infobox - title: vessel value: 200M, subtitle: cargo value: 1B  
-6. vincity - circle & 1B label, notification: 15 vessels, value 1B, near warzone Iran  
-7. zone visits graph put somewhere for a vessel  
 
 #### Bing Maps  
 
