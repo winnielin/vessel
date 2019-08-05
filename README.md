@@ -4,11 +4,10 @@
 
 ### Vessel Page
 
-1. vessels in vincity - alert  
-2. deviation notification popup on the map  
-3. made red sth (heatmap) at deviation - extreme weather  
-4. zone overlayed - show all JWC
-5. zone visits graph put somewhere for a vessel  
+1. deviation notification popup on the map  
+2. made red sth (heatmap) at deviation - extreme weather  
+3. zone overlayed - show all JWC
+4. zone visits graph put somewhere for a vessel  
 
 ### Fleet Page  
 
