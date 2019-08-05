@@ -799,7 +799,7 @@
                 // Get the checkbox
                 var checkBox = document.getElementById("defaultCheck2");
         
-                // If the checkbox is checked, display the output text
+                // If the checkbox is checked
                   if (checkBox.checked == true){
                     d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherActual.csv")
                       .then(function(data) {
@@ -902,6 +902,27 @@
 
                       //Assign the infobox to a map instance.
                       infobox.setMap(map);
+
+                      //heatmap
+                      //Generate a 1,000 random locations that are within the bounds of the map view.
+                      var locs = Microsoft.Maps.TestDataGenerator.getLocations(1000, map.getBounds());
+                      console.log(locs);
+                      //Load the HeatMap module.
+                      Microsoft.Maps.loadModule('Microsoft.Maps.HeatMap', function () {
+                        var heatmap = new Microsoft.Maps.HeatMapLayer(locs, {
+                        intensity: 0.50,
+                        radius: 100000,
+                        unit: 'meters', 
+                        colorGradient: {
+                            '0': 'Black',
+                            '0.4': 'Purple',
+                            '0.6': 'Red',
+                            '0.8': 'Yellow',
+                            '1': 'White'
+                        }
+                      });
+                          map.layers.insert(heatmap);
+                      });
 
 
                   } else {
