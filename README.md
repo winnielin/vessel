@@ -8,8 +8,7 @@
 2. deviation notification popup on the map  
 3. made red sth (heatmap) at deviation - extreme weather  
 4. zone overlayed - show all JWC
-6. vincity - 1B label, notification: 15 vessels, value 1B, near warzone Iran  
-7. zone visits graph put somewhere for a vessel  
+5. zone visits graph put somewhere for a vessel  
 
 ### Fleet Page  
 
