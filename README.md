@@ -4,17 +4,16 @@
 
 ### Vessel Page
 
-1. deviation notification popup on the map  
-2. made red sth (heatmap) at deviation - extreme weather  
-3. zone overlayed - show all JWC -> queue.js
-4. zone visits graph put somewhere for kimi  
+1. made red sth (heatmap) at deviation - extreme weather  
+2. zone overlayed - show all JWC -> queue.js
+3. zone visits graph put somewhere for kimi  
 
 ### Fleet Page  
 
 1. planned or actual vessel event  
 2. remove specific polygons -> layer???
 2. notification - approval button function  
-3. heat map layer - show weather info ???  
+3. show weather info - heat map layer ???  
 4. on the map ->show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
 5. a block with political and piracy events  
 6. how to use zone entry & exit data  

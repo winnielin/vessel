@@ -274,7 +274,7 @@
                         </div>
                         <div class="form-check">
                           <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" onclick="GetActualRoute()">Actual Route
+                            <input class="form-check-input" type="checkbox" value="actual" id="defaultCheck2" onclick="GetActualRoute()">Actual Route
                               <span class="form-check-sign">
                                 <span class="check"></span>
                               </span>
@@ -328,13 +328,13 @@
                           <span>
                             <b> Info - </b> This is the route of Maersk Kimi from 14 Jun to 1 Jul.</span>
                         </div>
-                    <div class="alert alert-warning">
+                    <!-- <div class="alert alert-warning">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                           <i class="material-icons">close</i>
                         </button>
                         <span>
-                          <b> Warning - </b> The route of Maersk Kimi diversed from the planned schedule on 27/06/2019 21:03:37.</span>
-                      </div>
+                          <b> Warning - </b> The route of Maersk Kimi diversed from the planned schedule on 18/06/2019 02:03:43.</span>
+                      </div> -->
                       <!-- <div class="alert alert-danger">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                           <i class="material-icons">close</i>
@@ -887,11 +887,22 @@
                       });
                       map.entities.push(line);
                     });
+
                     pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(27.035, 49.6795), {
                       icon: 'assets/img/changedPort.png',
                       title: 'SAJUB'
                       });
                       map.entities.push(pin);
+
+                      //Pass the title and description into the template and pass it into the infobox as an option.
+                      var infobox = new Microsoft.Maps.Infobox(new Microsoft.Maps.Location(25.77616, 52.40701), {
+                          title: 'Deviation - Extreme Weather',
+                          description: 'Maersk Kimi changed the port from QADOH to SAJUB on 18/06/2019 02:03:43.'
+                      }); 
+
+                      //Assign the infobox to a map instance.
+                      infobox.setMap(map);
+
 
                   } else {
                     for (var i = map.entities.getLength() - 1; i >= 0; i--) {
@@ -1024,7 +1035,7 @@
                     if (checkBox.checked == true){
                       map.setView ({
                         center: new Microsoft.Maps.Location(25.90372, 56.8122),
-                        zoom: 9
+                        zoom: 10
                       });
                       d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/VesselinVincity.csv")
                       .then(function(data) {
@@ -1086,24 +1097,42 @@
                 </script>
             <script>
                 $(document).ready(function(){
-              $(":checkbox[value=vincity]").click(function(){
-                if($(this).prop("checked") == true){
-                $("#notification").append(
-                  "<div class=\"alert alert-danger\">" + 
-                  "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">" +
-                  "<i class=\"material-icons\">close</i></button>" + 
-                  "<span><b> Danger </b><br>" + 
-                  "Number of positions: 15 <br>" + 
-                  "Value: 1B <br>" + 
-                  "Near war zone <b> IRAN </b>" +
-                  "</span></div>"
-                );
-            }
-            else if($(this).prop("checked") == false){
-              $("#shohjin").remove();
-            }
-        });
-    });
+                  $(":checkbox[value=vincity]").click(function(){
+                  if($(this).prop("checked") == true){
+                  $("#notification").append(
+                    "<div class=\"alert alert-danger\" id=\"vincity\">" + 
+                    "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">" +
+                    "<i class=\"material-icons\">close</i></button>" + 
+                    "<span><b> Danger </b><br>" + 
+                    "Number of positions: 15 <br>" + 
+                    "Value: 1B <br>" + 
+                    "Near war zone <b> IRAN </b>" +
+                    "</span></div>"
+                  );
+                }
+                else if($(this).prop("checked") == false){
+                  $("#vincity").remove();
+                }
+              });
+            });
+
+              $(document).ready(function(){
+                  $(":checkbox[value=actual]").click(function(){
+                  if($(this).prop("checked") == true){
+                  $("#notification").append(
+                    "<div class=\"alert alert-warning\" id=\"actual\">" + 
+                    "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">" +
+                    "<i class=\"material-icons\">close</i></button>" + 
+                    "<span><b> Warning - </b>" + 
+                    "The route of Maersk Kimi diversed from the planned schedule on 18/06/2019 02:03:43." + 
+                    "</span></div>"
+                  );
+                }
+                  else if($(this).prop("checked") == false){
+                    $("#actual").remove();
+                  }
+              });
+            });
                 </script>
               <script>
                 $(document).ready(function() {
