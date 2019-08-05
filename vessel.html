@@ -905,8 +905,12 @@
 
                       //heatmap
                       //Generate a 1,000 random locations that are within the bounds of the map view.
-                      var locs = Microsoft.Maps.TestDataGenerator.getLocations(1000, map.getBounds());
-                      console.log(locs);
+                      var locs = [new Microsoft.Maps.Location(24.52697584,	52.00975148),
+                                  new Microsoft.Maps.Location(24.56158852,	52.71950161),
+                                  new Microsoft.Maps.Location(24.7985244,	  52.07807375),
+                                  new Microsoft.Maps.Location(25.14970078,	52.91766443),
+                                  new Microsoft.Maps.Location(25.50115036,	51.89144622),
+                                  new Microsoft.Maps.Location(25.69179088,	53.15980482)];
                       //Load the HeatMap module.
                       Microsoft.Maps.loadModule('Microsoft.Maps.HeatMap', function () {
                         var heatmap = new Microsoft.Maps.HeatMapLayer(locs, {

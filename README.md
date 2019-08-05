@@ -4,9 +4,8 @@
 
 ### Vessel Page
 
-1. made red sth (heatmap) at deviation - extreme weather  
-2. zone overlayed - show all JWC -> queue.js
-3. zone visits graph put somewhere for kimi  
+1. zone overlayed - show all JWC -> queue.js
+2. zone visits graph put somewhere for kimi  
 
 ### Fleet Page  
 
@@ -45,17 +44,14 @@
 
 ### Team Report 2000
 
-Introduction 200  
+Introduction 500  
 
--structure -> using data science pipeline??  
--abstraction  
--concepts  
+-structure -> using data science pipeline  
 
-Conceptual Work 1600  
 Project description (Problem to solve)  
-Exploratory Data Analysis  
-Hypothesis and Methods  
-Result  
+Data Collection & Mining (Exploratory Data Analysis) 200  
+Story & Scenario (Hypothesis and Methods) 800
+Visualisation (Result) 400  
 
 Conclusion 200  
 
