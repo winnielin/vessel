@@ -29,39 +29,23 @@
   <link rel="icon" type="image/png" sizes="16x16" href="https://insurwave.com/images/favicon-16x16.png">
   <!-- Material Kit CSS -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
-  <style type="text/css">
+  
+  <style>
+    
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /* width: 960px; */
+    /* height: 500px; */
+    position: relative;
+  }
 
-    body {
-      font: 10px sans-serif;
-    }
-    
-    .axis path,
-    .axis line {
-      fill: none;
-      stroke: #000;
-      shape-rendering: crispEdges;
-    }
-    
-    .x.axis path {
-      fill: none;
-      stroke: #000;
-      shape-rendering: crispEdges;
-    }
-    
-    .line {
-      fill: none;
-      stroke-width: 7px;
-    }
-    
-    .vessel {opacity: 0.3;}
-    .vessel:hover {opacity:1;}
-    
+  
     </style>
 </head>
 
 <body>
   <div class="wrapper ">
-    <div class="sidebar" data-color="green" data-background-color="white">
+    <div class="sidebar" data-color="purple" data-background-color="black">
       <!--
       Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -224,34 +208,27 @@
         <div class="container-fluid">
           <!-- your content here -->
           <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-8">
               <div class="card" id="chart1">
                 <div class="card-header card-header-rose card-header-icon">
                   <div class="card-icon">
                     <i class="material-icons">assignment</i>
                   </div>
-                  <h4 class="card-title">Fleet Information&nbsp;&nbsp;
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-info">Planned</button>
-                        <button type="button" class="btn btn-info">Actual</button>
-                      </div>
-                    </h4>
-                </div>
-                <div>
-                    <input type="checkbox" id="maersk" onclick="maersklight()">MAERSK</input>
-                    <input type="checkbox" id="nyk" onclick="nyklight()">NYK</input>
-                </div>
-                <p id="menu"><b>Fleet Information</b><br>Select series: <select>
-                    
-                  <option value="VAL">Valuation, £GBP</option>
-                  <option value="MILE">Mileage, knots</option>
-                  <option value="PORT">Port visits (annual)</option>
-                  <option value="PORTOT">Port visits (total)</option>
-                  <option value="ZONE">Zone visits (annual)</option></select>
-              
+                  <!-- Selection Category -->
+                  <div>
+                  <h4 class="card-title"><b>Fleet Valuation Information</b><br>
+                    <h5 class="card-title"><b>Select reported year: </b>
+                      <select class="opt">
+                          <option value="CC">2018</option>
+                          <option value="DD">2019</option>
+                        </select>
+                    </h5>
+                  </h4>
+                  </div>
+                    <svg width="600" height="400"></svg>
                   </div>
                 </div>
-            <!-- <div class="col-md-4">
+            <div class="col-md-4">
                 <div class="card ">
                   <div class="card-header card-header-text card-header-rose">
                     <div class="card-text">
@@ -260,7 +237,7 @@
                   </div>
                   <div class="card-body " id="notification"></div>
                 </div>
-              </div> -->
+              </div>
             </div>
       </div>
       </div>
@@ -326,297 +303,183 @@
   <script src="assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="assets/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
-  <script type="text/javascript" src="http://d3js.org/d3.v2.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
   
   
 </body>
 
-<script type="text/javascript">
+<script>
 
-  // set the stage for the visualization
-      var margin = {top: 20, right: 20, bottom: 30, left: 70},
-          w = 860 - margin.left - margin.right,
-          h = 500 - margin.top - margin.bottom,
-          x = d3.time.scale().range([0,w-150]),
-          y = d3.scale.linear().range([h, 0]);
-          parseDate = d3.time.format("%Y").parse;
+  var speed = 0;
+
+  d3.csv("https://raw.githubusercontent.com/nataliaokuneva/data_vessel/master/claim.csv").then(function(data) {
+
+      chart(data, "CC")
+
+      d3.selectAll(".opt").on("change", function() {
+          speed = 750;
+          chart.update(data, this.value)
+      })
+
+  });
+
+  function chart(data, input) {
+
+      var z = d3.scaleOrdinal()
+          .range(["#99CCFF","#3399FF","#0066CC"]);
+      
+      // Create a tooltip
+      var tip = d3.tip().attr('class', 'd3-tip').direction('e').offset([0,5])
+              .html(function(d) {
+                  return d.value;
+              });
+
+      var svg = d3.select("svg"),
+          margin = {top: 35, right: 35, bottom: 35, left: 35},
+          width = +svg.attr("width") - margin.left - margin.right,
+          height = +svg.attr("height") - margin.top - margin.bottom;
+
+      var keys = data.columns.slice(1, 4);
+
+      var x0 = d3.scaleBand()
+          .domain(data.map(d => d.State))
+          .range([margin.left, width - margin.right])
+          .padding(0.1);
+
+      var x1 = d3.scaleBand()
+          .domain(keys)
+          .rangeRound([0, x0.bandwidth()]);
+
+      var y = d3.scaleLinear()
+          .range([height, margin.top]);
+
+      svg.append("g")
+          .attr("class", "x-axis");
+
+      svg.append("g")
+        .attr("class", "y-axis");
+        
+
+      // Handmade legend
+      svg.append("rect").attr("x",width-135).attr("y",height-417).attr("width", 13).attr('height', 13).style("fill", "#99CCFF")
+      svg.append("rect").attr("x",width-135).attr("y",height-402).attr("width", 13).attr('height', 13).style("fill", "#3399FF")
+      svg.append("rect").attr("x",width-135).attr("y",height-387).attr("width", 13).attr('height', 13).style("fill", "#0066CC")
+
+      svg.append("text").attr("x", width-115).attr("y", height-410).text("Valuation, USD").style("font-size", "15px").attr("alignment-baseline","middle")
+      svg.append("text").attr("x", width-115).attr("y", height-394).text("Premium, USD").style("font-size", "15px").attr("alignment-baseline","middle")
+      svg.append("text").attr("x", width-115).attr("y", height-378).text("Claim, USD").style("font-size", "15px").attr("alignment-baseline","middle")
+
+      var xAxis = g => g
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x0)
+              .tickSizeOuter(0))
+
+      var yAxis = g => g
+          .attr("transform", 
+              "translate(" + margin.left + ",0)")
+          .call(d3.axisLeft(y).ticks(null, "s"))
+
+      svg.call(tip);
+
+      update(data, input);
+
+      function update(data, input) {
+
+          var copy = [];
+
+          keys.forEach(function(t) {
+              t = t.slice(0, -2)
+              copy.push(t)
+          })
+
+          y.domain([0, d3.max(data, function(d) {
+              return d3.max(copy, function(key) {
+                  return d3.sum([d[key + input]])
+              }); 
+          })]).nice();
+
+          var barGroups = svg.selectAll(".layer")
+              .data(data, d => d.State);
+
+          barGroups.exit().remove();
+
+          barGroups.enter().append("g")
+              .classed('layer', true);
+
+          svg.selectAll(".layer").transition().duration(speed)
+              .attr("transform", function(d, i) {
+                  return "translate(" + x0(d.State) + ",0)";
+              });
+
+          var bars = svg.selectAll(".layer").selectAll(".bars")
+              .data(function(d) { 
+                  return copy.map(function(key) {
+                      return {key: key + input, value: d[key + input]}; 
+                  }); 
+              });
+
+          bars = bars
+              .enter()
+          .append("rect")
+              .attr("class", "bars")
+              .attr("x", d => x1(d.key))
+              .attr("width", x1.bandwidth())
+              .attr("fill", d => z(d.key))
+              .merge(bars);
+
+          bars.transition().duration(speed)
+              .attr("height", d => height - y(d["value"]))
+              .attr("y", d => y(d.value))
+
+          svg.selectAll(".x-axis").transition().duration(speed)
+              .call(xAxis);
           
-      var color = d3.scale.category10(); // to generate a different color for each line
-      
-      // to be used later
-      var vessels,
-          filtered,
-          transpose;
-      
-      // where the line gets its properties, how it will be interpolated
-      var line = d3.svg.line()
-         .interpolate("basis")
-         .x(function(d) { return x(d.year); })
-         .y(function(d) { return y(d.stat); });
-      
-      // add svg box where viz will go    
-      var svg = d3.select("#chart1").append("svg")
-          .attr("width", w + margin.left + margin.right)
-          .attr("height", h + margin.top + margin.bottom)
-          .append("g")
-          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  
-      // define the x axis and its class, append it to svg 
-      var xAxis = d3.svg.axis()
-          .scale(x)
-          .orient("bottom")
-          .ticks(d3.time.years, 1)
-          .tickFormat(d3.time.format('%Y'))
-         svg.append("svg:g")
-          .attr("class", "x axis");
-  
-      // define the y axis and its class, append it to svg
-      var yAxis = d3.svg.axis()
-          .scale(y)
-          .orient("left")
-          svg.append("svg:g")
-          .attr("class", "y axis");
-      
-      // update data when menu is changed    
-      var menu = d3.select("#menu select")
-      .on("change", change);    
-            
-  // put data from csv into vessels variable
-  //run redraw function that will refresh whenever a new data series is selected 
-  d3.csv("https://raw.githubusercontent.com/nataliaokuneva/data_vessel/master/data.csv", function(csv) {
-      vessels = csv;
-          redraw();
-      });
-      
-  d3.select(window)
-      .on("keydown", function() { altKey = d3.event.altKey; })
-      .on("keyup", function() { altKey = false; });
-  
-  var altKey;
-  
-  // set terms of transition that will take place
-  // when a new indicator is chosen   
-  function change() {
-    clearTimeout(timeout);
-  
-    d3.transition()
-        .duration(altKey ? 7500 : 1500)
-        .each(redraw);
-  }
-  
-  // all the meat goes in the redraw function
-  function redraw() {
-      
-      // create data nests based on the indicator (series)
-      var nested = d3.nest()
-      .key(function(d) { return d.indicatorCode; })
-      .map(vessels)
-      
-      // get value from menu selection
-      // the option values are set in HTML and correspond
-      //to the [indicatorCode] value we used to nest the data  
-      var series = menu.property("value");
-      
-      // only retrieve data from the selected series, using the nest we just created
-      var data = nested[series];
-      
-      // for object constancy we will need to set "keys", one for each vessel.
-      // the keyring variable contains only the names of the vessels
-      var keyring = d3.keys(data[0]).filter(function(key) { 
-             return (key !== "indicatorName" && key !== "yearCode" && key !== "indicatorCode" && key !== "year");
-         });
-      
-      // get the year and related statistics, map them to each vessel separately 
-      var transpose = keyring.map(function(name) {
-              return {
-                name: name,
-                values: data.map(function(d) {
-                  return {year: parseDate(d.year), stat: +d[name]};
-                })
-              };
-          });
-  
-      // set the x and y domains as the max and min
-      // of the related year and statistics, respectively
-      x.domain([
-      d3.min(transpose, function(c) { return d3.min(c.values, function(v) { return v.year; }); }),
-      d3.max(transpose, function(c) { return d3.max(c.values, function(v) { return v.year; }); })
-    ]);
-  
-      y.domain([
-      d3.min(transpose, function(c) { return d3.min(c.values, function(v) { return v.stat; }); }),
-      d3.max(transpose, function(c) { return d3.max(c.values, function(v) { return v.stat; }); })
-    ]);
-  
-      // announce to d3 that we will be using something called
-      // "vessels" that makes use of the transposed data 
-      var vessel = svg.selectAll(".vessel")
-        .data(transpose);
-       
-      // create separate groups for each vessel
-      // assign them a class and individual IDs (for styling) 
-      var vesselEnter = vessel.enter().append("g")
-        .attr("class", "vessel")
-        .attr("id", function(d) { return d.name; });
-      
-      // draw the lines and color them according to their names
-      vesselEnter.append("path")
-        .attr("class", "line")
-        .attr("d", function(d) { return line(d.values); })
-        .style("stroke", function(d) { return color(d.name); });
-  
-      // create labels for each vessel
-      // set their position to that of the last year and stat
-      vesselEnter.append("text")
-       .attr("class", "names")
-       .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
-       .attr("transform", function(d) { return "translate(" + x(d.value.year) + "," + y(d.value.stat) + ")"; })
-       .attr("x", 2)
-       .attr("dy", ".35em")
-       .text(function(d) { return d.name; });
-  
-      // set variable for updating visualization
-      var vesselUpdate = d3.transition(vessel);
-      
-      // change values of path to those of the new series
-      vesselUpdate.select("path")
-        .attr("d", function(d) { return line(d.values); });
-      
-      // change position of text alongside the moving path  
-      vesselUpdate.select("text")
-         .attr("transform", function(d) { return "translate(" + x(d.values[d.values.length - 1].year) + "," + y(d.values[d.values.length - 1].stat) + ")"; });
-    
-    // update the axes, though only the y axis will change    
-        d3.transition(svg).select(".y.axis")
-            .call(yAxis);   
-            
-        d3.transition(svg).select(".x.axis")
-              .attr("transform", "translate(0," + h + ")")
-            .call(xAxis);
-  
-  // that concludes redraw()
-  // add mouse
-  
-       var mouseG = svg.append("g")
-         .attr("class", "mouse-over-effects");
-  
-       mouseG.append("path") // this is the black vertical line to follow mouse
-          .attr("class", "mouse-line")
-          .style("stroke", "black")
-          .style("stroke-width", "1px")
-          .style("opacity", "0");
-  
-      var lines = document.getElementsByClassName('line');
-  
-      var mousePerLine = mouseG.selectAll('.mouse-per-line')
-          .data(vessels)
-          .enter()
-          .append("g")
-          .attr("class", "mouse-per-line");
-  
-      mousePerLine.append("circle")
-          .attr("r", 7)
-          .style("stroke", function(d, i) {
-      return z(i);
-      })
-          .style("fill", "none")
-          .style("stroke-width", "1px")
-          .style("opacity", "0");
-  
-      mousePerLine.append("text")
-          .attr("transform", "translate(10,3)");
-  
-      mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
-          .attr('width', width) // can't catch mouse events on a g element
-          .attr('height', height)
-          .attr('fill', 'none')
-          .attr('pointer-events', 'all')
-          .on('mouseout', function() { // on mouse out hide line, circles and text
-      d3.select(".mouse-line")
-        .style("opacity", "0");
-      d3.selectAll(".mouse-per-line circle")
-        .style("opacity", "0");
-      d3.selectAll(".mouse-per-line text")
-        .style("opacity", "0");
-      })
-        .on('mouseover', function() { // on mouse in show line, circles and text
-      d3.select(".mouse-line")
-        .style("opacity", "1");
-      d3.selectAll(".mouse-per-line circle")
-        .style("opacity", "1");
-      d3.selectAll(".mouse-per-line text")
-        .style("opacity", "1");
-      })
-        .on('mousemove', function() { // mouse moving over canvas
-      var mouse = d3.mouse(this);
-      d3.select(".mouse-line")
-        .attr("d", function() {
-          var d = "M" + mouse[0] + "," + height;
-          d += " " + mouse[0] + "," + 0;
-          return d;
-        });
-  
-      d3.selectAll(".mouse-per-line")
-        .attr("transform", function(d, i) {
-          console.log(width / mouse[0])
-          var xDate = x.invert(mouse[0]),
-            bisect = d3.bisector(function(d) {
-              return d[0];
-            }).right;
-          var idx = bisect(d.stat, xDate);
-  
-          var beginning = 0,
-            end = lines[i].getTotalLength(),
-            target = null;
-  
-          while (true) {
-            target = Math.floor((beginning + end) / 2);
-            var pos = lines[i].getPointAtLength(target);
-            if ((target === end || target === beginning) && pos.x !== mouse[0]) {
-              break;
-            }
-            if (pos.x > mouse[0]) end = target;
-            else if (pos.x < mouse[0]) beginning = target;
-            else break; //position found
+          svg.selectAll(".y-axis").transition().duration(speed)
+              .call(yAxis);
+
+          svg.call(zoom);
+
+
+          function zoom(group) {
+          
+              var extent = [
+                  [margin.left, margin.top], 
+                  [width - margin.right, height - margin.top]
+              ];
+              
+              group.call(d3.zoom()
+                  .scaleExtent([1, 2])
+                  .translateExtent(extent)
+                  .extent(extent)
+                  .on("zoom", zoomed));
+              
+              function zoomed() {
+          
+                  x0.range(
+                      [margin.left, width - margin.right]
+                      .map(d => d3.event.transform.applyX(d)));
+                  x1.rangeRound([0, x0.bandwidth()]);
+          
+                  group.selectAll(".layer")
+                      .attr("transform", function(d) { 
+                          return "translate(" + x0(d.State) + ",0)"; 
+                      });
+                  group.selectAll(".bars")
+                      .attr("x", function(d) { 
+                          return x1(d.key)
+                      })
+                      .attr("width", x1.bandwidth());
+          
+                  group.selectAll(".x-axis")
+                      .call(xAxis);
+              }
           }
-  
-          d3.select(this).select('text')
-            .text(y.invert(pos.y).toFixed(2));
-  
-          return "translate(" + mouse[0] + "," + pos.y + ")";
-        });
-    });
-  }
-  
-  
-  
-  
-  // automatically change value after a few seconds
-  var timeout = setTimeout(function() {
-    menu.property("value", "ZONE").node().focus();
-    change();
-  }, 7000);    
-          
-  // highlighting two groups of vessels
-  function maersklight() {
-      var chkbox = document.getElementById("maersk");
-      if (chkbox.checked) {
-          document.getElementById("Maersk Vega").style.cssText = "opacity:1;",
-          document.getElementById("Maersk Palermo").style.cssText = "opacity:1;"
-      } else { 
-          document.getElementById("Maersk Vega").style.cssText = "",
-          document.getElementById("Maersk Palermo").style.cssText = ""
-      }};
-      
-  function nyklight() {
-      var chkbox = document.getElementById("nyk")
-      if (chkbox.checked) {
-          document.getElementById("Gas Diana").style.cssText = "opacity:1;",
-          document.getElementById("Towada").style.cssText = "opacity:1;"
-      } else { 
-          document.getElementById("Gas Diana").style.cssText = "",
-          document.getElementById("Towada").style.cssText = ""
-      }};
+
+      }
+
+      chart.update = update;   
+  };
   
     </script>
 

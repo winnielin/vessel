@@ -61,6 +61,10 @@
                 </a>
               </li>
               <li class="nav-item ">
+                  <a class="nav-link" href="chart.html"> <!-- -->
+                    <i class="material-icons">show_chart</i>
+                    <p>Fleet Analysis</p>
+                  </a>
                     <a class="nav-link" data-toggle="collapse" href="#maersk" aria-expanded="true">
                       <i class="material-icons">apps</i>
                       <p> Maersk
@@ -914,7 +918,7 @@
                       //Load the HeatMap module.
                       Microsoft.Maps.loadModule('Microsoft.Maps.HeatMap', function () {
                         var heatmap = new Microsoft.Maps.HeatMapLayer(locs, {
-                        intensity: 0.50,
+                        intensity: 0.65,
                         radius: 100000,
                         unit: 'meters', 
                         colorGradient: {
