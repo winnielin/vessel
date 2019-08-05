@@ -2,11 +2,6 @@
 
 ## Coding To Do
 
-### Vessel Page
-
-1. zone overlayed - show all JWC -> queue.js
-2. zone visits graph put somewhere for kimi  
-
 ### Fleet Page  
 
 1. planned or actual vessel event  
@@ -16,6 +11,13 @@
 4. on the map ->show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
 5. a block with political and piracy events  
 6. how to use zone entry & exit data  
+
+### Vessel Page improvement
+
+1. zone visits graph put somewhere for kimi  
+2. past important events block  
+3. using queue.js to show all JWC zones  
+4. dropdown list for all vessels  
 
 ### d3.js chart page
 
