@@ -6,8 +6,8 @@
 
 1. deviation notification popup on the map  
 2. made red sth (heatmap) at deviation - extreme weather  
-3. zone overlayed - show all JWC
-4. zone visits graph put somewhere for a vessel  
+3. zone overlayed - show all JWC -> queue.js
+4. zone visits graph put somewhere for kimi  
 
 ### Fleet Page  
 

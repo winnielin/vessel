@@ -914,7 +914,7 @@
         
         // If the checkbox is checked, display the output text
         if (checkBox.checked == true){
-            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/GeoZonesCode.csv").then(function(data) {
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_IRAN.csv").then(function(data) {
                 var list = [];
                 var zone = "";
                 var len = data.length;
@@ -935,6 +935,79 @@
                 });
                 map.entities.push(polygon);
             });
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_HRA.csv").then(function(data) {
+                      var list = [];
+                      var zone = "";
+                      var len = data.length;
+                      for (i=0; i < len; i++) {
+                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                        list.push(zone);
+                    
+                      }
+                
+                var polygon = new Microsoft.Maps.Polygon(list, {
+                    fillColor: 'transparent',
+                    strokeColor: 'blue',
+                    strokeThickness: 2,
+                });
+                map.entities.push(polygon);
+            });
+
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ERITREA.csv").then(function(data) {
+                      var list = [];
+                      var zone = "";
+                      var len = data.length;
+                      for (i=0; i < len; i++) {
+                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                        list.push(zone);
+                    
+                      }
+                
+                var polygon = new Microsoft.Maps.Polygon(list, {
+                    fillColor: 'transparent',
+                    strokeColor: 'blue',
+                    strokeThickness: 2,
+                });
+                map.entities.push(polygon);
+            });
+
+            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_YEMEN.csv").then(function(data) {
+                      var list = [];
+                      var zone = "";
+                      var len = data.length;
+                      for (i=0; i < len; i++) {
+                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                        list.push(zone);
+                    
+                      }
+                
+                var polygon = new Microsoft.Maps.Polygon(list, {
+                    fillColor: 'transparent',
+                    strokeColor: 'blue',
+                    strokeThickness: 2,
+                });
+                map.entities.push(polygon);
+            });
+                    
+                  
+                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SA.csv").then(function(data) {
+                      var list = [];
+                      var zone = "";
+                      var len = data.length;
+                      for (i=0; i < len; i++) {
+                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                        list.push(zone);
+                    
+                      }
+                
+                var polygon = new Microsoft.Maps.Polygon(list, {
+                    fillColor: 'transparent',
+                    strokeColor: 'blue',
+                    strokeThickness: 2,
+                });
+                map.entities.push(polygon);
+            });
+
         } else {
                 for (var i = map.entities.getLength() - 1; i >= 0; i--) {
                     var polygon = map.entities.get(i);
