@@ -215,7 +215,6 @@ svg:not(:root) {
 
 table {
   border-collapse: collapse;
-  overflow: auto;
 }
 
 caption {
@@ -29289,6 +29288,5 @@ select.selectpicker {
     display: none !important;
   }
 }
-
 
 /*# sourceMappingURL=dashboard-pro.css.map */
