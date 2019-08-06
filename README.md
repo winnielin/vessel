@@ -48,19 +48,6 @@
 
 ## Report
 
-### Team Report 2000
-
-Introduction 500  
-
--structure -> using data science pipeline  
-
-Project description (Problem to solve)  
-Data Collection & Mining (Exploratory Data Analysis) 200  
-Story & Scenario (Hypothesis and Methods) 800
-Visualisation (Result) 400  
-
-Conclusion 200  
-
 ### Individual Report 4000
 
 8/6 Intro 400  
@@ -83,3 +70,16 @@ Conclusion 200
   -interaction with industry partner (the relation between the academic programme and the project)  
 
 8/11 Conclusion 400  
+
+### Team Report 2000
+
+Introduction 500  
+
+-structure -> using data science pipeline  
+
+Project description (Problem to solve)  
+Data Collection & Mining (Exploratory Data Analysis) 200  
+Story & Scenario (Hypothesis and Methods) 800  
+Visualisation (Result) 400  
+
+Conclusion 200  
