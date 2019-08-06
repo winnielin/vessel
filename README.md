@@ -6,11 +6,12 @@
 
 1. planned or actual vessel event  
 2. remove specific polygons -> layer???
-2. notification - approval button function  
-3. show weather info - heat map layer ???  
-4. on the map ->show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
-5. a block with political and piracy events  
-6. how to use zone entry & exit data  
+3. notification - approval button function  
+4. show weather info - heat map layer ???  
+5. on the map ->show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
+6. a block with political and piracy events  
+7. move two charts on the bottom of the page
+8. how to use zone entry & exit data  
 
 ### Vessel Page improvement
 
@@ -21,12 +22,12 @@
 
 ### d3.js chart page
 
-1. select vessels from the table then add data into chart  
-2. age slider, vessel type & shipping company selector  
-3. valuation chart - stacked bar & line  
-4. mileage + port visits +  
-5. restricted zone visits - by zone -> total accepted, change more/less  
-6. some claims, premium, value information message by side  
+~~1. select vessels from the table then add data into chart~~  
+~~2. age slider, vessel type & shipping company selector~~  
+~~3. valuation chart - stacked bar & line~~  
+~~4. mileage + port visits + ??~~  
+~~5. restricted zone visits - by zone -> total accepted, change more/less~~  
+~~6. some claims, premium, value information message by side~~  
 
 #### Bing Maps  
 
