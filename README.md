@@ -16,7 +16,7 @@
 ### d3.js chart page
 
 1. solve the size of svg  
-2. implement zones.html into chart2.html
+2. implement zones.html into chart2.html  
 ~~1. select vessels from the table then add data into chart~~  
 ~~2. age slider, vessel type & shipping company selector~~  
 ~~3. valuation chart - stacked bar & line~~  
@@ -26,6 +26,7 @@
 
 ### Vessel Page improvement
 
+1. remove heatmap
 1. zone visits graph put somewhere for kimi  
 2. past important events block  
 3. using queue.js to show all JWC zones  
@@ -34,10 +35,10 @@
 #### Bing Maps  
 
 1. how to untick route then remove only specific polyline from the map (different layer)    
-~~2. check how many zones a vessel crossed by checking points from the route~~  
-~~3. how many times planned schedule to cross the zone -> show zone + alert (zone call)~~  
-~~4. current location generate alert (if huge deviation -> reason)~~  
-5. direction for vessel  
+~~1. check how many zones a vessel crossed by checking points from the route~~  
+~~2. how many times planned schedule to cross the zone -> show zone + alert (zone call)~~  
+~~3. current location generate alert (if huge deviation -> reason)~~  
+2. direction for vessel  
 
 #### Template
 
