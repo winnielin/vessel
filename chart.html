@@ -42,12 +42,12 @@
       }
       
       .axis path{
-        fill: #000;
+        fill: none;
         stroke: #000;
       }
       
       .axis line {
-        fill: #000;
+        fill: none;
         stroke: #000;
         shape-rendering: crispEdges;
       }
@@ -58,7 +58,7 @@
       }
       
       .axisHorizontal path{
-        fill: #000;
+        fill: none;
       }
       
       .axisHorizontal line {
@@ -108,6 +108,38 @@
         top: 100%;
         left: 0;
       }
+
+      /* Zones */
+      .toolTip {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        position: absolute;
+        display: none;
+        width: auto;
+        height: auto;
+        background: none repeat scroll 0 0 white;
+        border: 0 none;
+        border-radius: 8px 8px 8px 8px;
+        box-shadow: -3px 3px 15px #888888;
+        color: black;
+        font: 12px sans-serif;
+        padding: 5px;
+        text-align: center;
+      }
+
+      .legend {
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size: 60%;
+      }
+
+      rect {
+          stroke-width: 2;
+      }
+
+      .bar {
+          fill: steelblue;
+          fill-opacity: .9;
+      }
+
       </style>
   
 </head>
@@ -279,24 +311,38 @@
           <div class="row">
           <div class="col-md-8">
               <div class="card">
-                <div class="card-header card-header-primary card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">bar_chart</i>
+                  <div class="card-header card-header-tabs card-header-primary">
+                      <div class="nav-tabs-navigation">
+                          <div class="nav-tabs-wrapper">
+                            <!-- <span class="nav-tabs-title"><h4>Chart</h4></span> -->
+                            <ul class="nav nav-tabs" data-tabs="tabs">
+                              <li class="nav-item">
+                                <a class="nav-link active" href="#valuation" data-toggle="tab">
+                                  <i class="material-icons">bar_chart</i> Fleet Valuation Information
+                                  <div class="ripple-container"></div>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="#zones" data-toggle="tab">
+                                  <i class="material-icons">bar_chart</i>Restricted Zone Visits Information
+                                  <div class="ripple-container"></div>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
                   </div>
-                  <h4 class="card-title">Fleet Valuation Information</h4>
-                </div>
                   <div class="card-body">
                           <!-- Selection Category -->
-                          <select class="selectpicker" data-size="4" data-style="btn btn-primary btn-round" title="YEAR">
+                          <select class="selectpicker" data-size="4" data-style="btn btn-primary btn-round" title="YEAR" id="year">
                             <option disabled>YEAR</option>
                             <option selected value="CC">2018</option>
                             <option value="DD">2019</option>
                           </select>
                     <svg width="750" height="500"></svg>
                   </div>
-                  
                 </div>
-                </div>
+              </div>
             <div class="col-md-4">
                 <div class="card ">
                   <div class="card-header card-header-text card-header-primary">
@@ -304,7 +350,7 @@
                     <h4 class="card-title">Notifications</h4>
                     </div>
                   </div>
-                  <div class="card-body " id="notification" style="overflow:scroll; height:550px;">
+                  <div class="card-body " id="notification" style="overflow:scroll; height:575px;">
                     <div id="cc">
                         <div class="timeline-heading">
                             <span class="badge badge-pill badge-info">MAERSK</span>

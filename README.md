@@ -7,11 +7,11 @@
 1. planned or actual vessel event  
 2. remove specific polygons -> layer???
 3. notification - approval button function  
-4. show weather info - heat map layer ???  
+4. show weather info - try to find a temperature layer to implement  
 5. on the map ->show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
 6. a block with political and piracy events  
-7. move two charts on the bottom of the page
-8. how to use zone entry & exit data  
+  
+7. how to use zone entry & exit data  
 
 ### d3.js chart page
 
@@ -63,24 +63,23 @@ Conclusion 200
 
 ### Individual Report 4000
 
-Intro 400  
+8/6 Intro 400  
 
-Subject area (technical or business area) 2000  
-  -marine insurance claims N  
-  -lack of competition and dynamic pricing S  
-  -the effects of big data on insurance S  
+8/7-9 Subject area (technical or business area) 2000  
   -visualisation helping decision making W   
-  -modelling risk R  
+  ~~-marine insurance claims N~~  
+  ~~-lack of competition and dynamic pricing S~~  
+  ~~-the effects of big data on insurance S~~  
+  ~~-modelling risk R~~  
   
-Working process 800  
-  -data generation and data mining R  
-  -storyboarding (use cases) S  
-  -scenario and hypothesis N  
-  -user interface W  
-  (method/analytical tools used & considered -> bing maps, html & power BI)  
+8/10 Working process 800  
+  -user interface (method/analytical tools used & considered -> bing maps, html & power BI)  
+  ~~-data generation and data mining R~~  
+  ~~-storyboarding (use cases) S~~  
+  ~~-scenario and hypothesis N~~  
   
-Reflection 400  
-  -project  
-  -interaction with industry partner  
-  
-Conclusion 400  
+8/11 Reflection 400  
+  -project (what you learned during the project)  
+  -interaction with industry partner (the relation between the academic programme and the project)  
+
+8/11 Conclusion 400  
