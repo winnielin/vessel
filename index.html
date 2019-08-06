@@ -16,7 +16,7 @@
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
 
   <style>
-
+    /* for d3 charts */
       body {
         /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
         /* width: 960px; */
@@ -801,13 +801,13 @@
                               <!-- <span class="nav-tabs-title"><h4>Chart</h4></span> -->
                               <ul class="nav nav-tabs" data-tabs="tabs">
                                 <li class="nav-item">
-                                  <a class="nav-link active" href="#valuation" data-toggle="tab">
+                                  <a class="nav-link active" href="#valuation" data-toggle="tab" value="valuation">
                                     <i class="material-icons">bar_chart</i> Fleet Valuation Information
                                     <div class="ripple-container"></div>
                                   </a>
                                 </li>
                                 <li class="nav-item">
-                                  <a class="nav-link" href="#zones" data-toggle="tab">
+                                  <a class="nav-link" href="#zones" data-toggle="tab" value="zones">
                                     <i class="material-icons">bar_chart</i>Restricted Zone Visits Information
                                     <div class="ripple-container"></div>
                                   </a>
@@ -817,16 +817,29 @@
                           </div>
                     </div>
                     <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="valuation">
                             <!-- Selection Category -->
-                            <select class="selectpicker" data-size="4" data-style="btn btn-primary btn-round" title="YEAR" id="year">
+                            <select class="selectpicker" data-size="4" data-style="btn btn-primary btn-round" title="YEAR" value="year">
                               <option disabled>YEAR</option>
                               <option selected value="CC">2018</option>
                               <option value="DD">2019</option>
                             </select>
-                      <svg width="750" height="500"></svg>
+                          <svg id="svg1" width="750" height="500"></svg>
+                        </div>
+                        <div class="tab-pane" id="zones">
+                            <!-- Selection Category -->
+                            <select class="selectpicker" data-size="6" data-style="btn btn-primary btn-round" title="CLIENT" value="client">
+                              <option disabled>CLIENT</option>
+                              <option selected value="AA">MAERSK</option>
+                              <option value="BB">NYK</option>
+                            </select>
+                          <svg id="svg2" width="750" height="500"></svg>
+                        </div>
                     </div>
                   </div>
                 </div>
+              </div>
               <div class="col-md-4">
                   <div class="card ">
                     <div class="card-header card-header-text card-header-primary">
@@ -957,7 +970,7 @@
                 //Add the pushpin to the map
                 // map.entities.push(pin);
             }
-  function GetKimiRoute() {
+                function GetKimiRoute() {
                 // Get the checkbox
                 var checkBox = document.getElementById("defaultCheck1");
         
@@ -1145,8 +1158,6 @@
                     }
                   }
                 }
-
-
                 function GetJinguRoute() {
                 // Get the checkbox
                 var checkBox = document.getElementById("defaultCheck2");
@@ -1371,6 +1382,7 @@
                 }
         
   </script>
+
   <script>
   //map notification
   $(document).ready(function(){
@@ -1456,16 +1468,332 @@
     });
 
     </script>
+  <script>
+      $(document).ready(function() {
+        $().ready(function() {
+          $sidebar = $('.sidebar');
+  
+          $sidebar_img_container = $sidebar.find('.sidebar-background');
+  
+          $full_page = $('.full-page');
+  
+          $sidebar_responsive = $('body > .navbar-collapse');
+  
+          window_width = $(window).width();
+  
+          fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+  
+          if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
+            if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
+              $('.fixed-plugin .dropdown').addClass('open');
+            }
+  
+          }
+  
+          $('.fixed-plugin a').click(function(event) {
+            // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+            if ($(this).hasClass('switch-trigger')) {
+              if (event.stopPropagation) {
+                event.stopPropagation();
+              } else if (window.event) {
+                window.event.cancelBubble = true;
+              }
+            }
+          });
+  
+          $('.fixed-plugin .active-color span').click(function() {
+            $full_page_background = $('.full-page-background');
+  
+            $(this).siblings().removeClass('active');
+            $(this).addClass('active');
+  
+            var new_color = $(this).data('color');
+  
+            if ($sidebar.length != 0) {
+              $sidebar.attr('data-color', new_color);
+            }
+  
+            if ($full_page.length != 0) {
+              $full_page.attr('filter-color', new_color);
+            }
+  
+            if ($sidebar_responsive.length != 0) {
+              $sidebar_responsive.attr('data-color', new_color);
+            }
+          });
+  
+          $('.fixed-plugin .background-color .badge').click(function() {
+            $(this).siblings().removeClass('active');
+            $(this).addClass('active');
+  
+            var new_color = $(this).data('background-color');
+  
+            if ($sidebar.length != 0) {
+              $sidebar.attr('data-background-color', new_color);
+            }
+          });
+  
+          $('.fixed-plugin .img-holder').click(function() {
+            $full_page_background = $('.full-page-background');
+  
+            $(this).parent('li').siblings().removeClass('active');
+            $(this).parent('li').addClass('active');
+  
+  
+            var new_image = $(this).find("img").attr('src');
+  
+            if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+              $sidebar_img_container.fadeOut('fast', function() {
+                $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+                $sidebar_img_container.fadeIn('fast');
+              });
+            }
+  
+            if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+              var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+  
+              $full_page_background.fadeOut('fast', function() {
+                $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+                $full_page_background.fadeIn('fast');
+              });
+            }
+  
+            if ($('.switch-sidebar-image input:checked').length == 0) {
+              var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+              var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+  
+              $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+              $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+            }
+  
+            if ($sidebar_responsive.length != 0) {
+              $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
+            }
+          });
+  
+          $('.switch-sidebar-image input').change(function() {
+            $full_page_background = $('.full-page-background');
+  
+            $input = $(this);
+  
+            if ($input.is(':checked')) {
+              if ($sidebar_img_container.length != 0) {
+                $sidebar_img_container.fadeIn('fast');
+                $sidebar.attr('data-image', '#');
+              }
+  
+              if ($full_page_background.length != 0) {
+                $full_page_background.fadeIn('fast');
+                $full_page.attr('data-image', '#');
+              }
+  
+              background_image = true;
+            } else {
+              if ($sidebar_img_container.length != 0) {
+                $sidebar.removeAttr('data-image');
+                $sidebar_img_container.fadeOut('fast');
+              }
+  
+              if ($full_page_background.length != 0) {
+                $full_page.removeAttr('data-image', '#');
+                $full_page_background.fadeOut('fast');
+              }
+  
+              background_image = false;
+            }
+          });
+  
+          $('.switch-sidebar-mini input').change(function() {
+            $body = $('body');
+  
+            $input = $(this);
+  
+            if (md.misc.sidebar_mini_active == true) {
+              $('body').removeClass('sidebar-mini');
+              md.misc.sidebar_mini_active = false;
+  
+              $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+  
+            } else {
+  
+              $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+  
+              setTimeout(function() {
+                $('body').addClass('sidebar-mini');
+  
+                md.misc.sidebar_mini_active = true;
+              }, 300);
+            }
+  
+            // we simulate the window Resize so the charts will get updated in realtime.
+            var simulateWindowResize = setInterval(function() {
+              window.dispatchEvent(new Event('resize'));
+            }, 180);
+  
+            // we stop the simulation of Window Resize after the animations are completed
+            setTimeout(function() {
+              clearInterval(simulateWindowResize);
+            }, 1000);
+  
+          });
+        });
+      });
+    </script>
+    
+    <script>
+    //chart notification
+    $(document).ready(function(){
+      $("select.selectpicker[value=year]").change(function(){
+          if($(this).children("option:selected").val() == "DD"){
+            $("#aa").remove();
+            $("#bb").remove();
+            $("#cc").remove();
+            $("#notificationv").append(
+              "<div id=\"dd\"><div class=\"timeline-heading\">" + 
+              "<span class=\"badge badge-pill badge-info\">MAERSK</span></div>" + 
+              "<p>MAERSK paid out a premium of USD 1,12 mln, while the costs spent on claims were USD 112,000. The insured vessels are jointly currently valued at USD 11,2 mln.<br></p>" +
+              "<div class=\"timeline-heading\">" + 
+              "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
+              "<p>NYK paid out a premium of USD 700,000, while the costs spent on claims were USD 150,000. The insured vessels are jointly currently valued at USD 7 mln.<br></p>" +
+              "<div class=\"timeline-heading\">" + 
+              "<span class=\"badge badge-pill badge-info\">APL</span></div>" + 
+              "<p>APL paid out a premium of USD 2,475 mln, while the costs spent on claims were USD 337,500. The insured vessels are jointly currently valued at USD 22,5 mln.<br></p>" + 
+              "<div class=\"timeline-heading\">" + 
+              "<span class=\"badge badge-pill badge-info\">MSC</span></div>" + 
+              "<p>MSC paid out a premium of USD 1 mln, while the costs spent on claims were USD 1,4 mln. The insured vessels are jointly currently valued at USD 8 mln. </p></div>"
+            );
+          }
+          else if($(this).children("option:selected").val() == "CC"){
+            $("#aa").remove();
+            $("#bb").remove();
+            $("#dd").remove();
+            $("#notificationv").append(
+              "<div id=\"cc\"><div class=\"timeline-heading\">" + 
+              "<span class=\"badge badge-pill badge-info\">MAERSK</span></div>" + 
+              "<p>MAERSK paid out a premium of USD 440,000, while the costs spent on claims were USD 110,000. The insured vessels are jointly currently valued at USD 11 mln.<br></p>" +
+              "<div class=\"timeline-heading\">" + 
+              "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
+              "<p>NYK paid out a premium of USD 1 mln, while the costs spent on claims were USD 1,5 mln. The insured vessels are jointly currently valued at USD 10 mln.<br></p>" + 
+              "<div class=\"timeline-heading\">" + 
+              "<span class=\"badge badge-pill badge-info\">APL</span></div>" + 
+              "<p>APL paid out a premium of USD 702,000, while the costs spent on claims were USD 800,000. The insured vessels are jointly currently valued at USD 23,4 mln.<br></p>" + 
+              "<div class=\"timeline-heading\">" + 
+              "<span class=\"badge badge-pill badge-info\">MSC</span></div>" + 
+              "<p>MSC paid out a premium of USD 500,000, while the costs spent on claims were USD 560,000. The insured vessels are jointly currently valued at USD 10 mln. </p></div>"
+            );
+          }
+        });
+      });
+
+      $(document).ready(function(){
+        $("a.nav-link[value=valuation]").click(function(){
+          if($("select.selectpicker[value=year]").children("option:selected").val() == "DD"){
+              $("#aa").remove();
+              $("#bb").remove();
+              $("#cc").remove();
+              $("#notificationv").append(
+                "<div id=\"dd\"><div class=\"timeline-heading\">" + 
+                "<span class=\"badge badge-pill badge-info\">MAERSK</span></div>" + 
+                "<p>MAERSK paid out a premium of USD 1,12 mln, while the costs spent on claims were USD 112,000. The insured vessels are jointly currently valued at USD 11,2 mln.<br></p>" +
+                "<div class=\"timeline-heading\">" + 
+                "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
+                "<p>NYK paid out a premium of USD 700,000, while the costs spent on claims were USD 150,000. The insured vessels are jointly currently valued at USD 7 mln.<br></p>" +
+                "<div class=\"timeline-heading\">" + 
+                "<span class=\"badge badge-pill badge-info\">APL</span></div>" + 
+                "<p>APL paid out a premium of USD 2,475 mln, while the costs spent on claims were USD 337,500. The insured vessels are jointly currently valued at USD 22,5 mln.<br></p>" + 
+                "<div class=\"timeline-heading\">" + 
+                "<span class=\"badge badge-pill badge-info\">MSC</span></div>" + 
+                "<p>MSC paid out a premium of USD 1 mln, while the costs spent on claims were USD 1,4 mln. The insured vessels are jointly currently valued at USD 8 mln. </p></div>"
+              );  
+          }
+          else if($("select.selectpicker[value=year]").children("option:selected").val() == "CC"){
+                    $("#aa").remove();
+                    $("#bb").remove();
+                    $("#dd").remove();
+                    $("#notificationv").append(
+                      "<div id=\"cc\"><div class=\"timeline-heading\">" + 
+                      "<span class=\"badge badge-pill badge-info\">MAERSK</span></div>" + 
+                      "<p>MAERSK paid out a premium of USD 440,000, while the costs spent on claims were USD 110,000. The insured vessels are jointly currently valued at USD 11 mln.<br></p>" +
+                      "<div class=\"timeline-heading\">" + 
+                      "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
+                      "<p>NYK paid out a premium of USD 1 mln, while the costs spent on claims were USD 1,5 mln. The insured vessels are jointly currently valued at USD 10 mln.<br></p>" + 
+                      "<div class=\"timeline-heading\">" + 
+                      "<span class=\"badge badge-pill badge-info\">APL</span></div>" + 
+                      "<p>APL paid out a premium of USD 702,000, while the costs spent on claims were USD 800,000. The insured vessels are jointly currently valued at USD 23,4 mln.<br></p>" + 
+                      "<div class=\"timeline-heading\">" + 
+                      "<span class=\"badge badge-pill badge-info\">MSC</span></div>" + 
+                      "<p>MSC paid out a premium of USD 500,000, while the costs spent on claims were USD 560,000. The insured vessels are jointly currently valued at USD 10 mln. </p></div>"
+                    );
+                }
+        }); 
+      }); 
+          $(document).ready(function(){
+          $("select.selectpicker[value=client]").change(function(){
+          if($(this).children("option:selected").val() == "BB"){
+                  $("#aa").remove();
+                  $("#cc").remove();
+                  $("#dd").remove();
+                  $("#notificationv").append(
+                    "<div id=\"bb\"><div class=\"timeline-heading\">" + 
+                    "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
+                    "<p>NYK Lines has reduced the number of zone calls to IRAN and IRAQ regions since the US tightened oil sanctions against Iran.<br></p></div>"
+                  );
+                }
+            else if($(this).children("option:selected").val() == "AA"){
+                  $("#bb").remove();
+                  $("#cc").remove();
+                  $("#dd").remove();
+                  $("#notificationv").append(
+                    "<div id=\"aa\"><div class=\"timeline-heading\">" + 
+                    "<span class=\"badge badge-pill badge-info\">2015</span></div>" + 
+                    "<p>MAERSK has reduced zone calls to IRAN and IRAQ after Maersk ship and Danish crew were seized in Strait of Hormuz in 2015.<br></p>" + 
+                    "<div class=\"timeline-heading\">" + 
+                    "<span class=\"badge badge-pill badge-info\">2017</span></div>" + 
+                    "<p>In June 2017, MAERSK found themselves unable to get cargo into Qatar via the Middle East’s primary feeder gateway Jebel Ali Port after Saudi Arabia, Egypt, the United Arab Emirates and Bahrain imposed sanctions on Qatar in a major regional diplomatic dispute. The number of zone calls to East Saudi Arabi reduced significantly.<br></p></div>"
+                  );
+                }
+          });
+        });
+
+        $(document).ready(function(){
+        $("a.nav-link[value=zones]").click(function(){
+          if($("select.selectpicker[value=client]").children("option:selected").val() == "BB"){
+                  $("#aa").remove();
+                  $("#cc").remove();
+                  $("#dd").remove();
+                  $("#notificationv").append(
+                    "<div id=\"bb\"><div class=\"timeline-heading\">" + 
+                    "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
+                    "<p>NYK Lines has reduced the number of zone calls to IRAN and IRAQ regions since the US tightened oil sanctions against Iran.<br></p></div>"
+                  );  
+          }
+          else if($("select.selectpicker[value=client]").children("option:selected").val() == "AA"){
+                  $("#bb").remove();
+                  $("#cc").remove();
+                  $("#dd").remove();
+                  $("#notificationv").append(
+                    "<div id=\"aa\"><div class=\"timeline-heading\">" + 
+                    "<span class=\"badge badge-pill badge-info\">2015</span></div>" + 
+                    "<p>MAERSK has reduced zone calls to IRAN and IRAQ after Maersk ship and Danish crew were seized in Strait of Hormuz in 2015.<br></p>" + 
+                    "<div class=\"timeline-heading\">" + 
+                    "<span class=\"badge badge-pill badge-info\">2017</span></div>" + 
+                    "<p>In June 2017, MAERSK found themselves unable to get cargo into Qatar via the Middle East’s primary feeder gateway Jebel Ali Port after Saudi Arabia, Egypt, the United Arab Emirates and Bahrain imposed sanctions on Qatar in a major regional diplomatic dispute. The number of zone calls to East Saudi Arabi reduced significantly.<br></p></div>"
+                  );
+                }
+        }); 
+      }); 
+    </script>
 
 <script>
     //valuation chart
+    (function chart1(){
     var speed = 0;
   
-    d3.csv("https://raw.githubusercontent.com/nataliaokuneva/data_vessel/master/claim.csv").then(function(data) {
+    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/claim.csv").then(function(data) {
   
         chart(data, "CC")
   
-        d3.selectAll(".selectpicker").on("change", function() {
+        d3.selectAll(".selectpicker[value=year]").on("change", function() {
             speed = 750;
             chart.update(data, this.value)
         })
@@ -1483,7 +1811,7 @@
                     return d.value;
                 });
   
-        var svg = d3.select("svg"),
+        var svg = d3.select("#svg1"),
             margin = {top: 35, right: 35, bottom: 35, left: 35},
             width = +svg.attr("width") - margin.left - margin.right,
             height = +svg.attr("height") - margin.top - margin.bottom;
@@ -1628,222 +1956,177 @@
   
         chart.update = update;   
     };
+  }())
       </script>
+
+<script>
+  (function chart2(){
+    //zones chart
+    var speed = 0;
+
+    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/zonesdata.csv").then(function(data) {
+
+        chart(data, "AA")
+
+        d3.selectAll(".selectpicker[value=client]").on("change", function() {
+            speed = 750;
+            chart.update(data, this.value)
+        })
+
+    });
+
+    function chart(data, input) {
+
+        var z = d3.scaleOrdinal()
+            .range(["#ca0020","#f4a582","#d5d5d5","#92c5de","#0571b0"]);
+
+        var svg = d3.select("#svg2"),
+            margin = {top: 35, right: 35, bottom: 35, left: 35},
+            width = +svg.attr("width") - margin.left - margin.right,
+            height = +svg.attr("height") - margin.top - margin.bottom;
+
+        var keys = data.columns.slice(1, 6);
+        
+        var x0 = d3.scaleBand()
+            .domain(data.map(d => d.State))
+            .range([margin.left, width - margin.right])
+            .padding(0.1);
+
+        var x1 = d3.scaleBand()
+            .domain(keys)
+            .rangeRound([0, x0.bandwidth()]);
+
+        var y = d3.scaleLinear()
+            .range([height, margin.top]);
+
+        svg.append("g")
+            .attr("class", "x-axis");
+
+        svg.append("g")
+          .attr("class", "y-axis");
+
+        // Handmade legend
+        svg.append("rect").attr("x",width-135).attr("y",height-417).attr("width", 13).attr('height', 13).style("fill", "#ca0020")
+        svg.append("rect").attr("x",width-135).attr("y",height-402).attr("width", 13).attr('height', 13).style("fill", "#f4a582")
+        svg.append("rect").attr("x",width-135).attr("y",height-387).attr("width", 13).attr('height', 13).style("fill", "#d5d5d5")
+        svg.append("rect").attr("x",width-135).attr("y",height-372).attr("width", 13).attr('height', 13).style("fill", "#92c5de")
+        svg.append("rect").attr("x",width-135).attr("y",height-357).attr("width", 13).attr('height', 13).style("fill", "#0571b0")
+        svg.append("text").attr("x", width-115).attr("y", height-410).text("IRAN").style("font-size", "12px").attr("alignment-baseline","middle")
+        svg.append("text").attr("x", width-115).attr("y", height-394).text("IRAQ").style("font-size", "12px").attr("alignment-baseline","middle")
+        svg.append("text").attr("x", width-115).attr("y", height-378).text("BENIN").style("font-size", "12px").attr("alignment-baseline","middle")
+        svg.append("text").attr("x", width-115).attr("y", height-363).text("KHOR").style("font-size", "12px").attr("alignment-baseline","middle")
+        svg.append("text").attr("x", width-115).attr("y", height-348).text("TTW").style("font-size", "12px").attr("alignment-baseline","middle")
+
+        var xAxis = g => g
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x0)
+                .tickSizeOuter(0))
+
+        var yAxis = g => g
+            .attr("transform", 
+                "translate(" + margin.left + ",0)")
+            .call(d3.axisLeft(y).ticks(null, "s"))
+
+        update(data, input);
+
+        function update(data, input) {
+
+            var copy = [];
+
+            keys.forEach(function(t) {
+                t = t.slice(0, -2)
+                copy.push(t)
+            })
+
+            y.domain([0, d3.max(data, function(d) {
+                return d3.max(copy, function(key) {
+                    return d3.sum([d[key + input]])
+                }); 
+            })]).nice();
+
+            var barGroups = svg.selectAll(".layer")
+                .data(data, d => d.State);
+
+            barGroups.exit().remove();
+
+            barGroups.enter().append("g")
+                .classed('layer', true);
+
+            svg.selectAll(".layer").transition().duration(speed)
+                .attr("transform", function(d, i) {
+                    return "translate(" + x0(d.State) + ",0)";
+                });
+
+            var bars = svg.selectAll(".layer").selectAll(".bars")
+                .data(function(d) { 
+                    return copy.map(function(key) {
+                        return {key: key + input, value: d[key + input]}; 
+                    }); 
+                });
+
+            bars = bars
+                .enter()
+            .append("rect")
+                .attr("class", "bars")
+                .attr("x", d => x1(d.key))
+                .attr("width", x1.bandwidth())
+                .attr("fill", d => z(d.key))
+                .merge(bars);
+
+            bars.transition().duration(speed)
+                .attr("height", d => height - y(d["value"]))
+                .attr("y", d => y(d.value))
+
+            svg.selectAll(".x-axis").transition().duration(speed)
+                .call(xAxis);
+            
+            svg.selectAll(".y-axis").transition().duration(speed)
+                .call(yAxis);
+
+            svg.call(zoom);
+
+            function zoom(group) {
+            
+                var extent = [
+                    [margin.left, margin.top], 
+                    [width - margin.right, height - margin.top]
+                ];
+                
+                group.call(d3.zoom()
+                    .scaleExtent([1, 2])
+                    .translateExtent(extent)
+                    .extent(extent)
+                    .on("zoom", zoomed));
+                
+                function zoomed() {
+            
+                    x0.range(
+                        [margin.left, width - margin.right]
+                        .map(d => d3.event.transform.applyX(d)));
+                    x1.rangeRound([0, x0.bandwidth()]);
+            
+                    group.selectAll(".layer")
+                        .attr("transform", function(d) { 
+                            return "translate(" + x0(d.State) + ",0)"; 
+                        });
+                    group.selectAll(".bars")
+                        .attr("x", function(d) { 
+                            return x1(d.key)
+                        })
+                        .attr("width", x1.bandwidth());
+            
+                    group.selectAll(".x-axis")
+                        .call(xAxis);
+                }
+            }
+
+        }
+
+        chart.update = update;   
+    };
+  }())
+  </script>
   
-      <script>
-      </script>
-  
-      <script>
-          $(document).ready(function() {
-            $().ready(function() {
-              $sidebar = $('.sidebar');
-      
-              $sidebar_img_container = $sidebar.find('.sidebar-background');
-      
-              $full_page = $('.full-page');
-      
-              $sidebar_responsive = $('body > .navbar-collapse');
-      
-              window_width = $(window).width();
-      
-              fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
-      
-              if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
-                if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
-                  $('.fixed-plugin .dropdown').addClass('open');
-                }
-      
-              }
-      
-              $('.fixed-plugin a').click(function(event) {
-                // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
-                if ($(this).hasClass('switch-trigger')) {
-                  if (event.stopPropagation) {
-                    event.stopPropagation();
-                  } else if (window.event) {
-                    window.event.cancelBubble = true;
-                  }
-                }
-              });
-      
-              $('.fixed-plugin .active-color span').click(function() {
-                $full_page_background = $('.full-page-background');
-      
-                $(this).siblings().removeClass('active');
-                $(this).addClass('active');
-      
-                var new_color = $(this).data('color');
-      
-                if ($sidebar.length != 0) {
-                  $sidebar.attr('data-color', new_color);
-                }
-      
-                if ($full_page.length != 0) {
-                  $full_page.attr('filter-color', new_color);
-                }
-      
-                if ($sidebar_responsive.length != 0) {
-                  $sidebar_responsive.attr('data-color', new_color);
-                }
-              });
-      
-              $('.fixed-plugin .background-color .badge').click(function() {
-                $(this).siblings().removeClass('active');
-                $(this).addClass('active');
-      
-                var new_color = $(this).data('background-color');
-      
-                if ($sidebar.length != 0) {
-                  $sidebar.attr('data-background-color', new_color);
-                }
-              });
-      
-              $('.fixed-plugin .img-holder').click(function() {
-                $full_page_background = $('.full-page-background');
-      
-                $(this).parent('li').siblings().removeClass('active');
-                $(this).parent('li').addClass('active');
-      
-      
-                var new_image = $(this).find("img").attr('src');
-      
-                if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-                  $sidebar_img_container.fadeOut('fast', function() {
-                    $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
-                    $sidebar_img_container.fadeIn('fast');
-                  });
-                }
-      
-                if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-                  var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
-      
-                  $full_page_background.fadeOut('fast', function() {
-                    $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
-                    $full_page_background.fadeIn('fast');
-                  });
-                }
-      
-                if ($('.switch-sidebar-image input:checked').length == 0) {
-                  var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
-                  var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
-      
-                  $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
-                  $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
-                }
-      
-                if ($sidebar_responsive.length != 0) {
-                  $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
-                }
-              });
-      
-              $('.switch-sidebar-image input').change(function() {
-                $full_page_background = $('.full-page-background');
-      
-                $input = $(this);
-      
-                if ($input.is(':checked')) {
-                  if ($sidebar_img_container.length != 0) {
-                    $sidebar_img_container.fadeIn('fast');
-                    $sidebar.attr('data-image', '#');
-                  }
-      
-                  if ($full_page_background.length != 0) {
-                    $full_page_background.fadeIn('fast');
-                    $full_page.attr('data-image', '#');
-                  }
-      
-                  background_image = true;
-                } else {
-                  if ($sidebar_img_container.length != 0) {
-                    $sidebar.removeAttr('data-image');
-                    $sidebar_img_container.fadeOut('fast');
-                  }
-      
-                  if ($full_page_background.length != 0) {
-                    $full_page.removeAttr('data-image', '#');
-                    $full_page_background.fadeOut('fast');
-                  }
-      
-                  background_image = false;
-                }
-              });
-      
-              $('.switch-sidebar-mini input').change(function() {
-                $body = $('body');
-      
-                $input = $(this);
-      
-                if (md.misc.sidebar_mini_active == true) {
-                  $('body').removeClass('sidebar-mini');
-                  md.misc.sidebar_mini_active = false;
-      
-                  $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
-      
-                } else {
-      
-                  $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
-      
-                  setTimeout(function() {
-                    $('body').addClass('sidebar-mini');
-      
-                    md.misc.sidebar_mini_active = true;
-                  }, 300);
-                }
-      
-                // we simulate the window Resize so the charts will get updated in realtime.
-                var simulateWindowResize = setInterval(function() {
-                  window.dispatchEvent(new Event('resize'));
-                }, 180);
-      
-                // we stop the simulation of Window Resize after the animations are completed
-                setTimeout(function() {
-                  clearInterval(simulateWindowResize);
-                }, 1000);
-      
-              });
-            });
-          });
-        </script>
-        <script>
-        $(document).ready(function(){
-          $("select.selectpicker").change(function(){
-              if($(this).children("option:selected").val() == "DD"){
-                $("#cc").remove();
-                $("#notificationv").append(
-                  "<div id=\"dd\"><div class=\"timeline-heading\">" + 
-                  "<span class=\"badge badge-pill badge-info\">MAERSK</span></div>" + 
-                  "<p>MAERSK paid out a premium of USD 1,12 mln, while the costs spent on claims were USD 112,000. The insured vessels are jointly currently valued at USD 11,2 mln.<br></p>" +
-                  "<div class=\"timeline-heading\">" + 
-                  "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
-                  "<p>NYK paid out a premium of USD 700,000, while the costs spent on claims were USD 150,000. The insured vessels are jointly currently valued at USD 7 mln.<br></p>" +
-                  "<div class=\"timeline-heading\">" + 
-                  "<span class=\"badge badge-pill badge-info\">APL</span></div>" + 
-                  "<p>APL paid out a premium of USD 2,475 mln, while the costs spent on claims were USD 337,500. The insured vessels are jointly currently valued at USD 22,5 mln.<br></p>" + 
-                  "<div class=\"timeline-heading\">" + 
-                  "<span class=\"badge badge-pill badge-info\">MSC</span></div>" + 
-                  "<p>MSC paid out a premium of USD 1 mln, while the costs spent on claims were USD 1,4 mln. The insured vessels are jointly currently valued at USD 8 mln. </p></div>"
-                );
-              }
-              else if($(this).children("option:selected").val() == "CC"){
-                $("#dd").remove();
-                $("#notificationv").append(
-                  "<div id=\"cc\"><div class=\"timeline-heading\">" + 
-                  "<span class=\"badge badge-pill badge-info\">MAERSK</span></div>" + 
-                  "<p>MAERSK paid out a premium of USD 440,000, while the costs spent on claims were USD 110,000. The insured vessels are jointly currently valued at USD 11 mln.<br></p>" +
-                  "<div class=\"timeline-heading\">" + 
-                  "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
-                  "<p>NYK paid out a premium of USD 1 mln, while the costs spent on claims were USD 1,5 mln. The insured vessels are jointly currently valued at USD 10 mln.<br></p>" + 
-                  "<div class=\"timeline-heading\">" + 
-                  "<span class=\"badge badge-pill badge-info\">APL</span></div>" + 
-                  "<p>APL paid out a premium of USD 702,000, while the costs spent on claims were USD 800,000. The insured vessels are jointly currently valued at USD 23,4 mln.<br></p>" + 
-                  "<div class=\"timeline-heading\">" + 
-                  "<span class=\"badge badge-pill badge-info\">MSC</span></div>" + 
-                  "<p>MSC paid out a premium of USD 500,000, while the costs spent on claims were USD 560,000. The insured vessels are jointly currently valued at USD 10 mln. </p></div>"
-                );
-              }
-              });
-      });
-        </script>
 </body>
 
 </html>

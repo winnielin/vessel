@@ -10,13 +10,13 @@
 4. show weather info - try to find a temperature layer to implement  
 5. on the map ->show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
 6. a block with political and piracy events  
-  
 7. how to use zone entry & exit data  
+
+## To Improve
 
 ### d3.js chart page
 
 1. solve the size of svg  
-2. implement zones.html into chart2.html  
 ~~1. select vessels from the table then add data into chart~~  
 ~~2. age slider, vessel type & shipping company selector~~  
 ~~3. valuation chart - stacked bar & line~~  
@@ -24,7 +24,7 @@
 ~~5. restricted zone visits - by zone -> total accepted, change more/less~~  
 ~~6. some claims, premium, value information message by side~~  
 
-### Vessel Page improvement
+### Vessel Page
 
 1. remove heatmap
 1. zone visits graph put somewhere for kimi  
@@ -40,7 +40,7 @@
 ~~3. current location generate alert (if huge deviation -> reason)~~  
 2. direction for vessel  
 
-#### Template
+#### Template  
 
 ~~1. receive vessel name then read csv file and show the basic information of the selected vessel~~  
 ~~2. notification block read from csv file~~  
