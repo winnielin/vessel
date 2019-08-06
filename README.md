@@ -13,21 +13,23 @@
 7. move two charts on the bottom of the page
 8. how to use zone entry & exit data  
 
-### Vessel Page improvement
-
-1. zone visits graph put somewhere for kimi  
-2. past important events block  
-3. using queue.js to show all JWC zones  
-4. dropdown list for all vessels  
-
 ### d3.js chart page
 
+1. solve the size of svg  
+2. implement zones.html into chart2.html
 ~~1. select vessels from the table then add data into chart~~  
 ~~2. age slider, vessel type & shipping company selector~~  
 ~~3. valuation chart - stacked bar & line~~  
 ~~4. mileage + port visits + ??~~  
 ~~5. restricted zone visits - by zone -> total accepted, change more/less~~  
 ~~6. some claims, premium, value information message by side~~  
+
+### Vessel Page improvement
+
+1. zone visits graph put somewhere for kimi  
+2. past important events block  
+3. using queue.js to show all JWC zones  
+4. dropdown list for all vessels  
 
 #### Bing Maps  
 
