@@ -50,16 +50,16 @@
 
 ### Individual Report 4000
 
-8/6 Intro 400  
+8/7 Intro 400  
 
-8/7-9 Subject area (technical or business area) 2000  
+8/7-9 Subject area (technical or business area) 1600  
   -visualisation helping decision making W   
   ~~-marine insurance claims N~~  
   ~~-lack of competition and dynamic pricing S~~  
   ~~-the effects of big data on insurance S~~  
   ~~-modelling risk R~~  
   
-8/10 Working process 800  
+8/9-10 Working process 1200  
   -user interface (method/analytical tools used & considered -> bing maps, html & power BI)  
   ~~-data generation and data mining R~~  
   ~~-storyboarding (use cases) S~~  
