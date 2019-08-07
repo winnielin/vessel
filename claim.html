@@ -101,6 +101,7 @@ text {
 <select class="opt">
   <option value="CC">2018</option>
   <option value="DD">2019</option>
+  <option value="EE">All</option>
 </select> 
 
 <svg width="750" height="500"></svg>
@@ -123,7 +124,7 @@ d3.csv("https://raw.githubusercontent.com/nataliaokuneva/data_vessel/master/clai
 function chart(data, input) {
 
     var z = d3.scaleOrdinal()
-        .range(["#99CCFF","#3399FF","#0066CC"]);
+        .range(["#003366","#99CCFF","#3399FF","#0066CC"]);
     
     // Create a tooltip
     var tip = d3.tip().attr('class', 'd3-tip').direction('e').offset([0,5])
@@ -136,7 +137,7 @@ function chart(data, input) {
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom;
 
-    var keys = data.columns.slice(1, 4);
+    var keys = data.columns.slice(1, 5, 9);
 
     var x0 = d3.scaleBand()
         .domain(data.map(d => d.State))
@@ -158,13 +159,16 @@ function chart(data, input) {
       
 
     // Handmade legend
-    svg.append("rect").attr("x",width-135).attr("y",height-417).attr("width", 13).attr('height', 13).style("fill", "#99CCFF")
-    svg.append("rect").attr("x",width-135).attr("y",height-402).attr("width", 13).attr('height', 13).style("fill", "#3399FF")
-    svg.append("rect").attr("x",width-135).attr("y",height-387).attr("width", 13).attr('height', 13).style("fill", "#0066CC")
+    svg.append("rect").attr("x",width-135).attr("y",height-417).attr("width", 13).attr('height', 13).style("fill", "#003366")
+    svg.append("rect").attr("x",width-135).attr("y",height-402).attr("width", 13).attr('height', 13).style("fill", "#99CCFF")
+    svg.append("rect").attr("x",width-135).attr("y",height-387).attr("width", 13).attr('height', 13).style("fill", "#3399FF")
+    svg.append("rect").attr("x",width-135).attr("y",height-372).attr("width", 13).attr('height', 13).style("fill", "#0066CC")
+
 
     svg.append("text").attr("x", width-115).attr("y", height-410).text("Valuation, USD").style("font-size", "15px").attr("alignment-baseline","middle")
     svg.append("text").attr("x", width-115).attr("y", height-394).text("Premium, USD").style("font-size", "15px").attr("alignment-baseline","middle")
-    svg.append("text").attr("x", width-115).attr("y", height-378).text("Claim, USD").style("font-size", "15px").attr("alignment-baseline","middle")
+    svg.append("text").attr("x", width-115).attr("y", height-378).text("Claims paid, USD").style("font-size", "15px").attr("alignment-baseline","middle")
+    svg.append("text").attr("x", width-115).attr("y", height-362).text("Claims outstanding, USD").style("font-size", "15px").attr("alignment-baseline","middle")
 
     var xAxis = g => g
         .attr("transform", "translate(0," + height + ")")
