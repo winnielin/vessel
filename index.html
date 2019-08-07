@@ -547,7 +547,7 @@
                           <td>
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" value="shohjin" id="defaultCheck3"  onclick="GetShohjinRoute()">
+                                <input class="form-check-input" type="checkbox" value="shohjin" id="defaultCheck3" onclick="GetShohjinRoute()">
                                 <span class="form-check-sign">
                                   <span class="check"></span>
                                 </span>
@@ -753,7 +753,7 @@
                                       N
                                     </td>
                                     <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" class="btn btn-success">
+                                        <button type="button" rel="tooltip" class="btn btn-success" value="kimiSA" id="kimiSA" onclick="ApproveKimiSA()">
                                           <i class="material-icons">check</i>
                                         </button>
                                         <button type="button" rel="tooltip" class="btn btn-danger">
@@ -976,6 +976,17 @@
         
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
+
+                    //Create custom Pushpin current location for the vessel
+                    var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(36.59544, 36.18998),
+                    {
+                      icon: 'assets/img/vesselCurrentLoc.png',
+                    });
+
+                    //Add the pushpin to the map
+                    map.entities.push(pin);
+
+
                     d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherKIMI.csv")
                       .then(function(data) {
                     var list = [];
@@ -1164,6 +1175,16 @@
         
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
+
+                    //Create custom Pushpin current location for the vessel
+                    var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(29.53157, 34.94194),
+                    {
+                      icon: 'assets/img/vesselCurrentLoc.png',
+                    });
+
+                    //Add the pushpin to the map
+                    map.entities.push(pin);
+
                     d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherJINGU.csv")
                       .then(function(data) {
                     var list = [];
@@ -1283,6 +1304,16 @@
         
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
+
+                    //Create custom Pushpin current location for the vessel
+                    var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(29.50292, 34.93681),
+                    {
+                      icon: 'assets/img/vesselCurrentLoc.png',
+                    });
+
+                    //Add the pushpin to the map
+                    map.entities.push(pin);
+
                     d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherSHOHJIN.csv")
                       .then(function(data) {
                     var list = [];
@@ -1398,7 +1429,7 @@
               "<div class=\"table-responsive\"><table class=\"table\"><thead class=\"\">" +
               "<th>Zone</th><th>Expected Duration</th><th>Multiple Entries/Exits</th><th>Prior Approval</th></thead>" + 
               "<tbody><tr><td>SA</td><td>2 Days</td><td>N</td>" + 
-              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
+              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
               "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
               "<tr><td>YEMEN</td><td>1 Day</td><td>Y</td>" + 
               "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
@@ -1428,10 +1459,13 @@
               "<span data-notify=\"message\"><b>JINGU</b>" +
               "<div class=\"table-responsive\"><table class=\"table\"><thead class=\"\">" +
               "<th>Zone</th><th>Expected Duration</th><th>Multiple Entries/Exits</th><th>Prior Approval</th></thead>" + 
-              "<tbody><tr><td>SA</td><td>2 Days</td><td>N</td>" + 
+              "<tbody><tr><td>ISRAEL</td><td>3 Days</td><td>N</td>" + 
               "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
               "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
-              "<tr><td>HRA</td><td>8 Days</td><td>Y</td>" +
+              "<tr><td>SA</td><td>5 Days</td><td>Y</td>" +
+              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
+              "<tr><td>HRA</td><td>2 Days</td><td>N</td>" +
               "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
               "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
               "</tbody></table></div></span></div>");
@@ -1453,10 +1487,13 @@
               "<span data-notify=\"message\"><b>SHOHJIN</b>" +
               "<div class=\"table-responsive\"><table class=\"table\"><thead class=\"\">" +
               "<th>Zone</th><th>Expected Duration</th><th>Multiple Entries/Exits</th><th>Prior Approval</th></thead>" + 
-              "<tbody><tr><td>SA</td><td>2 Days</td><td>N</td>" + 
+              "<tbody><tr><td>ISRAEL</td><td>1 Day</td><td>N</td>" + 
               "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
               "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
-              "<tr><td>HRA</td><td>8 Days</td><td>Y</td>" +
+              "<tr><td>SA</td><td>10 Days</td><td>Y</td>" +
+              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
+              "<tr><td>YEMEN</td><td>2 Days</td><td>N</td>" +
               "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
               "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
               "</tbody></table></div></span></div>");

@@ -4,13 +4,13 @@
 
 ### Fleet Page  
 
-1. planned or actual vessel event  
-2. remove specific polygons -> layer???
-3. notification - approval button function  
-4. show weather info - try to find a temperature layer to implement  
-5. on the map ->show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
+1. planned vessel event - approval & reject button fuction  
+2. actual vessel event - end point + vincity + notification with 2 more columns  
+3. on the map -> show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
+4. show weather info - find a temperature layer to implement  
+5. remove specific polygons -> layer?  
 6. a block with political and piracy events  
-7. how to use zone entry & exit data  
+7. how to use zone entry & exit data?  
 
 ## To Improve
 
