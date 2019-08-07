@@ -54,26 +54,34 @@
 
 ### Individual Report 4000
 
-8/7 Intro 400  
-
-8/7-9 Subject area (technical or business area) 1600  
-  -visualisation helping decision making W   
+1. Intro 400 (8/7)  
+1-1 Big data & blockchain 100  
+1-2 Marine insurance 100  
+1-3 Rationale + thesis statement 100  
+1-4 Limitation 100  
+  
+2. Subject area (technical or business area) - visualisation helping decision making 1400 (8/9-10)  
+2-1  
+2-2  
+    
   ~~-marine insurance claims N~~  
   ~~-lack of competition and dynamic pricing S~~  
   ~~-the effects of big data on insurance S~~  
   ~~-modelling risk R~~  
   
-8/9-10 Working process 1200  
-  -user interface (method/analytical tools used & considered -> bing maps, html & power BI)  
+3. Working process - user interface 1400 (8/7-8)  
+3-1 Developing tools used & considered -> bing maps API, html or power BI, front-end framework - bootstrap 400  
+3-2 Fleet Page 500
+3-3 Vessel Page 500
   ~~-data generation and data mining R~~  
   ~~-storyboarding (use cases) S~~  
   ~~-scenario and hypothesis N~~  
   
-8/11 Reflection 400  
-  -project (what you learned during the project)  
-  -interaction with industry partner (the relation between the academic programme and the project)  
+4. Reflection 400 (8/11)  
+4-1 project (what you learned during the project) 200  
+4-2 interaction with industry partner (the relation between the academic programme and the project) 200  
 
-8/11 Conclusion 400  
+5. Conclusion 400 (8/11)  
 
 ### Team Report 2000
 
