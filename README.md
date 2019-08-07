@@ -16,7 +16,7 @@
 
 ### d3.js chart block
 
-1. refine notification wording  
+1. update new charts and notification wording  
 2. year 2018,19 change to slider  
 3. solve the size of svg  
   
