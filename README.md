@@ -55,14 +55,18 @@
 ### Individual Report 4000
 
 1. Intro 400 (8/7)  
-1-1 Big data & blockchain 100  
-1-2 Marine insurance 100  
-1-3 Rationale + thesis statement 100  
-1-4 Limitation 100  
+1-1 Big data & blockchain (Hook + Technical area) 100  
+1-2 Marine insurance (Business context + Problem statement) 150  
+1-3 Rationale + Thesis Statement + Limitation 150  
   
-2. Subject area (technical or business area) - visualisation helping decision making 1400 (8/9-10)  
-2-1  
-2-2  
+2. Subject area - visualisation helping decision making 1400 (8/9-10)  
+2-1 What is data visualisation? Why use? 200  
+    -diffent kind of visualisation  
+    -the use in business area  
+2-2 Current status of visualisation in marine area 1000  
+    -websites pros and cons  
+    -analysis  
+2-3 future development 200  
     
   ~~-marine insurance claims N~~  
   ~~-lack of competition and dynamic pricing S~~  
@@ -70,16 +74,33 @@
   ~~-modelling risk R~~  
   
 3. Working process - user interface 1400 (8/7-8)  
-3-1 Developing tools used & considered -> bing maps API, html or power BI, front-end framework - bootstrap 400  
-3-2 Fleet Page 500
-3-3 Vessel Page 500
-  ~~-data generation and data mining R~~  
-  ~~-storyboarding (use cases) S~~  
-  ~~-scenario and hypothesis N~~  
+3-1 Developing tools used & considered 400  
+    -bing maps API or SDK  
+    -html or power BI  
+    -front-end framework - bootstrap, react, vue  
+    -UX design  
+3-2 Fleet Page 500  
+    -How it works  
+    -data selection  
+    -result  
+3-3 Vessel Page 500  
+    -How it works  
+    -data selection  
+    -result  
   
 4. Reflection 400 (8/11)  
 4-1 project (what you learned during the project) 200  
+    -project management  
+    -brainstorming  
+    -persona  
+    -story boarding  
+    -use case  
+    -scenario  
+    -hypothesis  
+    -actual webpage development -local server or github  
+  
 4-2 interaction with industry partner (the relation between the academic programme and the project) 200  
+    -slack  
 
 5. Conclusion 400 (8/11)  
 
