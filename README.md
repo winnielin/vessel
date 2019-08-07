@@ -16,11 +16,9 @@
 
 ### d3.js chart block
 
-1. split claim into paid and outstanding  
-2. add all to year and client option  
-3. refine notification wording  
-4. year 2018,19 change to slider  
-5. solve the size of svg  
+1. refine notification wording  
+2. year 2018,19 change to slider  
+3. solve the size of svg  
   
 ~~1. select vessels from the table then add data into chart~~  
 ~~2. age slider, vessel type & shipping company selector~~  
@@ -40,10 +38,11 @@
 #### Bing Maps  
 
 1. how to untick route then remove only specific polyline from the map (different layer)    
+2. direction for vessel  
+  
 ~~1. check how many zones a vessel crossed by checking points from the route~~  
 ~~2. how many times planned schedule to cross the zone -> show zone + alert (zone call)~~  
 ~~3. current location generate alert (if huge deviation -> reason)~~  
-2. direction for vessel  
 
 #### Template  
 
@@ -78,13 +77,12 @@
 
 ### Team Report 2000
 
-Introduction 500  
-
 -structure -> using data science pipeline  
 
+Introduction 500  
 Project description (Problem to solve)  
 Data Collection (Exploratory Data Analysis) 250   
-Story & Scenario (Hypothesis and Methods) 800  
-Visualisation (Result) 400  
+Story & Scenario (Hypothesis and Methods) 600  
+Data Visualisation (Result) 450  
 
 Conclusion 200  
