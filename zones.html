@@ -103,8 +103,9 @@ text {
 <p id="menu"><b>Restricted Zone Visits Information</b><br><br><b>Select client: </b>
 
 <select class="opt">
-  <option value="CC">MAERSK</option>
-  <option value="DD">NYK</option>
+  <option value="AA">MAERSK</option>
+  <option value="BB">NYK</option>
+  <option value="LL">All</option>
 </select> 
 
 <svg width="750" height="500"></svg>
@@ -113,9 +114,9 @@ text {
 
 var speed = 0;
 
-d3.csv("https://raw.githubusercontent.com/nataliaokuneva/data_vessel/master/zonesdata%20copy.csv").then(function(data) {
+d3.csv("https://raw.githubusercontent.com/nataliaokuneva/data_vessel/master/zones_upd.csv").then(function(data) {
 
-    chart(data, "CC")
+    chart(data, "AA")
 
     d3.selectAll(".opt").on("change", function() {
         speed = 750;
@@ -134,7 +135,7 @@ function chart(data, input) {
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom;
 
-    var keys = data.columns.slice(1, 6);
+    var keys = data.columns.slice(1, 6, 11);
     
     var x0 = d3.scaleBand()
         .domain(data.map(d => d.State))
