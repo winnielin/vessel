@@ -4,19 +4,24 @@
 
 ### Fleet Page  
 
-1. planned vessel event - approval & reject button fuction  
+1. planned vessel event - approval & reject button fuction + additional premium btn  
 2. actual vessel event - end point + vincity + notification with 2 more columns  
-3. on the map -> show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
-4. show weather info - find a temperature layer to implement  
-5. remove specific polygons -> layer?  
-6. a block with political and piracy events  
-7. how to use zone entry & exit data?  
+3. notification with smaller font size to show more information  
+4. on the map -> show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
+5. show weather info - implement weather radar map  
+6. fake dropdown list (ref:https://www.shipmap.org)  
+7. remove specific polygons -> layer?  
+8. a block with political and piracy events  
+9. how to use zone entry & exit data?  
 
-## To Improve
+### d3.js chart block
 
-### d3.js chart page
-
-1. solve the size of svg  
+1. split claim into paid and outstanding  
+2. add all to year and client option  
+3. refine notification wording  
+4. year 2018,19 change to slider  
+5. solve the size of svg  
+  
 ~~1. select vessels from the table then add data into chart~~  
 ~~2. age slider, vessel type & shipping company selector~~  
 ~~3. valuation chart - stacked bar & line~~  
@@ -78,7 +83,7 @@ Introduction 500
 -structure -> using data science pipeline  
 
 Project description (Problem to solve)  
-Data Collection & Mining (Exploratory Data Analysis) 200  
+Data Collection (Exploratory Data Analysis) 250   
 Story & Scenario (Hypothesis and Methods) 800  
 Visualisation (Result) 400  
 
