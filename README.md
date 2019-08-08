@@ -57,9 +57,6 @@
 1. Intro 400 (8/7)  
 1-1 Big data & blockchain (Hook + Technical area) 100  
 1-2 Marine insurance (Business context + Problem statement) 150  
-
-
-
 1-3 Rationale + Thesis Statement + Limitation (Structure) 150  
     -Possible topics  
       --marine insurance claims  
