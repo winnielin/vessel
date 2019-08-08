@@ -54,7 +54,7 @@
 
 ### Individual Report 4000
 
-1. Intro 400 (8/7)  
+1. Intro 400  
 1-1 Big data & blockchain (Hook + Technical area) 100  
 1-2 Marine insurance (Business context + Problem statement) 150  
 1-3 Rationale + Thesis Statement + Limitation (Structure) 150  
@@ -68,7 +68,7 @@
       --Data Discovery (Collection, cleaning & mining) & difficulty  
       --Production Solution  
 
-2. Subject area - visualisation helping decision making 1400 (8/9-10)  
+2. Subject area - visualisation helping decision making 1400 (8/10)  
 2-1 What is data visualisation? Why use? 200  
     -diffent kind of visualisation  
     -the use in business area  
@@ -77,7 +77,7 @@
     -analysis  
 2-3 future development 200  
   
-3. Working process - user interface 1400 (8/7-8)  
+3. Working process - user interface 1400 (8/9)  
 3-1 Developing tools used & considered 400  
     -bing maps API or SDK  
     -html or power BI  
