@@ -57,21 +57,28 @@
 1. Intro 400 (8/7)  
 1-1 Big data & blockchain (Hook + Technical area) 100  
 1-2 Marine insurance (Business context + Problem statement) 150  
-1-3 Rationale + Thesis Statement + Limitation 150  
-  
+
+
+
+1-3 Rationale + Thesis Statement + Limitation (Structure) 150  
+    -Possible topics  
+      --marine insurance claims  
+      --lack of competition and dynamic pricing  
+      --the effects of big data on insurance  
+      --modelling risk  
+    -Data science working process  
+      --Business Problem/ Use Case  
+      --Data Discovery (Collection, cleaning & mining) & difficulty  
+      --Production Solution  
+
 2. Subject area - visualisation helping decision making 1400 (8/9-10)  
 2-1 What is data visualisation? Why use? 200  
     -diffent kind of visualisation  
     -the use in business area  
 2-2 Current status of visualisation in marine area 1000  
-    -websites pros and cons  
+    -some websites pros and cons  
     -analysis  
 2-3 future development 200  
-    
-  ~~-marine insurance claims N~~  
-  ~~-lack of competition and dynamic pricing S~~  
-  ~~-the effects of big data on insurance S~~  
-  ~~-modelling risk R~~  
   
 3. Working process - user interface 1400 (8/7-8)  
 3-1 Developing tools used & considered 400  
