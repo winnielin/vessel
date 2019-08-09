@@ -4,9 +4,8 @@
 
 ### Fleet Page  
 
-1. show weather info - implement a tile layer to the map (weather radar map)  
+1. show weather info - implement a tile layer to the map (weather radar map) -> how to change location 
 2. fake dropdown list - CustomOverlay Class (ref:https://www.shipmap.org)  
-  
 3. planned vessel event button function - (approval & reject, additional premium)  
 4. actual vessel event - clear map  
 5. remove specific polygons -> layer?  

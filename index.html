@@ -1993,16 +1993,16 @@
                 // If the checkbox is checked, display the output text
                 if (checkBox.checked == true){
                   // Custom tiles of Hurricane Katrina for zoom level 1-10
-                  var katrinaTileSource = new Microsoft.Maps.TileSource({
-                      uriConstructor: 'https://bingmapsisdk.blob.core.windows.net/katrinatiles/{quadkey}.png',
-                      minZoom: 1,
-                      maxZoom: 10,
-                      bounds: Microsoft.Maps.LocationRect.fromEdges(18.808553, 58.048618, -2.357447, 37.341618)
-                  });
-                  var katrinaTileLayer = new Microsoft.Maps.TileLayer({
-                      mercator: katrinaTileSource,
-                  });
-                  map.layers.insert(katrinaTileLayer);
+                var katrinaTileSource = new Microsoft.Maps.TileSource({
+                    uriConstructor: 'https://bingmapsisdk.blob.core.windows.net/katrinatiles/{quadkey}.png',
+                    minZoom: 1,
+                    maxZoom: 10,
+                    bounds: Microsoft.Maps.LocationRect.fromEdges(35.176, -101.065, 14.01, -80.538)
+                });
+                var katrinaTileLayer = new Microsoft.Maps.TileLayer({
+                    mercator: katrinaTileSource,
+                });
+                map.layers.insert(katrinaTileLayer);
                   
               } else {
                   for (var i = map.entities.getLength() - 1; i >= 0; i--) {
