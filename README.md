@@ -4,21 +4,21 @@
 
 ### Fleet Page  
 
-1. planned vessel event - approval & reject button fuction + additional premium btn  
-2. actual vessel event - end point + vincity + notification with 2 more columns  
-3. notification with smaller font size to show more information  
-4. on the map -> show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
-5. show weather info - implement weather radar map  
-6. fake dropdown list (ref:https://www.shipmap.org)  
-7. remove specific polygons -> layer?  
-8. a block with political and piracy events  
-9. how to use zone entry & exit data?  
+1. on the map -> show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
+2. show weather info - implement a tile layer to the map (weather radar map)  
+3. fake dropdown list - CustomOverlay Class (ref:https://www.shipmap.org)  
+  
+4. planned vessel event button function - (approval & reject, additional premium)  
+5. actual vessel event - clear map  
+6. remove specific polygons -> layer?  
+7. a block with political and piracy events  
+8. how to use zone entry & exit data?  
 
 ### d3.js chart block
 
-1. update new charts and notification wording  
+1. zone chart strange???  
 2. year 2018,19 change to slider  
-3. solve the size of svg  
+3. solve the size of svg (always minimize sidebar)  
   
 ~~1. select vessels from the table then add data into chart~~  
 ~~2. age slider, vessel type & shipping company selector~~  
@@ -70,7 +70,7 @@
 
 2. Subject area - visualisation helping decision making 1400 (8/10)  
 2-1 What is data visualisation? Why use? 200  
-    -diffent kind of visualisation  
+    -different kind of visualisation  
     -the use in business area  
 2-2 Current status of visualisation in marine area 1000  
     -some websites pros and cons  
@@ -102,7 +102,6 @@
     -scenario  
     -hypothesis  
     -actual webpage development -local server or github  
-  
 4-2 interaction with industry partner (the relation between the academic programme and the project) 200  
     -slack  
 

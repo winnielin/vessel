@@ -288,6 +288,18 @@
           <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
               <li class="nav-item">
+              <select class="selectpicker" data-style="select-with-transition" title="Marine Rules" data-size="7">
+              <option disabled> Choose Country</option>
+              <option value="2">United Kingdom </option>
+              <option value="3">United States</option>
+              <option value="4">Singapore</option>
+              <option value="5">Hong Kong</option>
+              <option value="6">Netherlands </option>
+            </select>
+            </li>
+          </ul>
+            <ul class="navbar-nav">
+              <li class="nav-item">
                 <a class="nav-link" href="#pablo">
                   <i class="material-icons">notifications</i> Notifications
                 </a>
@@ -316,7 +328,7 @@
                               </a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="#messages" data-toggle="tab">
+                              <a class="nav-link" href="#actual" data-toggle="tab">
                                 <i class="material-icons">my_locations</i> Actual
                                 <div class="ripple-container"></div>
                               </a>
@@ -326,10 +338,12 @@
                       </div>
                 </div>
                 <div class="card-body table-responsive" style="overflow:scroll; height:350px;">
-                  <div class="table-responsive">
-                      <table class="table table-hover">
-                      <thead>
-                        <tr>
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="planned">
+                      <div class="table-responsive">
+                        <table class="table table-hover">
+                        <thead>
+                          <tr>
                           <th class="text-center">#</th>
                           <th></th>
                           <th>Client</th>
@@ -349,7 +363,7 @@
                           <td>
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" value="kimi" id="defaultCheck1"  onclick="GetKimiRoute()">
+                                <input class="form-check-input" type="checkbox" value="kimiPlanned" id="kimiPlanned" onclick="GetKimiPlannedRoute()">
                                 <span class="form-check-sign">
                                   <span class="check"></span>
                                 </span>
@@ -459,7 +473,7 @@
                           <td>
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" value="jingu" id="defaultCheck2"  onclick="GetJinguRoute()">
+                                <input class="form-check-input" type="checkbox" value="jinguPlanned" id="jinguPlanned"  onclick="GetJinguPlannedRoute()">
                                 <span class="form-check-sign">
                                   <span class="check"></span>
                                 </span>
@@ -547,7 +561,7 @@
                           <td>
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" value="shohjin" id="defaultCheck3" onclick="GetShohjinRoute()">
+                                <input class="form-check-input" type="checkbox" value="shohjinPlanned" id="shohjinPlanned" onclick="GetShohjinPlannedRoute()">
                                 <span class="form-check-sign">
                                   <span class="check"></span>
                                 </span>
@@ -678,6 +692,359 @@
                     </table>
                   </div>
                 </div>
+                <div class="tab-pane" id="actual">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                    <thead>
+                      <tr>
+                      <th class="text-center">#</th>
+                      <th></th>
+                      <th>Client</th>
+                      <th>Vessel Name</th>
+                      <th>IMO</th>
+                      <th>Call Sign</th>
+                      <th>Vessel Type</th>
+                      <th>Flag</th>
+                      <th class="text-right">Gross Tonnage</th>
+                      <th class="text-right">Built Year</th>
+                      <th class="text-right">Age</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="table-info">
+                      <td class="text-center">1</td>
+                      <td>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="kimiActual" id="kimiActual"  onclick="GetKimiActualRoute()">
+                            <span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </td>
+                      <td>M</td>
+                      <td>Maersk Kimi</td>
+                      <td>9162227</td>
+                      <td>PDHO</td>
+                      <td>Container</td>
+                      <td>Netherlands</td>
+                      <td class="text-right">80942</td>
+                      <td class="text-right">1998</td>
+                      <td class="text-right">21</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">2</td>
+                        <td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox">
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </td>
+                        <td>M</td>
+                        <td>Maersk Vega</td>
+                        <td>9294082</td>
+                        <td>PPTF</td>
+                        <td>Supply</td>
+                        <td>Brazil</td>
+                        <td class="text-right">3760</td>
+                        <td class="text-right">2006</td>
+                        <td class="text-right">13</td>
+                      </tr>
+                      <tr>
+                          <td class="text-center">3</td>
+                          <td>
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox">
+                                <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div>
+                          </td>
+                          <td>M</td>
+                          <td>Maersk Ventura</td>
+                          <td>9294094</td>
+                          <td>PPTL</td>
+                          <td>Supply</td>
+                          <td>Brazil</td>
+                          <td class="text-right">3760</td>
+                          <td class="text-right">2006</td>
+                          <td class="text-right">13</td>
+                        </tr>
+                    <tr>
+                      <td class="text-center">4</td>
+                      <td>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="">
+                            <span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </td>
+                      <td>M</td>
+                      <td>BERLIAN EKUATOR</td>
+                      <td>9265541</td>
+                      <td>HPYK</td>
+                      <td>LPG Tanker</td>
+                      <td>Singapore</td>
+                      <td class="text-right">22209</td>
+                      <td class="text-right">1998</td>
+                      <td class="text-right">21</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">5</td>
+                      <td>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="">
+                            <span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </td>
+                      <td>K</td>
+                      <td>DOHA</td>
+                      <td>9085637</td>
+                      <td>JNCI</td>
+                      <td>LPG Tanker</td>
+                      <td>Hong Kong</td>
+                      <td class="text-right">111184</td>
+                      <td class="text-right">1999</td>
+                      <td class="text-right">20</td>
+                    </tr>
+                    <tr class="table-info">
+                      <td class="text-center">6</td>
+                      <td>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="jinguActual" id="jinguActual"  onclick="GetJinguActualRoute()">
+                            <span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </td>
+                      <td>K</td>
+                      <td>JINGU</td>
+                      <td>9021423</td>
+                      <td>3FBA</td>
+                      <td>Container</td>
+                      <td>Hong Kong</td>
+                      <td class="text-right">42164</td>
+                      <td class="text-right">1992</td>
+                      <td class="text-right">27</td>
+                    </tr>
+                    <tr>
+                    <td class="text-center">7</td>
+                      <td>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox">
+                            <span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </td>
+                      <td>K</td>
+                      <td>TSUGARU</td>
+                      <td>9454498</td>
+                      <td>7JVF</td>
+                      <td>Crude Oil Tanker</td>
+                      <td>Hong Kong</td>
+                      <td class="text-right">160152</td>
+                      <td class="text-right">2001</td>
+                      <td class="text-right">18</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">8</td>
+                          <td>
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox">
+                                <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div>
+                          </td>
+                          <td>K</td>
+                          <td>TOYO</td>
+                          <td>9304667</td>
+                          <td>H3ZA</td>
+                          <td>Crude Oil Tanker</td>
+                          <td>Hong Kong</td>
+                          <td class="text-right">160098</td>
+                          <td class="text-right">2001</td>
+                          <td class="text-right">18</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">9</td>
+                              <td>
+                                <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox">
+                                    <span class="form-check-sign">
+                                      <span class="check"></span>
+                                    </span>
+                                  </label>
+                                </div>
+                              </td>
+                              <td>K</td>
+                              <td>TOWADA</td>
+                              <td>9321213</td>
+                              <td>7JXI</td>
+                              <td>Crude Oil Tanker</td>
+                              <td>Singapore</td>
+                              <td class="text-right">159967</td>
+                              <td class="text-right">2002</td>
+                              <td class="text-right">17</td>
+                            </tr>
+                    <tr class="table-info">
+                      <td class="text-center">10</td>
+                      <td>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="shohjinActual" id="shohjinActual" onclick="GetShohjinActualRoute()">
+                            <span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </td>
+                      <td>K</td>
+                      <td>SHOHJIN</td>
+                      <td>9073701</td>
+                      <td>3FUX9</td>
+                      <td>Container</td>
+                      <td>USA</td>
+                      <td class="text-right">50308</td>
+                      <td class="text-right">1999</td>
+                      <td class="text-right">20</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">11</td>
+                        <td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox">
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </td>
+                        <td>N</td>
+                        <td>TAITAR NO.1</td>
+                        <td>9403669</td>
+                        <td>3FJB7</td>
+                        <td>LNG Tanker</td>
+                        <td>Singapore </td>
+                        <td class="text-right">118634</td>
+                        <td class="text-right">2009</td>
+                        <td class="text-right">10</td>
+                      </tr>
+                      <tr>
+                          <td class="text-center">12</td>
+                          <td>
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox">
+                                <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div>
+                          </td>
+                          <td>N</td>
+                          <td>TAITAR NO.2</td>
+                          <td>9403645</td>
+                          <td>3EXZ</td>
+                          <td>LNG Tanker</td>
+                          <td>USA</td>
+                          <td class="text-right">118634</td>
+                          <td class="text-right">2009</td>
+                          <td class="text-right">10</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">13</td>
+                            <td>
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input class="form-check-input" type="checkbox">
+                                  <span class="form-check-sign">
+                                    <span class="check"></span>
+                                  </span>
+                                </label>
+                              </div>
+                            </td>
+                            <td>N</td>
+                            <td>TAITAR NO.3</td>
+                            <td>9403671</td>
+                            <td>3FMD5</td>
+                            <td>LNG Tanker</td>
+                            <td>Singapore</td>
+                            <td class="text-right">118634</td>
+                            <td class="text-right">2010</td>
+                            <td class="text-right">9</td>
+                          </tr>
+                          <tr>
+                              <td class="text-center">14</td>
+                              <td>
+                                <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox">
+                                    <span class="form-check-sign">
+                                      <span class="check"></span>
+                                    </span>
+                                  </label>
+                                </div>
+                              </td>
+                              <td>H</td>
+                              <td>Hyundai Honour</td>
+                              <td>9473731</td>
+                              <td>9HA4590</td>
+                              <td>Container</td>
+                              <td>Malta</td>
+                              <td class="text-right">141770</td>
+                              <td class="text-right">2012</td>
+                              <td class="text-right">7</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">15</td>
+                                <td>
+                                  <div class="form-check">
+                                    <label class="form-check-label">
+                                      <input class="form-check-input" type="checkbox">
+                                      <span class="form-check-sign">
+                                        <span class="check"></span>
+                                      </span>
+                                    </label>
+                                  </div>
+                                </td>
+                                <td>S</td>
+                                <td>Siem Thiima</td>
+                                <td>9727235</td>
+                                <td>LAUB7</td>
+                                <td>Supply</td>
+                                <td>Norway  </td>
+                                <td class="text-right">4768</td>
+                                <td class="text-right">2016</td>
+                                <td class="text-right">3</td>
+                              </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
               </div>
             </div>
         </div>
@@ -824,6 +1191,7 @@
                               <option disabled>YEAR</option>
                               <option selected value="CC">2018</option>
                               <option value="DD">2019</option>
+                              <option value="EE">All</option>
                             </select>
                           <svg id="svg1" width="750" height="500"></svg>
                         </div>
@@ -833,6 +1201,7 @@
                               <option disabled>CLIENT</option>
                               <option selected value="AA">MAERSK</option>
                               <option value="BB">NYK</option>
+                              <option value="LL">ALL</option>
                             </select>
                           <svg id="svg2" width="750" height="500"></svg>
                         </div>
@@ -936,9 +1305,9 @@
   <!-- d3.js -->
   <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+  
   <script>
   var map, polygons;
-  var usgsEarthquakeUrl = 'https://raw.githubusercontent.com/winnielin/vessel/master/redSea.json';
             function GetMap() {
                 map = new Microsoft.Maps.Map('#myMap', {
                     center: new Microsoft.Maps.Location(23.34454, 40.66896),
@@ -961,24 +1330,16 @@
                 //     map.layers.insert(layer);
                 // });
                 
-                //Create custom Pushpin current location for the vessel
-                // var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(25.90372,56.8122),
-                // {
-                //   icon: 'assets/img/vesselCurrentLoc.png',
-                // });
-        
-                //Add the pushpin to the map
-                // map.entities.push(pin);
             }
-                function GetKimiRoute() {
+                function GetKimiActualRoute() {
                 // Get the checkbox
-                var checkBox = document.getElementById("defaultCheck1");
+                var checkBox = document.getElementById("kimiActual");
         
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
 
                     //Create custom Pushpin current location for the vessel
-                    var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(36.59544, 36.18998),
+                    var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(15.94309, 53.74743),
                     {
                       icon: 'assets/img/vesselCurrentLoc.png',
                     });
@@ -1063,79 +1424,7 @@
                       }
                     }
                         
-            //show zones        
-            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_HRA.csv").then(function(data) {
-                      var list = [];
-                      var zone = "";
-                      var len = data.length;
-                      for (i=0; i < len; i++) {
-                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-                        list.push(zone);
-                    
-                      }
-                
-                var polygon = new Microsoft.Maps.Polygon(list, {
-                    fillColor: 'transparent',
-                    strokeColor: 'brown',
-                    strokeThickness: 2,
-                });
-                map.entities.push(polygon);
-            });
-
-            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ERITREA.csv").then(function(data) {
-                      var list = [];
-                      var zone = "";
-                      var len = data.length;
-                      for (i=0; i < len; i++) {
-                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-                        list.push(zone);
-                    
-                      }
-                
-                var polygon = new Microsoft.Maps.Polygon(list, {
-                    fillColor: 'transparent',
-                    strokeColor: 'brown',
-                    strokeThickness: 2,
-                });
-                map.entities.push(polygon);
-            });
-
-            d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_YEMEN.csv").then(function(data) {
-                      var list = [];
-                      var zone = "";
-                      var len = data.length;
-                      for (i=0; i < len; i++) {
-                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-                        list.push(zone);
-                    
-                      }
-                
-                var polygon = new Microsoft.Maps.Polygon(list, {
-                    fillColor: 'transparent',
-                    strokeColor: 'brown',
-                    strokeThickness: 2,
-                });
-                map.entities.push(polygon);
-            });
-                    
-                  
-                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SA.csv").then(function(data) {
-                      var list = [];
-                      var zone = "";
-                      var len = data.length;
-                      for (i=0; i < len; i++) {
-                        zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
-                        list.push(zone);
-                    
-                      }
-                
-                var polygon = new Microsoft.Maps.Polygon(list, {
-                    fillColor: 'transparent',
-                    strokeColor: 'brown',
-                    strokeThickness: 2,
-                });
-                map.entities.push(polygon);
-            });
+            
                     var line = new Microsoft.Maps.Polyline(list, {
                       strokeColor: 'red',
                       strokeThickness: 2,
@@ -1169,15 +1458,15 @@
                     }
                   }
                 }
-                function GetJinguRoute() {
+                function GetJinguActualRoute() {
                 // Get the checkbox
-                var checkBox = document.getElementById("defaultCheck2");
+                var checkBox = document.getElementById("jinguActual");
         
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
 
                     //Create custom Pushpin current location for the vessel
-                    var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(29.53157, 34.94194),
+                    var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(12.64903, 58.91744),
                     {
                       icon: 'assets/img/vesselCurrentLoc.png',
                     });
@@ -1298,15 +1587,15 @@
                     }
                   }
                 }
-                function GetShohjinRoute() {
+                function GetShohjinActualRoute() {
                 // Get the checkbox
-                var checkBox = document.getElementById("defaultCheck3");
+                var checkBox = document.getElementById("shohjinActual");
         
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
 
                     //Create custom Pushpin current location for the vessel
-                    var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(29.50292, 34.93681),
+                    var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(12.23666, 60.72469),
                     {
                       icon: 'assets/img/vesselCurrentLoc.png',
                     });
@@ -1411,13 +1700,238 @@
                     }
                   }
                 }
-        
+
+                function GetKimiPlannedRoute() {
+                // Get the checkbox
+                var checkBox = document.getElementById("kimiPlanned");
+
+                // If the checkbox is checked, display the output text
+                if (checkBox.checked == true){
+                  //Create custom Pushpin current location for the vessel
+                  var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(36.59544, 36.18998),
+                    {
+                      icon: 'assets/img/vesselCurrentLoc.png',
+                    });
+
+                    //Add the pushpin to the map
+                    map.entities.push(pin);
+                  
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherKIMI.csv")
+                  .then(function(data) {
+                  var list = [];
+                  var dynamic = "";
+                  var len = data.length;
+                  for (i=0; i < len; i++) {
+                      dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                      list.push(dynamic);
+                  }
+                  var line = new Microsoft.Maps.Polyline(list, {
+                      strokeColor: 'red',
+                      strokeThickness: 2,
+                  });
+                  map.entities.push(line);
+              });
+
+              //show zones        
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_HRA.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'brown',
+                          strokeThickness: 2,
+                      });
+                      map.entities.push(polygon);
+                  });
+
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ERITREA.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'brown',
+                          strokeThickness: 2,
+                      });
+                      map.entities.push(polygon);
+                  });
+
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_YEMEN.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'brown',
+                          strokeThickness: 2,
+                      });
+                      map.entities.push(polygon);
+                  });
+                          
+                          d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SA.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'brown',
+                          strokeThickness: 2,
+                      });
+                      map.entities.push(polygon);
+                  });
+                
+              } else {
+                  for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                      var polyline = map.entities.get(i);
+                        if (polyline instanceof Microsoft.Maps.Polyline) {
+                            map.entities.removeAt(i);
+                        }
+                      var pushpin = map.entities.get(i);
+                        if (pushpin instanceof Microsoft.Maps.Pushpin) {
+                            map.entities.removeAt(i);
+                        }
+                  }
+          }
+      }
+                function GetJinguPlannedRoute() {
+                // Get the checkbox
+                var checkBox = document.getElementById("jinguPlanned");
+
+                // If the checkbox is checked, display the output text
+                if (checkBox.checked == true){
+                  //Create custom Pushpin current location for the vessel
+                  var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(29.53157, 34.94194),
+                    {
+                      icon: 'assets/img/vesselCurrentLoc.png',
+                    });
+
+                    //Add the pushpin to the map
+                    map.entities.push(pin);
+                  
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherJINGU.csv")
+                  .then(function(data) {
+                  var list = [];
+                  var dynamic = "";
+                  var len = data.length;
+                  for (i=0; i < len; i++) {
+                      dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                      list.push(dynamic);
+                  }
+                  var line = new Microsoft.Maps.Polyline(list, {
+                      strokeColor: 'blue',
+                      strokeThickness: 2,
+                  });
+                  map.entities.push(line);
+              });
+
+              //show zones        
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_HRA.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'brown',
+                          strokeThickness: 2,
+                      });
+                      map.entities.push(polygon);
+                  });
+                
+              } else {
+                  for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                      var polyline = map.entities.get(i);
+                        if (polyline instanceof Microsoft.Maps.Polyline) {
+                            map.entities.removeAt(i);
+                        }
+                      var pushpin = map.entities.get(i);
+                        if (pushpin instanceof Microsoft.Maps.Pushpin) {
+                            map.entities.removeAt(i);
+                        }
+                  }
+          }
+      }
+                function GetShohjinPlannedRoute() {
+                // Get the checkbox
+                var checkBox = document.getElementById("shohjinPlanned");
+
+                // If the checkbox is checked, display the output text
+                if (checkBox.checked == true){
+                  //Create custom Pushpin current location for the vessel
+                  var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(29.50292, 34.93681),
+                    {
+                      icon: 'assets/img/vesselCurrentLoc.png',
+                    });
+
+                    //Add the pushpin to the map
+                    map.entities.push(pin);
+                  
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherSHOHJIN.csv")
+                  .then(function(data) {
+                  var list = [];
+                  var dynamic = "";
+                  var len = data.length;
+                  for (i=0; i < len; i++) {
+                      dynamic = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                      list.push(dynamic);
+                  }
+                  var line = new Microsoft.Maps.Polyline(list, {
+                      strokeColor: 'green',
+                      strokeThickness: 2,
+                  });
+                  map.entities.push(line);
+              });
+
+                
+              } else {
+                  for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                      var polyline = map.entities.get(i);
+                        if (polyline instanceof Microsoft.Maps.Polyline) {
+                            map.entities.removeAt(i);
+                        }
+                      var pushpin = map.entities.get(i);
+                        if (pushpin instanceof Microsoft.Maps.Pushpin) {
+                            map.entities.removeAt(i);
+                        }
+                  }
+          }
+      }
   </script>
 
   <script>
   //map notification
-  $(document).ready(function(){
-        $(":checkbox[value=kimi]").click(function(){
+    $(document).ready(function(){
+        $(":checkbox[value=kimiPlanned]").click(function(){
             if($(this).prop("checked") == true){
               $("#notification").append(
               "<div class=\"alert alert-primary\" data-notify=\"container\" id=\"kimi\">" +
@@ -1425,21 +1939,52 @@
               "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">" +
               "<i class=\"material-icons\">close</i></button>" +
               "<span data-notify=\"icon\" class=\"now-ui-icons ui-1_bell-53\"></span>" + 
-              "<span data-notify=\"message\"><b> Maersk Kimi</b>" +
+              "<span data-notify=\"message\"><b> Maersk Kimi</b>" + 
+
               "<div class=\"table-responsive\"><table class=\"table\"><thead class=\"\">" +
-              "<th>Zone</th><th>Expected Duration</th><th>Multiple Entries/Exits</th><th>Prior Approval</th></thead>" + 
-              "<tbody><tr><td>SA</td><td>2 Days</td><td>N</td>" + 
-              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
-              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
-              "<tr><td>YEMEN</td><td>1 Day</td><td>Y</td>" + 
-              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
-              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
-              "<tr><td>ERITREA_HRA</td><td>2 Days</td><td>Y</td>" + 
-              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
-              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
-              "<tr><td>HRA</td><td>8 Days</td><td>Y</td>" +
-              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
-              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
+              "<th style=\"font-size:10px\">Zone</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Expected Duration</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Multiple Entries/Exits</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Prior Approval</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Deviation</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Deviation Option</th></thead>" + 
+
+              "<tbody><tr><td style=\"font-size:10px\">SA</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">2 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "<tr><td style=\"font-size:10px\">YEMEN</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">1 Day</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "<tr><td style=\"font-size:10px\">ERITREA_HRA</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">3 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "<tr><td style=\"font-size:10px\">HRA</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">8 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
               "</tbody></table></div></span></div>");
             }
             else if($(this).prop("checked") == false){
@@ -1448,7 +1993,69 @@
         });
     });
     $(document).ready(function(){
-        $(":checkbox[value=jingu]").click(function(){
+        $(":checkbox[value=kimiActual]").click(function(){
+            if($(this).prop("checked") == true){
+              $("#notification").append(
+              "<div class=\"alert alert-primary\" data-notify=\"container\" id=\"kimi\">" +
+              "<i class=\"material-icons\" data-notify=\"icon\">notifications</i>" +
+              "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">" +
+              "<i class=\"material-icons\">close</i></button>" +
+              "<span data-notify=\"icon\" class=\"now-ui-icons ui-1_bell-53\"></span>" + 
+              "<span data-notify=\"message\"><b> Maersk Kimi</b>" + 
+
+              "<div class=\"table-responsive\"><table class=\"table\"><thead class=\"\">" +
+              "<th style=\"font-size:10px\">Zone</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Expected Duration</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Multiple Entries/Exits</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Prior Approval</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Deviation</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Deviation Option</th></thead>" + 
+
+              "<tbody><tr><td style=\"font-size:10px\">SA</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">2 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "<tr><td style=\"font-size:10px\">YEMEN</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">1 Day</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "<tr><td style=\"font-size:10px\">ERITREA_HRA</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">3 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "<tr><td style=\"font-size:10px\">HRA</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">8 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "</tbody></table></div></span></div>");
+            }
+            else if($(this).prop("checked") == false){
+              $("#kimi").remove();
+            }
+        });
+    });
+    $(document).ready(function(){
+        $(":checkbox[value=jinguPlanned]").click(function(){
             if($(this).prop("checked") == true){
               $("#notification").append(
               "<div class=\"alert alert-primary\" data-notify=\"container\" id=\"jingu\">" +
@@ -1456,18 +2063,43 @@
               "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">" +
               "<i class=\"material-icons\">close</i></button>" +
               "<span data-notify=\"icon\" class=\"now-ui-icons ui-1_bell-53\"></span>" + 
-              "<span data-notify=\"message\"><b>JINGU</b>" +
+              "<span data-notify=\"message\"><b>JINGU</b>" + 
+
               "<div class=\"table-responsive\"><table class=\"table\"><thead class=\"\">" +
-              "<th>Zone</th><th>Expected Duration</th><th>Multiple Entries/Exits</th><th>Prior Approval</th></thead>" + 
-              "<tbody><tr><td>ISRAEL</td><td>3 Days</td><td>N</td>" + 
-              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
-              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
-              "<tr><td>SA</td><td>5 Days</td><td>Y</td>" +
-              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
-              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
-              "<tr><td>HRA</td><td>2 Days</td><td>N</td>" +
-              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
-              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
+              "<th style=\"font-size:10px\">Zone</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Expected Duration</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Multiple Entries/Exits</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Prior Approval</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Deviation</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Deviation Option</th></thead>" + 
+
+              "<tbody><tr><td style=\"font-size:10px\">ISAREL</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">3 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "<tr><td style=\"font-size:10px\">SA</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">5 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "<tr><td style=\"font-size:10px\">HRA</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">2 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
               "</tbody></table></div></span></div>");
             }
             else if($(this).prop("checked") == false){
@@ -1476,7 +2108,60 @@
         });
     });
     $(document).ready(function(){
-        $(":checkbox[value=shohjin]").click(function(){
+        $(":checkbox[value=jinguActual]").click(function(){
+            if($(this).prop("checked") == true){
+              $("#notification").append(
+              "<div class=\"alert alert-primary\" data-notify=\"container\" id=\"jingu\">" +
+              "<i class=\"material-icons\" data-notify=\"icon\">notifications</i>" +
+              "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">" +
+              "<i class=\"material-icons\">close</i></button>" +
+              "<span data-notify=\"icon\" class=\"now-ui-icons ui-1_bell-53\"></span>" + 
+              "<span data-notify=\"message\"><b>JINGU</b>" + 
+
+              "<div class=\"table-responsive\"><table class=\"table\"><thead class=\"\">" +
+              "<th style=\"font-size:10px\">Zone</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Expected Duration</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Multiple Entries/Exits</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Prior Approval</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Deviation</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Deviation Option</th></thead>" + 
+
+              "<tbody><tr><td style=\"font-size:10px\">ISAREL</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">3 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "<tr><td style=\"font-size:10px\">SA</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">5 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "<tr><td style=\"font-size:10px\">HRA</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">2 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "</tbody></table></div></span></div>");
+            }
+            else if($(this).prop("checked") == false){
+              $("#jingu").remove();
+            }
+        });
+    });
+    $(document).ready(function(){
+        $(":checkbox[value=shohjinPlanned]").click(function(){
             if($(this).prop("checked") == true){
               $("#notification").append(
               "<div class=\"alert alert-primary\" data-notify=\"container\" id=\"shohjin\">" +
@@ -1484,18 +2169,96 @@
               "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">" +
               "<i class=\"material-icons\">close</i></button>" +
               "<span data-notify=\"icon\" class=\"now-ui-icons ui-1_bell-53\"></span>" + 
-              "<span data-notify=\"message\"><b>SHOHJIN</b>" +
+              "<span data-notify=\"message\"><b>SHOHJIN</b>" + 
+
               "<div class=\"table-responsive\"><table class=\"table\"><thead class=\"\">" +
-              "<th>Zone</th><th>Expected Duration</th><th>Multiple Entries/Exits</th><th>Prior Approval</th></thead>" + 
-              "<tbody><tr><td>ISRAEL</td><td>1 Day</td><td>N</td>" + 
-              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
-              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
-              "<tr><td>SA</td><td>10 Days</td><td>Y</td>" +
-              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
-              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
-              "<tr><td>YEMEN</td><td>2 Days</td><td>N</td>" +
-              "<td class=\"td-actions text-right\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"><i class=\"material-icons\">check</i></button>" + 
-              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td></tr>" + 
+              "<th style=\"font-size:10px\">Zone</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Expected Duration</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Multiple Entries/Exits</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Prior Approval</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Deviation</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Deviation Option</th></thead>" + 
+
+              "<tbody><tr><td style=\"font-size:10px\">ISAREL</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">1 Day</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "<tr><td style=\"font-size:10px\">SA</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">8 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "<tr><td style=\"font-size:10px\">YEMEN</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">2 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "</tbody></table></div></span></div>");
+            }
+            else if($(this).prop("checked") == false){
+              $("#shohjin").remove();
+            }
+        });
+    });
+    $(document).ready(function(){
+        $(":checkbox[value=shohjinActual]").click(function(){
+            if($(this).prop("checked") == true){
+              $("#notification").append(
+              "<div class=\"alert alert-primary\" data-notify=\"container\" id=\"shohjin\">" +
+              "<i class=\"material-icons\" data-notify=\"icon\">notifications</i>" +
+              "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">" +
+              "<i class=\"material-icons\">close</i></button>" +
+              "<span data-notify=\"icon\" class=\"now-ui-icons ui-1_bell-53\"></span>" + 
+              "<span data-notify=\"message\"><b>SHOHJIN</b>" + 
+
+              "<div class=\"table-responsive\"><table class=\"table\"><thead class=\"\">" +
+              "<th style=\"font-size:10px\">Zone</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Expected Duration</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Multiple Entries/Exits</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Prior Approval</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Deviation</th>" + 
+              "<th style=\"font-size:8px; text-align:center;\">Deviation Option</th></thead>" + 
+
+              "<tbody><tr><td style=\"font-size:10px\">ISAREL</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">1 Day</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "<tr><td style=\"font-size:10px\">SA</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">8 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
+              "<tr><td style=\"font-size:10px\">YEMEN</td>" +
+              "<td style=\"font-size:10px; text-align:center;\">2 Days</td>" +
+              "<td style=\"font-size:12px; text-align:center;\">N</td>" + 
+              "<td class=\"td-actions text-center\"><button type=\"button\" rel=\"tooltip\" class=\"btn btn-success\"  value=\"kimiSA\" id=\"kimiSA\" onclick=\"ApproveKimiSA()\"><i class=\"material-icons\">check</i></button>" + 
+              "<button type=\"button\" rel=\"tooltip\" class=\"btn btn-danger\"><i class=\"material-icons\">close</i></button></td>" + 
+              "<td style=\"font-size:12px; text-align:center;\">Y</td>" + 
+              "<td class=\"td-actions text-center\"><button class=\"btn btn-success btn-sm\" style=\"font-size:8px\">Charge more</button>" + 
+              "<button class=\"btn btn-danger btn-sm\" style=\"font-size:8px\">Charge less</button></td></tr>" + 
+
               "</tbody></table></div></span></div>");
             }
             else if($(this).prop("checked") == false){
@@ -1505,6 +2268,7 @@
     });
 
     </script>
+
   <script>
       $(document).ready(function() {
         $().ready(function() {
@@ -1685,39 +2449,64 @@
             $("#aa").remove();
             $("#bb").remove();
             $("#cc").remove();
+            $("#ee").remove();
+            $("#ll").remove();
             $("#notificationv").append(
               "<div id=\"dd\"><div class=\"timeline-heading\">" + 
               "<span class=\"badge badge-pill badge-info\">MAERSK</span></div>" + 
-              "<p>MAERSK paid out a premium of USD 1,12 mln, while the costs spent on claims were USD 112,000. The insured vessels are jointly currently valued at USD 11,2 mln.<br></p>" +
+              "<p>MAERSK paid out a premium of USD 1,12 mln, while it posted a gross claims provision of USD 960,000 of which USD 720,000 had been paid. The insured vessels are jointly currently valued at USD 11,2 mln.<br></p>" +
               "<div class=\"timeline-heading\">" + 
               "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
-              "<p>NYK paid out a premium of USD 700,000, while the costs spent on claims were USD 150,000. The insured vessels are jointly currently valued at USD 7 mln.<br></p>" +
+              "<p>NYK paid out a premium of USD 700,000, while it posted a gross claims provision of USD 620,000 of which USD 350,000 had been paid. The insured vessels are jointly currently valued at USD 7 mln.<br></p>" +
               "<div class=\"timeline-heading\">" + 
               "<span class=\"badge badge-pill badge-info\">APL</span></div>" + 
-              "<p>APL paid out a premium of USD 2,475 mln, while the costs spent on claims were USD 337,500. The insured vessels are jointly currently valued at USD 22,5 mln.<br></p>" + 
+              "<p>APL paid out a premium of USD 2,475 mln, while it posted a gross claims provision of USD 2 mln of which USD 1,3 mln had been paid. The insured vessels are jointly currently valued at USD 22,5 mln.<br></p>" + 
               "<div class=\"timeline-heading\">" + 
               "<span class=\"badge badge-pill badge-info\">MSC</span></div>" + 
-              "<p>MSC paid out a premium of USD 1 mln, while the costs spent on claims were USD 1,4 mln. The insured vessels are jointly currently valued at USD 8 mln. </p></div>"
+              "<p>MSC paid out a premium of USD 1,6 mln, while it posted a gross claims provision of USD 2,5 mln of which USD 2 mln had been paid. The insured vessels are jointly currently valued at USD 8 mln.</p></div>"
             );
           }
           else if($(this).children("option:selected").val() == "CC"){
             $("#aa").remove();
             $("#bb").remove();
             $("#dd").remove();
+            $("#ee").remove();
+            $("#ll").remove();
             $("#notificationv").append(
               "<div id=\"cc\"><div class=\"timeline-heading\">" + 
               "<span class=\"badge badge-pill badge-info\">MAERSK</span></div>" + 
-              "<p>MAERSK paid out a premium of USD 440,000, while the costs spent on claims were USD 110,000. The insured vessels are jointly currently valued at USD 11 mln.<br></p>" +
+              "<p>MAERSK paid out a premium of USD 1,04 mln, while it posted a gross claims provision of USD 1,5 mln of which USD 800,000 had been paid. The insured vessels are jointly currently valued at USD 11 mln.<br></p>" +
               "<div class=\"timeline-heading\">" + 
               "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
-              "<p>NYK paid out a premium of USD 1 mln, while the costs spent on claims were USD 1,5 mln. The insured vessels are jointly currently valued at USD 10 mln.<br></p>" + 
+              "<p>NYK paid out a premium of USD 1 mln, while it posted a gross claims provision of USD 750,000 of which USD 500,000 had been paid. The insured vessels are jointly currently valued at USD 10 mln.<br></p>" + 
               "<div class=\"timeline-heading\">" + 
               "<span class=\"badge badge-pill badge-info\">APL</span></div>" + 
-              "<p>APL paid out a premium of USD 702,000, while the costs spent on claims were USD 800,000. The insured vessels are jointly currently valued at USD 23,4 mln.<br></p>" + 
+              "<p>APL paid out a premium of USD 702,000, while it posted a gross claims provision of USD 551,000 of which USD 351,000 had been paid. The insured vessels are jointly currently valued at USD 23,4 mln.<br></p>" + 
               "<div class=\"timeline-heading\">" + 
               "<span class=\"badge badge-pill badge-info\">MSC</span></div>" + 
-              "<p>MSC paid out a premium of USD 500,000, while the costs spent on claims were USD 560,000. The insured vessels are jointly currently valued at USD 10 mln. </p></div>"
+              "<p>MSC paid out a premium of USD 1 mln, while it posted a gross claims provision of USD 600,000 of which USD 350,000 had been paid. The insured vessels are jointly currently valued at USD 10 mln.</p></div>"
             );
+          }
+          else if($("select.selectpicker[value=year]").children("option:selected").val() == "EE"){
+                    $("#aa").remove();
+                    $("#bb").remove();
+                    $("#cc").remove();
+                    $("#dd").remove();
+                    $("#ll").remove();
+                    $("#notificationv").append(
+                      "<div id=\"ee\"><div class=\"timeline-heading\">" + 
+                      "<span class=\"badge badge-pill badge-info\">MAERSK</span></div>" + 
+                      "<p>The total amount of premium paid by MAERSK for two years reached USD 1,56 mln, while gross claims amounted to USD 619,000.<br></p>" +
+                      "<div class=\"timeline-heading\">" + 
+                      "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
+                      "<p>The total amount of premium paid by NYK for two years reached USD 1,7 mln, while gross claims amounted to USD 970,000.<br></p>" + 
+                      "<div class=\"timeline-heading\">" + 
+                      "<span class=\"badge badge-pill badge-info\">APL</span></div>" + 
+                      "<p>The total amount of premium paid by APL for two years reached USD 3,177 mln, while gross claims amounted to USD 2,021 mln.<br></p>" + 
+                      "<div class=\"timeline-heading\">" + 
+                      "<span class=\"badge badge-pill badge-info\">MSC</span></div>" + 
+                      "<p>The total amount of premium paid by MSC for two years reached USD 2,6 mln, while gross claims amounted to USD 2,2 mln.</p></div>"
+                    );
           }
         });
       });
@@ -1728,40 +2517,65 @@
               $("#aa").remove();
               $("#bb").remove();
               $("#cc").remove();
+              $("#ee").remove();
+              $("#ll").remove();
               $("#notificationv").append(
                 "<div id=\"dd\"><div class=\"timeline-heading\">" + 
                 "<span class=\"badge badge-pill badge-info\">MAERSK</span></div>" + 
-                "<p>MAERSK paid out a premium of USD 1,12 mln, while the costs spent on claims were USD 112,000. The insured vessels are jointly currently valued at USD 11,2 mln.<br></p>" +
+                "<p>MAERSK paid out a premium of USD 1,12 mln, while it posted a gross claims provision of USD 960,000 of which USD 720,000 had been paid. The insured vessels are jointly currently valued at USD 11,2 mln.<br></p>" +
                 "<div class=\"timeline-heading\">" + 
                 "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
-                "<p>NYK paid out a premium of USD 700,000, while the costs spent on claims were USD 150,000. The insured vessels are jointly currently valued at USD 7 mln.<br></p>" +
+                "<p>NYK paid out a premium of USD 700,000, while it posted a gross claims provision of USD 620,000 of which USD 350,000 had been paid. The insured vessels are jointly currently valued at USD 7 mln.<br></p>" +
                 "<div class=\"timeline-heading\">" + 
                 "<span class=\"badge badge-pill badge-info\">APL</span></div>" + 
-                "<p>APL paid out a premium of USD 2,475 mln, while the costs spent on claims were USD 337,500. The insured vessels are jointly currently valued at USD 22,5 mln.<br></p>" + 
+                "<p>APL paid out a premium of USD 2,475 mln, while it posted a gross claims provision of USD 2 mln of which USD 1,3 mln had been paid. The insured vessels are jointly currently valued at USD 22,5 mln.<br></p>" + 
                 "<div class=\"timeline-heading\">" + 
                 "<span class=\"badge badge-pill badge-info\">MSC</span></div>" + 
-                "<p>MSC paid out a premium of USD 1 mln, while the costs spent on claims were USD 1,4 mln. The insured vessels are jointly currently valued at USD 8 mln. </p></div>"
+                "<p>MSC paid out a premium of USD 1,6 mln, while it posted a gross claims provision of USD 2,5 mln of which USD 2 mln had been paid. The insured vessels are jointly currently valued at USD 8 mln.</p></div>"
               );  
           }
           else if($("select.selectpicker[value=year]").children("option:selected").val() == "CC"){
                     $("#aa").remove();
                     $("#bb").remove();
                     $("#dd").remove();
+                    $("#ee").remove();
+                    $("#ll").remove();
                     $("#notificationv").append(
                       "<div id=\"cc\"><div class=\"timeline-heading\">" + 
                       "<span class=\"badge badge-pill badge-info\">MAERSK</span></div>" + 
-                      "<p>MAERSK paid out a premium of USD 440,000, while the costs spent on claims were USD 110,000. The insured vessels are jointly currently valued at USD 11 mln.<br></p>" +
+                      "<p>MAERSK paid out a premium of USD 1,04 mln, while it posted a gross claims provision of USD 1,5 mln of which USD 800,000 had been paid. The insured vessels are jointly currently valued at USD 11 mln.<br></p>" +
                       "<div class=\"timeline-heading\">" + 
                       "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
-                      "<p>NYK paid out a premium of USD 1 mln, while the costs spent on claims were USD 1,5 mln. The insured vessels are jointly currently valued at USD 10 mln.<br></p>" + 
+                      "<p>NYK paid out a premium of USD 1 mln, while it posted a gross claims provision of USD 750,000 of which USD 500,000 had been paid. The insured vessels are jointly currently valued at USD 10 mln.<br></p>" + 
                       "<div class=\"timeline-heading\">" + 
                       "<span class=\"badge badge-pill badge-info\">APL</span></div>" + 
-                      "<p>APL paid out a premium of USD 702,000, while the costs spent on claims were USD 800,000. The insured vessels are jointly currently valued at USD 23,4 mln.<br></p>" + 
+                      "<p>APL paid out a premium of USD 702,000, while it posted a gross claims provision of USD 551,000 of which USD 351,000 had been paid. The insured vessels are jointly currently valued at USD 23,4 mln.<br></p>" + 
                       "<div class=\"timeline-heading\">" + 
                       "<span class=\"badge badge-pill badge-info\">MSC</span></div>" + 
-                      "<p>MSC paid out a premium of USD 500,000, while the costs spent on claims were USD 560,000. The insured vessels are jointly currently valued at USD 10 mln. </p></div>"
+                      "<p>MSC paid out a premium of USD 1 mln, while it posted a gross claims provision of USD 600,000 of which USD 350,000 had been paid. The insured vessels are jointly currently valued at USD 10 mln.</p></div>"
                     );
                 }
+          else if($("select.selectpicker[value=year]").children("option:selected").val() == "EE"){
+                    $("#aa").remove();
+                    $("#bb").remove();
+                    $("#cc").remove();
+                    $("#dd").remove();
+                    $("#ll").remove();
+                    $("#notificationv").append(
+                      "<div id=\"ee\"><div class=\"timeline-heading\">" + 
+                      "<span class=\"badge badge-pill badge-info\">MAERSK</span></div>" + 
+                      "<p>The total amount of premium paid by MAERSK for two years reached USD 1,56 mln, while gross claims amounted to USD 619,000.<br></p>" +
+                      "<div class=\"timeline-heading\">" + 
+                      "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
+                      "<p>The total amount of premium paid by NYK for two years reached USD 1,7 mln, while gross claims amounted to USD 970,000.<br></p>" + 
+                      "<div class=\"timeline-heading\">" + 
+                      "<span class=\"badge badge-pill badge-info\">APL</span></div>" + 
+                      "<p>The total amount of premium paid by APL for two years reached USD 3,177 mln, while gross claims amounted to USD 2,021 mln.<br></p>" + 
+                      "<div class=\"timeline-heading\">" + 
+                      "<span class=\"badge badge-pill badge-info\">MSC</span></div>" + 
+                      "<p>The total amount of premium paid by MSC for two years reached USD 2,6 mln, while gross claims amounted to USD 2,2 mln.</p></div>"
+                    );
+          }
         }); 
       }); 
           $(document).ready(function(){
@@ -1770,9 +2584,14 @@
                   $("#aa").remove();
                   $("#cc").remove();
                   $("#dd").remove();
+                  $("#ee").remove();
+                  $("#ll").remove();
                   $("#notificationv").append(
                     "<div id=\"bb\"><div class=\"timeline-heading\">" + 
-                    "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
+                    "<span class=\"badge badge-pill badge-info\">2015</span></div>" + 
+                    "<p>In 2015, NYK Lines signed a joint-venture agreement with Ports Development Company (PDC) to establish NYK’s first exclusive RORO terminal operating company at King Abdullah port (KAP) on the Red Sea coast of Saudi Arabia.<br></p>" +
+                    "<div class=\"timeline-heading\">" + 
+                    "<span class=\"badge badge-pill badge-info\">IRAN and IRAQ</span></div>" + 
                     "<p>NYK Lines has reduced the number of zone calls to IRAN and IRAQ regions since the US tightened oil sanctions against Iran.<br></p></div>"
                   );
                 }
@@ -1780,6 +2599,8 @@
                   $("#bb").remove();
                   $("#cc").remove();
                   $("#dd").remove();
+                  $("#ee").remove();
+                  $("#ll").remove();
                   $("#notificationv").append(
                     "<div id=\"aa\"><div class=\"timeline-heading\">" + 
                     "<span class=\"badge badge-pill badge-info\">2015</span></div>" + 
@@ -1787,6 +2608,19 @@
                     "<div class=\"timeline-heading\">" + 
                     "<span class=\"badge badge-pill badge-info\">2017</span></div>" + 
                     "<p>In June 2017, MAERSK found themselves unable to get cargo into Qatar via the Middle East’s primary feeder gateway Jebel Ali Port after Saudi Arabia, Egypt, the United Arab Emirates and Bahrain imposed sanctions on Qatar in a major regional diplomatic dispute. The number of zone calls to East Saudi Arabi reduced significantly.<br></p></div>"
+                  );
+                }
+            else if($(this).children("option:selected").val() == "LL"){
+                  $("#aa").remove();
+                  $("#bb").remove();
+                  $("#cc").remove();
+                  $("#dd").remove();
+                  $("#ee").remove();
+                  $("#notificationv").append(
+                    "<div id=\"ll\"><div class=\"timeline-heading\">" + 
+                    "<span class=\"badge badge-pill badge-info\">Overall</span></div>" + 
+                    "<p>The total number of restricted zone visits by all clients has significantly decreased throughout the reported period.<br></p>" + 
+                    "<p>Shipping companies have been diverting vessels from the area where multiple attacks on vessels were reported and while tensions in the Strait and the Gulf were high.<br></p></div>"
                   );
                 }
           });
@@ -1798,16 +2632,23 @@
                   $("#aa").remove();
                   $("#cc").remove();
                   $("#dd").remove();
+                  $("#ee").remove();
+                  $("#ll").remove();
                   $("#notificationv").append(
                     "<div id=\"bb\"><div class=\"timeline-heading\">" + 
-                    "<span class=\"badge badge-pill badge-info\">NYK</span></div>" + 
+                    "<span class=\"badge badge-pill badge-info\">2015</span></div>" + 
+                    "<p>In 2015, NYK Lines signed a joint-venture agreement with Ports Development Company (PDC) to establish NYK’s first exclusive RORO terminal operating company at King Abdullah port (KAP) on the Red Sea coast of Saudi Arabia.<br></p>" +
+                    "<div class=\"timeline-heading\">" + 
+                    "<span class=\"badge badge-pill badge-info\">IRAN and IRAQ</span></div>" + 
                     "<p>NYK Lines has reduced the number of zone calls to IRAN and IRAQ regions since the US tightened oil sanctions against Iran.<br></p></div>"
-                  );  
+                  );
           }
           else if($("select.selectpicker[value=client]").children("option:selected").val() == "AA"){
                   $("#bb").remove();
                   $("#cc").remove();
                   $("#dd").remove();
+                  $("#ee").remove();
+                  $("#ll").remove();
                   $("#notificationv").append(
                     "<div id=\"aa\"><div class=\"timeline-heading\">" + 
                     "<span class=\"badge badge-pill badge-info\">2015</span></div>" + 
@@ -1817,6 +2658,19 @@
                     "<p>In June 2017, MAERSK found themselves unable to get cargo into Qatar via the Middle East’s primary feeder gateway Jebel Ali Port after Saudi Arabia, Egypt, the United Arab Emirates and Bahrain imposed sanctions on Qatar in a major regional diplomatic dispute. The number of zone calls to East Saudi Arabi reduced significantly.<br></p></div>"
                   );
                 }
+          else if($("select.selectpicker[value=client]").children("option:selected").val() == "LL"){
+                  $("#aa").remove();
+                  $("#bb").remove();
+                  $("#cc").remove();
+                  $("#dd").remove();
+                  $("#ee").remove();
+                  $("#notificationv").append(
+                    "<div id=\"ll\"><div class=\"timeline-heading\">" + 
+                    "<span class=\"badge badge-pill badge-info\">Overall</span></div>" + 
+                    "<p>The total number of restricted zone visits by all clients has significantly decreased throughout the reported period.<br></p>" + 
+                    "<p>Shipping companies have been diverting vessels from the area where multiple attacks on vessels were reported and while tensions in the Strait and the Gulf were high.<br></p></div>"
+                  );
+                }
         }); 
       }); 
     </script>
@@ -1824,175 +2678,178 @@
 <script>
     //valuation chart
     (function chart1(){
-    var speed = 0;
-  
-    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/claim.csv").then(function(data) {
-  
-        chart(data, "CC")
-  
-        d3.selectAll(".selectpicker[value=year]").on("change", function() {
-            speed = 750;
-            chart.update(data, this.value)
-        })
-  
-    });
-  
-    function chart(data, input) {
-  
-        var z = d3.scaleOrdinal()
-            .range(["#99CCFF","#3399FF","#0066CC"]);
-        
-        // Create a tooltip
-        var tip = d3.tip().attr('class', 'd3-tip').direction('e').offset([0,5])
-                .html(function(d) {
-                    return d.value;
-                });
-  
-        var svg = d3.select("#svg1"),
-            margin = {top: 35, right: 35, bottom: 35, left: 35},
-            width = +svg.attr("width") - margin.left - margin.right,
-            height = +svg.attr("height") - margin.top - margin.bottom;
-  
-        var keys = data.columns.slice(1, 4);
-  
-        var x0 = d3.scaleBand()
-            .domain(data.map(d => d.State))
-            .range([margin.left, width - margin.right])
-            .padding(0.1);
-  
-        var x1 = d3.scaleBand()
-            .domain(keys)
-            .rangeRound([0, x0.bandwidth()]);
-  
-        var y = d3.scaleLinear()
-            .range([height, margin.top]);
-  
-        svg.append("g")
-            .attr("class", "x-axis");
-  
-        svg.append("g")
-          .attr("class", "y-axis");
+      var speed = 0;
+
+      d3.csv("https://raw.githubusercontent.com/nataliaokuneva/data_vessel/master/claim.csv").then(function(data) {
+
+          chart(data, "CC")
+          //change .selectpicker[value=year]
+          d3.selectAll(".selectpicker[value=year]").on("change", function() {
+              speed = 750;
+              chart.update(data, this.value)
+          })
+
+      });
+
+      function chart(data, input) {
+
+          var z = d3.scaleOrdinal()
+              .range(["#003366","#99CCFF","#3399FF","#0066CC"]);
           
-  
-        // Handmade legend
-        svg.append("rect").attr("x",width-135).attr("y",height-417).attr("width", 13).attr('height', 13).style("fill", "#99CCFF")
-        svg.append("rect").attr("x",width-135).attr("y",height-402).attr("width", 13).attr('height', 13).style("fill", "#3399FF")
-        svg.append("rect").attr("x",width-135).attr("y",height-387).attr("width", 13).attr('height', 13).style("fill", "#0066CC")
-  
-        svg.append("text").attr("x", width-115).attr("y", height-410).text("Valuation, USD").style("font-size", "15px").attr("alignment-baseline","middle")
-        svg.append("text").attr("x", width-115).attr("y", height-394).text("Premium, USD").style("font-size", "15px").attr("alignment-baseline","middle")
-        svg.append("text").attr("x", width-115).attr("y", height-378).text("Claim, USD").style("font-size", "15px").attr("alignment-baseline","middle")
-  
-        var xAxis = g => g
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x0)
-                .tickSizeOuter(0))
-  
-        var yAxis = g => g
-            .attr("transform", 
-                "translate(" + margin.left + ",0)")
-            .call(d3.axisLeft(y).ticks(null, "s"))
-  
-        svg.call(tip);
-  
-        update(data, input);
-  
-        function update(data, input) {
-  
-            var copy = [];
-  
-            keys.forEach(function(t) {
-                t = t.slice(0, -2)
-                copy.push(t)
-            })
-  
-            y.domain([0, d3.max(data, function(d) {
-                return d3.max(copy, function(key) {
-                    return d3.sum([d[key + input]])
-                }); 
-            })]).nice();
-  
-            var barGroups = svg.selectAll(".layer")
-                .data(data, d => d.State);
-  
-            barGroups.exit().remove();
-  
-            barGroups.enter().append("g")
-                .classed('layer', true);
-  
-            svg.selectAll(".layer").transition().duration(speed)
-                .attr("transform", function(d, i) {
-                    return "translate(" + x0(d.State) + ",0)";
-                });
-  
-            var bars = svg.selectAll(".layer").selectAll(".bars")
-                .data(function(d) { 
-                    return copy.map(function(key) {
-                        return {key: key + input, value: d[key + input]}; 
-                    }); 
-                });
-  
-            bars = bars
-                .enter()
-            .append("rect")
-                .attr("class", "bars")
-                .attr("x", d => x1(d.key))
-                .attr("width", x1.bandwidth())
-                .attr("fill", d => z(d.key))
-                .merge(bars);
-  
-            bars.transition().duration(speed)
-                .attr("height", d => height - y(d["value"]))
-                .attr("y", d => y(d.value))
-  
-            svg.selectAll(".x-axis").transition().duration(speed)
-                .call(xAxis);
+          // Create a tooltip
+          var tip = d3.tip().attr('class', 'd3-tip').direction('e').offset([0,5])
+                  .html(function(d) {
+                      return d.value;
+                  });
+          //change svg id
+          var svg = d3.select("#svg1"),
+              margin = {top: 35, right: 35, bottom: 35, left: 35},
+              width = +svg.attr("width") - margin.left - margin.right,
+              height = +svg.attr("height") - margin.top - margin.bottom;
+
+          var keys = data.columns.slice(1, 5, 9);
+
+          var x0 = d3.scaleBand()
+              .domain(data.map(d => d.State))
+              .range([margin.left, width - margin.right])
+              .padding(0.1);
+
+          var x1 = d3.scaleBand()
+              .domain(keys)
+              .rangeRound([0, x0.bandwidth()]);
+
+          var y = d3.scaleLinear()
+              .range([height, margin.top]);
+
+          svg.append("g")
+              .attr("class", "x-axis");
+
+          svg.append("g")
+            .attr("class", "y-axis");
             
-            svg.selectAll(".y-axis").transition().duration(speed)
-                .call(yAxis);
-  
-            svg.call(zoom);
-  
-  
-            function zoom(group) {
-            
-                var extent = [
-                    [margin.left, margin.top], 
-                    [width - margin.right, height - margin.top]
-                ];
-                
-                group.call(d3.zoom()
-                    .scaleExtent([1, 2])
-                    .translateExtent(extent)
-                    .extent(extent)
-                    .on("zoom", zoomed));
-                
-                function zoomed() {
-            
-                    x0.range(
-                        [margin.left, width - margin.right]
-                        .map(d => d3.event.transform.applyX(d)));
-                    x1.rangeRound([0, x0.bandwidth()]);
-            
-                    group.selectAll(".layer")
-                        .attr("transform", function(d) { 
-                            return "translate(" + x0(d.State) + ",0)"; 
-                        });
-                    group.selectAll(".bars")
-                        .attr("x", function(d) { 
-                            return x1(d.key)
-                        })
-                        .attr("width", x1.bandwidth());
-            
-                    group.selectAll(".x-axis")
-                        .call(xAxis);
-                }
-            }
-  
-        }
-  
-        chart.update = update;   
-    };
+
+          // Handmade legend
+          svg.append("rect").attr("x",width-165).attr("y",height-417).attr("width", 13).attr('height', 13).style("fill", "#003366")
+          svg.append("rect").attr("x",width-165).attr("y",height-402).attr("width", 13).attr('height', 13).style("fill", "#99CCFF")
+          svg.append("rect").attr("x",width-165).attr("y",height-387).attr("width", 13).attr('height', 13).style("fill", "#3399FF")
+          svg.append("rect").attr("x",width-165).attr("y",height-372).attr("width", 13).attr('height', 13).style("fill", "#0066CC")
+
+
+          svg.append("text").attr("x", width-145).attr("y", height-410).text("Valuation, USD").style("font-size", "15px").attr("alignment-baseline","middle")
+          svg.append("text").attr("x", width-145).attr("y", height-394).text("Premium, USD").style("font-size", "15px").attr("alignment-baseline","middle")
+          svg.append("text").attr("x", width-145).attr("y", height-378).text("Claims paid, USD").style("font-size", "15px").attr("alignment-baseline","middle")
+          svg.append("text").attr("x", width-145).attr("y", height-362).text("Claims outstanding, USD").style("font-size", "15px").attr("alignment-baseline","middle")
+
+          var xAxis = g => g
+              .attr("transform", "translate(0," + height + ")")
+              .call(d3.axisBottom(x0)
+                  .tickSizeOuter(0))
+
+          var yAxis = g => g
+              .attr("transform", 
+                  "translate(" + margin.left + ",0)")
+              .call(d3.axisLeft(y).ticks(null, "s"))
+
+          svg.call(tip);
+
+          update(data, input);
+
+          function update(data, input) {
+
+              var copy = [];
+
+              keys.forEach(function(t) {
+                  t = t.slice(0, -2)
+                  copy.push(t)
+              })
+
+              y.domain([0, d3.max(data, function(d) {
+                  return d3.max(copy, function(key) {
+                      return d3.sum([d[key + input]])
+                  }); 
+              })]).nice();
+
+              var barGroups = svg.selectAll(".layer")
+                  .data(data, d => d.State);
+
+              barGroups.exit().remove();
+
+              barGroups.enter().append("g")
+                  .classed('layer', true);
+
+              svg.selectAll(".layer").transition().duration(speed)
+                  .attr("transform", function(d, i) {
+                      return "translate(" + x0(d.State) + ",0)";
+                  });
+
+              var bars = svg.selectAll(".layer").selectAll(".bars")
+                  .data(function(d) { 
+                      return copy.map(function(key) {
+                          return {key: key + input, value: d[key + input]}; 
+                      }); 
+                  });
+
+              bars = bars
+                  .enter()
+              .append("rect")
+                  .attr("class", "bars")
+                  .attr("x", d => x1(d.key))
+                  .attr("width", x1.bandwidth())
+                  .attr("fill", d => z(d.key))
+                  .merge(bars);
+
+              bars.transition().duration(speed)
+                  .attr("height", d => height - y(d["value"]))
+                  .attr("y", d => y(d.value))
+
+              svg.selectAll(".x-axis").transition().duration(speed)
+                  .call(xAxis);
+              
+              svg.selectAll(".y-axis").transition().duration(speed)
+                  .call(yAxis);
+
+              svg.call(zoom);
+
+
+              function zoom(group) {
+              
+                  var extent = [
+                      [margin.left, margin.top], 
+                      [width - margin.right, height - margin.top]
+                  ];
+                  
+                  group.call(d3.zoom()
+                      .scaleExtent([1, 2])
+                      .translateExtent(extent)
+                      .extent(extent)
+                      .on("zoom", zoomed));
+                  
+                  function zoomed() {
+              
+                      x0.range(
+                          [margin.left, width - margin.right]
+                          .map(d => d3.event.transform.applyX(d)));
+                      x1.rangeRound([0, x0.bandwidth()]);
+              
+                      group.selectAll(".layer")
+                          .attr("transform", function(d) { 
+                              return "translate(" + x0(d.State) + ",0)"; 
+                          });
+                      group.selectAll(".bars")
+                          .attr("x", function(d) { 
+                              return x1(d.key)
+                          })
+                          .attr("width", x1.bandwidth());
+              
+                      group.selectAll(".x-axis")
+                          .call(xAxis);
+                  }
+              }
+
+          }
+
+          chart.update = update;   
+      };
   }())
       </script>
 
@@ -2004,7 +2861,7 @@
     d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/zonesdata.csv").then(function(data) {
 
         chart(data, "AA")
-
+        //change .selectpicker[value=client]
         d3.selectAll(".selectpicker[value=client]").on("change", function() {
             speed = 750;
             chart.update(data, this.value)
@@ -2016,14 +2873,14 @@
 
         var z = d3.scaleOrdinal()
             .range(["#ca0020","#f4a582","#d5d5d5","#92c5de","#0571b0"]);
-
+        //change svg id
         var svg = d3.select("#svg2"),
             margin = {top: 35, right: 35, bottom: 35, left: 35},
             width = +svg.attr("width") - margin.left - margin.right,
             height = +svg.attr("height") - margin.top - margin.bottom;
 
-        var keys = data.columns.slice(1, 6);
-        
+        var keys = data.columns.slice(1, 6, 11);
+
         var x0 = d3.scaleBand()
             .domain(data.map(d => d.State))
             .range([margin.left, width - margin.right])
@@ -2160,7 +3017,7 @@
         }
 
         chart.update = update;   
-    };
+        };
   }())
   </script>
   
