@@ -1058,7 +1058,7 @@
                       <h4 class="card-title">
                           <div class="form-check">
                               <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" value="">Show weather
+                                <input class="form-check-input" type="checkbox" value="weather" id="weather" onclick="ShowWeather()">Show weather
                                 <span class="form-check-sign">
                                   <span class="check"></span>
                                 </span>
@@ -1685,6 +1685,44 @@
                       map.entities.push(line);
                     });
                     
+                    map.setView ({
+                        center: new Microsoft.Maps.Location(12.23666, 60.72469),
+                        zoom: 10
+                      });
+
+                    //Create custom Pushpin current location for the vessel
+                    var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(12.23666, 60.92469),
+                    {
+                      icon: 'assets/img/vesselinVincity.png',
+                    });
+
+                    //Add the pushpin to the map
+                    map.entities.push(pin);
+
+                    var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(12.03666, 60.72469),
+                    {
+                      icon: 'assets/img/vesselinVincity.png',
+                    });
+
+                    //Add the pushpin to the map
+                    map.entities.push(pin);
+                    
+                    //Load the spatial math module
+                    Microsoft.Maps.loadModule("Microsoft.Maps.SpatialMath", function () {
+                        var center = map.getCenter();
+                        //Create an accuracy circle
+                        var circle = createCircle(center, 17, 'rgba(0,0,150,0.3)');
+                        map.entities.push(circle);
+
+                        //Create a blue circle that has a 10 pixel radius as a pushpin and add to map.
+                        var labelPin = createCirclePushpin(new Microsoft.Maps.Location(12.23666, 60.72469), 10, 'rgba(0,0,150,0.1)');
+
+                        //Store a reference to the label pushpin in the polygon metadata.
+                        circle.metadata = { label: labelPin };    
+
+                        //Add the label pushpin to the map.
+                        map.entities.push(labelPin);
+                        });
 
                   } else {
                     for (var i = map.entities.getLength() - 1; i >= 0; i--) {
@@ -1700,6 +1738,28 @@
                     }
                   }
                 }
+
+                function createCircle(center, radius, color) {
+                  //Calculate the locations for a regular polygon that has 36 locations which will rssult in an approximate circle.
+                    var locs = Microsoft.Maps.SpatialMath.getRegularPolygon(center, radius, 36, Microsoft.Maps.SpatialMath.DistanceUnits.Miles);
+                    polygon = new Microsoft.Maps.Polygon(locs, { fillColor: color, strokeThickness: 1 });
+                    return polygon;
+                  }  
+                function createCirclePushpin(location, radius, fillColor, strokeColor, strokeWidth) {
+                      strokeWidth = strokeWidth || 0;
+
+                  //Create an SVG string of a circle with the specified radius and color.
+                    var svg = ['<svg xmlns="http://www.w3.org/2000/svg" width="', (radius * 2),
+                    '" height="', (radius * 2), '"><circle cx="', radius, '" cy="', radius, '" r="',
+                    (radius - strokeWidth), '" stroke="', strokeColor, '" stroke-width="', strokeWidth, '" fill="', fillColor, '"/></svg>'];
+
+                  //Create a pushpin from the SVG and anchor it to the center of the circle.
+                    return new Microsoft.Maps.Pushpin(location, {
+                    icon: svg.join(''),
+                    anchor: new Microsoft.Maps.Point(radius, radius),
+                    title: "100M"
+                    });
+                  }
 
                 function GetKimiPlannedRoute() {
                 // Get the checkbox
@@ -1913,6 +1973,37 @@
               });
 
                 
+              } else {
+                  for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                      var polyline = map.entities.get(i);
+                        if (polyline instanceof Microsoft.Maps.Polyline) {
+                            map.entities.removeAt(i);
+                        }
+                      var pushpin = map.entities.get(i);
+                        if (pushpin instanceof Microsoft.Maps.Pushpin) {
+                            map.entities.removeAt(i);
+                        }
+                  }
+          }
+      }
+                function ShowWeather() {
+                // Get the checkbox
+                var checkBox = document.getElementById("weather");
+
+                // If the checkbox is checked, display the output text
+                if (checkBox.checked == true){
+                  // Custom tiles of Hurricane Katrina for zoom level 1-10
+                  var katrinaTileSource = new Microsoft.Maps.TileSource({
+                      uriConstructor: 'https://bingmapsisdk.blob.core.windows.net/katrinatiles/{quadkey}.png',
+                      minZoom: 1,
+                      maxZoom: 10,
+                      bounds: Microsoft.Maps.LocationRect.fromEdges(18.808553, 58.048618, -2.357447, 37.341618)
+                  });
+                  var katrinaTileLayer = new Microsoft.Maps.TileLayer({
+                      mercator: katrinaTileSource,
+                  });
+                  map.layers.insert(katrinaTileLayer);
+                  
               } else {
                   for (var i = map.entities.getLength() - 1; i >= 0; i--) {
                       var polyline = map.entities.get(i);

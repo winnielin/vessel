@@ -4,15 +4,14 @@
 
 ### Fleet Page  
 
-1. on the map -> show one vessel in vincity with a circle that labeled the value of these vessels (maybe 3)  
-2. show weather info - implement a tile layer to the map (weather radar map)  
-3. fake dropdown list - CustomOverlay Class (ref:https://www.shipmap.org)  
+1. show weather info - implement a tile layer to the map (weather radar map)  
+2. fake dropdown list - CustomOverlay Class (ref:https://www.shipmap.org)  
   
-4. planned vessel event button function - (approval & reject, additional premium)  
-5. actual vessel event - clear map  
-6. remove specific polygons -> layer?  
-7. a block with political and piracy events  
-8. how to use zone entry & exit data?  
+3. planned vessel event button function - (approval & reject, additional premium)  
+4. actual vessel event - clear map  
+5. remove specific polygons -> layer?  
+6. a block with political and piracy events  
+7. how to use zone entry & exit data?  
 
 ### d3.js chart block
 
