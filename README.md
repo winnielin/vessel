@@ -29,18 +29,21 @@
   
 3. Working process - user interface 1400 (8/9)  
 3-1 Developing tools used & considered 400  
-    -bing maps API or SDK  
     -html or power BI  
-    -front-end framework - bootstrap, react, vue  
-    -UX design  
+    -bing maps API or SDK and d3.js  
+    -front-end framework - bootstrap, react, vue
 3-2 Fleet Page 500  
-    -How it works  
+    -what to deliver  
     -data selection  
+    -UX design
     -result  
+    -to improve/ link to subject area
 3-3 Vessel Page 500  
-    -How it works  
+    -what to deliver  
     -data selection  
+    -UX design
     -result  
+    -to improve/ link to subject area 
   
 4. Reflection 400 (8/11)  
 4-1 project (what you learned during the project) 200  
@@ -54,6 +57,7 @@
     -actual webpage development -local server or github  
 4-2 interaction with industry partner (the relation between the academic programme and the project) 200  
     -slack  
+    -difficulties in developing
 
 5. Conclusion 400 (8/11)  
 
