@@ -30,14 +30,14 @@
 3. Working process - user interface 1400 (8/9)  
 3-1 Developing tools used & considered 400  
     -html or power BI  
-    -bing maps API or SDK and d3.js  
-    -front-end framework - bootstrap, react, vue
+    -bing maps API and d3.js  
+    -front-end framework - bootstrap, react, vue  
 3-2 Fleet Page 500  
     -what to deliver  
     -data selection  
     -UX design
     -result  
-    -to improve/ link to subject area
+    -to improve/ link to subject area  
 3-3 Vessel Page 500  
     -what to deliver  
     -data selection  
