@@ -18,7 +18,7 @@
       --Data Discovery (Collection, cleaning & mining) & difficulty  
       --Production Solution  
 
-2. Subject area - visualisation helping decision making 1400 (8/10)  
+2. Subject area - visualisation helping decision making 1400 (8/12)  
 2-1 What is data visualisation? Why use? 200  
     -different kind of visualisation  
     -the use in business area  
@@ -27,25 +27,24 @@
     -analysis  
 2-3 future development 200  
   
-3. Working process - user interface 1400 (8/9)  
+3. Working process - user interface 1400  
 3-1 Developing tools used & considered 400  
     -html or power BI  
     -bing maps API and d3.js  
     -front-end framework - bootstrap, react, vue  
-3-2 Fleet Page 500  
-    -what to deliver  
-    -data selection  
-    -UX design
-    -result  
+3-2 Fleet Page 550  
+    -what to deliver 100  
+    -data selection 150  
+    -UI design 100  
+    -result 200  
     -to improve/ link to subject area  
-3-3 Vessel Page 500  
-    -what to deliver  
-    -data selection  
-    -UX design
-    -result  
+3-3 Vessel Page 450  
+    -what to deliver 100  
+    -data selection 150  
+    -result 150  
     -to improve/ link to subject area 
   
-4. Reflection 400 (8/11)  
+4. Reflection 400 (8/13)  
 4-1 project (what you learned during the project) 200  
     -project management  
     -brainstorming  
@@ -59,7 +58,7 @@
     -slack  
     -difficulties in developing
 
-5. Conclusion 400 (8/11)  
+5. Conclusion 400 (8/13)  
 
 ## Coding To Do
 
