@@ -32,16 +32,16 @@
     -html or power BI  
     -bing maps API and d3.js  
     -front-end framework - bootstrap, react, vue  
-3-2 Fleet Page 550  
+3-2 Fleet Page 600  
     -what to deliver 100  
     -data selection 150  
     -UI design 100  
     -result 200  
-    -to improve/ link to subject area  
-3-3 Vessel Page 450  
+    -to improve/ link to subject area ??  
+3-3 Vessel Page 400  
     -what to deliver 100  
     -data selection 150  
-    -result 150  
+    -result 100  
     -to improve/ link to subject area 
   
 4. Reflection 400 (8/13)  
@@ -49,11 +49,12 @@
     -project management  
     -brainstorming  
     -persona  
-    -story boarding  
+    -storyboarding  
     -use case  
     -scenario  
     -hypothesis  
-    -actual webpage development -local server or github  
+    -actual webpage development  
+    -local server or Github  
 4-2 interaction with industry partner (the relation between the academic programme and the project) 200  
     -slack  
     -difficulties in developing
