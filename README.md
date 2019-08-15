@@ -18,22 +18,22 @@
       --Data Discovery (Collection, cleaning & mining) & difficulty  
       --Production Solution  
 
-2. Subject area - visualisation helping decision making 1200 (8/14)  
-2-1 What is data visualisation? Why use? 200  
-    -different kind of visualisation 100   
+2. Subject area - visualisation helping decision making 1100  
+2-1 What is data visualisation? Why use? 150  
+    -different kind of visualisation 50   
     -the use in the business area 100  
     (the importance of using the notification to transmit information to the user then to make value)  
-2-2 Current status of visualisation in marine area 800  
+2-2 Current status of visualisation in marine area 850  
     -AIS data 100   
     -weather visualisation 100  
-    -some websites pros and cons (BigOceanData & MarineTraffic) 150  
+    -some websites pros and cons (BigOceanData & MarineTraffic) 200  
     -big data + visualisation 150  
     -situational awareness 100  
     -the detection of anomalous maritime behaviour 100  
     -fleet management 100  
-2-3 future development 200  
-    -4D 100  
-    -conclusion 100  
+2-3 future development 100  
+    -4D 50  
+    -conclusion 50  
     
 3. Working process - user interface 1500  
 3-1 Developing tools used & considered 400  
@@ -52,7 +52,7 @@
     -result 350  
     -to improve/ link to subject area ??  
   
-4. Reflection 400 (8/15)  
+4. Reflection 300  
 4-1 project (what you learned during the project) 200  
     -project management  
     -brainstorming  
@@ -63,11 +63,12 @@
     -hypothesis  
     -actual webpage development  
     -local server or Github  
-4-2 interaction with industry partner (the relation between the academic programme and the project) 200  
+4-2 interaction with industry partner 100  
+    (the relation between the academic programme and the project)  
     -slack  
     -difficulties in developing
 
-5. Conclusion 300 (8/15)  
+5. Conclusion 300  
 
 ## Coding To Do
 
