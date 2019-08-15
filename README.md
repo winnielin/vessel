@@ -18,19 +18,18 @@
       --Data Discovery (Collection, cleaning & mining) & difficulty  
       --Production Solution  
 
-2. Subject area - visualisation helping decision making 1100  
+2. Subject area - visualisation helping decision making 1000  
 2-1 What is data visualisation? Why use? 150  
     -different kind of visualisation 50   
     -the use in the business area 100  
     (the importance of using the notification to transmit information to the user then to make value)  
-2-2 Current status of visualisation in marine area 850  
+2-2 Current status of visualisation in marine area 750  
     -AIS data 100   
     -weather visualisation 100  
     -some websites pros and cons (BigOceanData & MarineTraffic) 200  
     -big data + visualisation 150  
-    -situational awareness 100  
-    -the detection of anomalous maritime behaviour 100  
-    -fleet management 100  
+    -situational awareness 50  
+    -the detection of anomalous maritime behaviour 150  
 2-3 future development 100  
     -4D 50  
     -conclusion 50  
@@ -52,7 +51,7 @@
     -result 350  
     -to improve/ link to subject area ??  
   
-4. Reflection 300  
+4. Reflection 400  
 4-1 project (what you learned during the project) 200  
     -project management  
     -brainstorming  
