@@ -2,7 +2,7 @@
 
 ## Report
 
-### Individual Report 4000
+### Individual Report 3600
 
 1. Intro 400  
 1-1 Big data & blockchain (Hook + Technical area) 100  
@@ -18,7 +18,7 @@
       --Data Discovery (Collection, cleaning & mining) & difficulty  
       --Production Solution  
 
-2. Subject area - visualisation helping decision making 1000  
+2. Subject area - Data visualisation on helping decision making 1000  
 2-1 What is data visualisation? Why use? 150  
     -different kind of visualisation 50   
     -the use in the business area 100  
