@@ -2970,144 +2970,144 @@
             width = +svg.attr("width") - margin.left - margin.right,
             height = +svg.attr("height") - margin.top - margin.bottom;
 
-        var keys = data.columns.slice(1, 6, 11);
+            var keys = data.columns.slice(1, 6, 11);
+    
+            var x0 = d3.scaleBand()
+                .domain(data.map(d => d.State))
+                .range([margin.left, width - margin.right])
+                .padding(0.1);
 
-        var x0 = d3.scaleBand()
-            .domain(data.map(d => d.State))
-            .range([margin.left, width - margin.right])
-            .padding(0.1);
+            var x1 = d3.scaleBand()
+                .domain(keys)
+                .rangeRound([0, x0.bandwidth()]);
 
-        var x1 = d3.scaleBand()
-            .domain(keys)
-            .rangeRound([0, x0.bandwidth()]);
+            var y = d3.scaleLinear()
+                .range([height, margin.top]);
 
-        var y = d3.scaleLinear()
-            .range([height, margin.top]);
+            svg.append("g")
+                .attr("class", "x-axis");
 
-        svg.append("g")
-            .attr("class", "x-axis");
+            svg.append("g")
+              .attr("class", "y-axis");
 
-        svg.append("g")
-          .attr("class", "y-axis");
+            // Handmade legend
+            svg.append("rect").attr("x",width-135).attr("y",height-417).attr("width", 13).attr('height', 13).style("fill", "#ca0020")
+            svg.append("rect").attr("x",width-135).attr("y",height-402).attr("width", 13).attr('height', 13).style("fill", "#f4a582")
+            svg.append("rect").attr("x",width-135).attr("y",height-387).attr("width", 13).attr('height', 13).style("fill", "#d5d5d5")
+            svg.append("rect").attr("x",width-135).attr("y",height-372).attr("width", 13).attr('height', 13).style("fill", "#92c5de")
+            svg.append("rect").attr("x",width-135).attr("y",height-357).attr("width", 13).attr('height', 13).style("fill", "#0571b0")
+            svg.append("text").attr("x", width-115).attr("y", height-410).text("IRAN").style("font-size", "12px").attr("alignment-baseline","middle")
+            svg.append("text").attr("x", width-115).attr("y", height-394).text("IRAQ").style("font-size", "12px").attr("alignment-baseline","middle")
+            svg.append("text").attr("x", width-115).attr("y", height-378).text("BENIN").style("font-size", "12px").attr("alignment-baseline","middle")
+            svg.append("text").attr("x", width-115).attr("y", height-363).text("KHOR").style("font-size", "12px").attr("alignment-baseline","middle")
+            svg.append("text").attr("x", width-115).attr("y", height-348).text("TTW").style("font-size", "12px").attr("alignment-baseline","middle")
 
-        // Handmade legend
-        svg.append("rect").attr("x",width-135).attr("y",height-417).attr("width", 13).attr('height', 13).style("fill", "#ca0020")
-        svg.append("rect").attr("x",width-135).attr("y",height-402).attr("width", 13).attr('height', 13).style("fill", "#f4a582")
-        svg.append("rect").attr("x",width-135).attr("y",height-387).attr("width", 13).attr('height', 13).style("fill", "#d5d5d5")
-        svg.append("rect").attr("x",width-135).attr("y",height-372).attr("width", 13).attr('height', 13).style("fill", "#92c5de")
-        svg.append("rect").attr("x",width-135).attr("y",height-357).attr("width", 13).attr('height', 13).style("fill", "#0571b0")
-        svg.append("text").attr("x", width-115).attr("y", height-410).text("IRAN").style("font-size", "12px").attr("alignment-baseline","middle")
-        svg.append("text").attr("x", width-115).attr("y", height-394).text("IRAQ").style("font-size", "12px").attr("alignment-baseline","middle")
-        svg.append("text").attr("x", width-115).attr("y", height-378).text("BENIN").style("font-size", "12px").attr("alignment-baseline","middle")
-        svg.append("text").attr("x", width-115).attr("y", height-363).text("KHOR").style("font-size", "12px").attr("alignment-baseline","middle")
-        svg.append("text").attr("x", width-115).attr("y", height-348).text("TTW").style("font-size", "12px").attr("alignment-baseline","middle")
+            var xAxis = g => g
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x0)
+                    .tickSizeOuter(0))
 
-        var xAxis = g => g
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x0)
-                .tickSizeOuter(0))
+            var yAxis = g => g
+                .attr("transform", 
+                    "translate(" + margin.left + ",0)")
+                .call(d3.axisLeft(y).ticks(null, "s"))
 
-        var yAxis = g => g
-            .attr("transform", 
-                "translate(" + margin.left + ",0)")
-            .call(d3.axisLeft(y).ticks(null, "s"))
+            update(data, input);
 
-        update(data, input);
+            function update(data, input) {
 
-        function update(data, input) {
+                var copy = [];
 
-            var copy = [];
+                keys.forEach(function(t) {
+                    t = t.slice(0, -2)
+                    copy.push(t)
+                })
 
-            keys.forEach(function(t) {
-                t = t.slice(0, -2)
-                copy.push(t)
-            })
-
-            y.domain([0, d3.max(data, function(d) {
-                return d3.max(copy, function(key) {
-                    return d3.sum([d[key + input]])
-                }); 
-            })]).nice();
-
-            var barGroups = svg.selectAll(".layer")
-                .data(data, d => d.State);
-
-            barGroups.exit().remove();
-
-            barGroups.enter().append("g")
-                .classed('layer', true);
-
-            svg.selectAll(".layer").transition().duration(speed)
-                .attr("transform", function(d, i) {
-                    return "translate(" + x0(d.State) + ",0)";
-                });
-
-            var bars = svg.selectAll(".layer").selectAll(".bars")
-                .data(function(d) { 
-                    return copy.map(function(key) {
-                        return {key: key + input, value: d[key + input]}; 
+                y.domain([0, d3.max(data, function(d) {
+                    return d3.max(copy, function(key) {
+                        return d3.sum([d[key + input]])
                     }); 
-                });
+                })]).nice();
 
-            bars = bars
-                .enter()
-            .append("rect")
-                .attr("class", "bars")
-                .attr("x", d => x1(d.key))
-                .attr("width", x1.bandwidth())
-                .attr("fill", d => z(d.key))
-                .merge(bars);
+                var barGroups = svg.selectAll(".layer")
+                    .data(data, d => d.State);
 
-            bars.transition().duration(speed)
-                .attr("height", d => height - y(d["value"]))
-                .attr("y", d => y(d.value))
+                barGroups.exit().remove();
 
-            svg.selectAll(".x-axis").transition().duration(speed)
-                .call(xAxis);
-            
-            svg.selectAll(".y-axis").transition().duration(speed)
-                .call(yAxis);
+                barGroups.enter().append("g")
+                    .classed('layer', true);
 
-            svg.call(zoom);
+                svg.selectAll(".layer").transition().duration(speed)
+                    .attr("transform", function(d, i) {
+                        return "translate(" + x0(d.State) + ",0)";
+                    });
 
-            function zoom(group) {
-            
-                var extent = [
-                    [margin.left, margin.top], 
-                    [width - margin.right, height - margin.top]
-                ];
+                var bars = svg.selectAll(".layer").selectAll(".bars")
+                    .data(function(d) { 
+                        return copy.map(function(key) {
+                            return {key: key + input, value: d[key + input]}; 
+                        }); 
+                    });
+
+                bars = bars
+                    .enter()
+                .append("rect")
+                    .attr("class", "bars")
+                    .attr("x", d => x1(d.key))
+                    .attr("width", x1.bandwidth())
+                    .attr("fill", d => z(d.key))
+                    .merge(bars);
+
+                bars.transition().duration(speed)
+                    .attr("height", d => height - y(d["value"]))
+                    .attr("y", d => y(d.value))
+
+                svg.selectAll(".x-axis").transition().duration(speed)
+                    .call(xAxis);
                 
-                group.call(d3.zoom()
-                    .scaleExtent([1, 2])
-                    .translateExtent(extent)
-                    .extent(extent)
-                    .on("zoom", zoomed));
+                svg.selectAll(".y-axis").transition().duration(speed)
+                    .call(yAxis);
+
+                svg.call(zoom);
+
+                function zoom(group) {
                 
-                function zoomed() {
-            
-                    x0.range(
-                        [margin.left, width - margin.right]
-                        .map(d => d3.event.transform.applyX(d)));
-                    x1.rangeRound([0, x0.bandwidth()]);
-            
-                    group.selectAll(".layer")
-                        .attr("transform", function(d) { 
-                            return "translate(" + x0(d.State) + ",0)"; 
-                        });
-                    group.selectAll(".bars")
-                        .attr("x", function(d) { 
-                            return x1(d.key)
-                        })
-                        .attr("width", x1.bandwidth());
-            
-                    group.selectAll(".x-axis")
-                        .call(xAxis);
+                    var extent = [
+                        [margin.left, margin.top], 
+                        [width - margin.right, height - margin.top]
+                    ];
+                    
+                    group.call(d3.zoom()
+                        .scaleExtent([1, 2])
+                        .translateExtent(extent)
+                        .extent(extent)
+                        .on("zoom", zoomed));
+                    
+                    function zoomed() {
+                
+                        x0.range(
+                            [margin.left, width - margin.right]
+                            .map(d => d3.event.transform.applyX(d)));
+                        x1.rangeRound([0, x0.bandwidth()]);
+                
+                        group.selectAll(".layer")
+                            .attr("transform", function(d) { 
+                                return "translate(" + x0(d.State) + ",0)"; 
+                            });
+                        group.selectAll(".bars")
+                            .attr("x", function(d) { 
+                                return x1(d.key)
+                            })
+                            .attr("width", x1.bandwidth());
+                
+                        group.selectAll(".x-axis")
+                            .call(xAxis);
+                    }
                 }
+
             }
 
-        }
-
-        chart.update = update;   
+            chart.update = update;   
         };
   }())
   </script>

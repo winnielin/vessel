@@ -271,7 +271,7 @@
                         </div>
                         <div class="form-check">
                           <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="vincity" id="defaultCheck4" onclick="GetVesselinVincity()"> Vessels in the Vicinity (15 miles)
+                            <input class="form-check-input" type="checkbox" value="vicinity" id="defaultCheck4" onclick="GetVesselinVicinity()"> Vessels in the Vicinity (15 miles)
                               <span class="form-check-sign">
                                 <span class="check"></span>
                               </span>
@@ -688,7 +688,7 @@
               <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
 
               <script>
-                var map, polygons;
+                var map, polygons, initialLayer, plannedLayer, heatmap, zoneLayer, vicinityLayer;
             
                 function GetMap() {
                     map = new Microsoft.Maps.Map('#myMap', {
@@ -702,24 +702,31 @@
                     //     var layer = new Microsoft.Maps.GeoXmlLayer('http://geo.vliz.be/geoserver/wms?request=GetMap&service=wms&version=1.1.1&srs=EPSG:4326&layers=MarineRegions:iho&width=800&height=207&bbox=102.238472104104,-3.22872316782812,122.151298801884,25.5672843458959&styles=gazetteer_red&Format=KML&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Eid%3C%2FPropertyName%3E%3CLiteral%3E49%3C%2FLiteral%3E%3C%2FPropertyIsEqualTo%3E');
                     //     map.layers.insert(layer);
                     // });
-                    
+
+                    initialLayer = new Microsoft.Maps.Layer("InitialLayer");
                     
                     //Create custom Pushpin current location for the vessel
                     var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(25.90372,56.8122),
                     {
                       icon: 'assets/img/vesselCurrentLoc.png',
                     });
-            
+                    
+                    initialLayer.add(pin);
                     //Add the pushpin to the map
-                    map.entities.push(pin);
+
+                    map.layers.insert(initialLayer);
+                    // map.entities.push(pin);
                 }
+
                 function GetPlannedRoute() {
                 // console.log(document.getElementById("vesselName").title);
                 // Get the checkbox
-               var checkBox = document.getElementById("defaultCheck1");
+                var checkBox = document.getElementById("defaultCheck1");
           
                 // If the checkbox is checked, display the output text
                 if (checkBox.checked == true){
+                  plannedLayer = new Microsoft.Maps.Layer("plannedLayer");
+
                   d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherPlanned.csv")
                   .then(function(data) {
                   var list = [];
@@ -733,7 +740,8 @@
                       strokeColor: 'blue',
                       strokeThickness: 2,
                   });
-                  map.entities.push(line);
+                  
+                  plannedLayer.add(line);
               });
 
                 //Create custom Pushpin for ports
@@ -748,20 +756,27 @@
                       // subTitle: data[i].Port_Name,
                       // text: data[i].Voyage + " Leg " + data[i].Leg
                       });
-                      map.entities.push(pin);
+                      plannedLayer.add(pin);
                     }
                   });
+
+                  map.layers.insert(plannedLayer);
+
               } else {
-                  for (var i = map.entities.getLength() - 1; i >= 0; i--) {
-                      var polyline = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Polyline) {
-                            map.entities.removeAt(i);
-                        }
-                      var polyline = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Pushpin) {
-                            map.entities.removeAt(i);
-                        }
+                  // for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                  //     var polyline = map.entities.get(i);
+                  //       if (polyline instanceof Microsoft.Maps.Polyline) {
+                  //           map.entities.removeAt(i);
+                  //       }
+                  //     var polyline = map.entities.get(i);
+                  //       if (polyline instanceof Microsoft.Maps.Pushpin) {
+                  //           map.entities.removeAt(i);
+                  //       }
+                  // }
+                  if(plannedLayer){
+                    plannedLayer.clear();
                   }
+                  
           }
       }
                 function GetActualRoute() {
@@ -770,6 +785,8 @@
         
                 // If the checkbox is checked
                   if (checkBox.checked == true){
+                    actualLayer = new Microsoft.Maps.Layer("actualLayer");
+
                     d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherActual.csv")
                       .then(function(data) {
                     var list = [];
@@ -800,7 +817,7 @@
                                        + "Temperature: " + data[i].Temperature + " °C</br>"
                                        + "Wind Speed: " + data[i].Wind_Speed + " m/s"
                           };
-                          map.entities.push(pin);
+                          actualLayer.add(pin);
                           //Add mouse events to the pushpin
                           Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
                             if (e.targetType == "pushpin") {
@@ -833,7 +850,7 @@
                                        + "Temperature: " + data[i].Temperature + " °C</br>"
                                        + "Wind Speed: " + data[i].Wind_Speed + " m/s"
                           };
-                          map.entities.push(pin);
+                          actualLayer.add(pin);
                           //Add mouse events to the pushpin
                           Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
                             if (e.targetType == "pushpin") {
@@ -854,14 +871,14 @@
                       strokeColor: 'red',
                       strokeThickness: 2,
                       });
-                      map.entities.push(line);
+                      actualLayer.add(line);
                     });
 
                     pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(27.035, 49.6795), {
                       icon: 'assets/img/changedPort.png',
                       title: 'SAJUB'
                       });
-                      map.entities.push(pin);
+                      actualLayer.add(pin);
 
                       //Pass the title and description into the template and pass it into the infobox as an option.
                       var infobox = new Microsoft.Maps.Infobox(new Microsoft.Maps.Location(25.77616, 52.40701), {
@@ -872,6 +889,8 @@
                       //Assign the infobox to a map instance.
                       infobox.setMap(map);
 
+                      map.layers.insert(actualLayer);
+                      
                       //heatmap
                       //Generate a 1,000 random locations that are within the bounds of the map view.
                       var locs = [new Microsoft.Maps.Location(24.52697584,	52.00975148),
@@ -882,7 +901,7 @@
                                   new Microsoft.Maps.Location(25.69179088,	53.15980482)];
                       //Load the HeatMap module.
                       Microsoft.Maps.loadModule('Microsoft.Maps.HeatMap', function () {
-                        var heatmap = new Microsoft.Maps.HeatMapLayer(locs, {
+                        heatmap = new Microsoft.Maps.HeatMapLayer(locs, {
                         intensity: 0.65,
                         radius: 100000,
                         unit: 'meters', 
@@ -899,17 +918,12 @@
 
 
                   } else {
-                    for (var i = map.entities.getLength() - 1; i >= 0; i--) {
-                      var polyline = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Polyline) {
-                            map.entities.removeAt(i);
-                        }
-                      var pushpin = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Pushpin) {
-                            map.entities.removeAt(i);
-                        }
-                      
-                    }
+                    //how to make infobox invisible?
+
+                    if(actualLayer){
+                    actualLayer.clear();
+                    heatmap.clear();
+                  }
                   }
                 }
     //will need to send vessel name to this function
@@ -919,6 +933,9 @@
         
         // If the checkbox is checked, display the output text
         if (checkBox.checked == true){
+  
+            zoneLayer = new Microsoft.Maps.Layer("zoneLayer");
+
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_IRAN.csv").then(function(data) {
                 var list = [];
                 var zone = "";
@@ -938,7 +955,7 @@
                     strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_HRA.csv").then(function(data) {
                       var list = [];
@@ -952,10 +969,10 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
 
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ERITREA.csv").then(function(data) {
@@ -970,10 +987,10 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
 
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_YEMEN.csv").then(function(data) {
@@ -988,10 +1005,10 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
                     
                   
@@ -1007,10 +1024,10 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
 
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_IRAQ.csv").then(function(data) {
@@ -1025,10 +1042,10 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
 
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_IRAQ_TTW.csv").then(function(data) {
@@ -1043,10 +1060,10 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
 
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ISRAEL.csv").then(function(data) {
@@ -1061,10 +1078,10 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
 
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ISRAEL_TTW.csv").then(function(data) {
@@ -1079,10 +1096,10 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
 
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_LEBANON.csv").then(function(data) {
@@ -1097,10 +1114,10 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
 
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_Libya.csv").then(function(data) {
@@ -1115,10 +1132,10 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
 
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_NIGERIA.csv").then(function(data) {
@@ -1133,10 +1150,10 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
 
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_PAKISTAN.csv").then(function(data) {
@@ -1151,10 +1168,10 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
 
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SOMALIA.csv").then(function(data) {
@@ -1169,10 +1186,10 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
 
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SYRIA.csv").then(function(data) {
@@ -1187,10 +1204,10 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
 
             d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_TOGO.csv").then(function(data) {
@@ -1205,30 +1222,33 @@
                 
                 var polygon = new Microsoft.Maps.Polygon(list, {
                     fillColor: 'transparent',
-                    strokeColor: 'brown',
+                    strokeColor: 'red',
                     strokeThickness: 2,
                 });
-                map.entities.push(polygon);
+                zoneLayer.add(polygon);
             });
 
+            map.layers.insert(zoneLayer);
+
         } else {
-                for (var i = map.entities.getLength() - 1; i >= 0; i--) {
-                    var polygon = map.entities.get(i);
-                        if (polygon instanceof Microsoft.Maps.Polygon) {
-                            map.entities.removeAt(i);
-                        }
-                }
+            if(zoneLayer){
+              zoneLayer.clear();
+            }
         }
     }         
-                  function GetVesselinVincity() {
+                  function GetVesselinVicinity() {
                     // Get the checkbox
                      var checkBox = document.getElementById("defaultCheck4");
                     // If the checkbox is checked, display the output text
                     if (checkBox.checked == true){
+                      vicinityLayer = new Microsoft.Maps.Layer("vicinityLayer");
+
+
                       map.setView ({
                         center: new Microsoft.Maps.Location(25.90372, 56.8122),
                         zoom: 10
                       });
+
                       d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/VesselinVincity.csv")
                       .then(function(data) {
                         var len = data.length;
@@ -1236,7 +1256,7 @@
                           var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude), {
                             icon: 'assets/img/vesselinVincity.png'
                           });
-                          map.entities.push(pin);
+                          vicinityLayer.add(pin);
                         }
 
                         //Load the spatial math module
@@ -1244,7 +1264,7 @@
                         var center = map.getCenter();
                         //Create an accuracy circle
                         var circle = createCircle(center, 17, 'rgba(0,0,150,0.3)');
-                        map.entities.push(circle);
+                        vicinityLayer.add(circle);
 
                         //Create a blue circle that has a 10 pixel radius as a pushpin and add to map.
                         var labelPin = createCirclePushpin(new Microsoft.Maps.Location(26.10872, 56.8122), 10, 'rgba(0,0,150,0.1)');
@@ -1253,14 +1273,17 @@
                         circle.metadata = { label: labelPin };    
 
                         //Add the label pushpin to the map.
-                        map.entities.push(labelPin);
+                        vicinityLayer.add(labelPin);
                         });
                       });
+
+                      map.layers.insert(vicinityLayer);
                         
-                      
                     }
                     else {
-
+                      if(vicinityLayer){
+                        vicinityLayer.clear();
+                      }
                     }
                   }
 
@@ -1289,10 +1312,10 @@
                 </script>
             <script>
                 $(document).ready(function(){
-                  $(":checkbox[value=vincity]").click(function(){
+                  $(":checkbox[value=vicinity]").click(function(){
                   if($(this).prop("checked") == true){
                   $("#notification").append(
-                    "<div class=\"alert alert-danger\" id=\"vincity\">" + 
+                    "<div class=\"alert alert-danger\" id=\"vicinity\">" + 
                     "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">" +
                     "<i class=\"material-icons\">close</i></button>" + 
                     "<span><b> Danger </b><br>" + 
@@ -1303,7 +1326,7 @@
                   );
                 }
                 else if($(this).prop("checked") == false){
-                  $("#vincity").remove();
+                  $("#vicinity").remove();
                 }
               });
             });
