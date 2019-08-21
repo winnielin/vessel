@@ -5,18 +5,17 @@
 ### Fleet Page  
 
 1. show weather info - implement a tile layer to the map (weather radar map) 7-10 
-2. fake dropdown list - CustomOverlay Class (ref:https://www.shipmap.org) 4-6 
+2. fake dropdown list - CustomOverlay Class (ref:https://www.shipmap.org) 7-8 
 3. planned vessel event button function - (approval & reject, additional premium) 10-12 
-4. actual vessel event - clear map 5-6 
-5. remove specific polygons -> layer? 5-6 
+4. actual vessel event - clear map 7-8 
+5. remove specific polygons -> layer? 7-8  
+6. change zones color  
 ~~6. a block with political and piracy events~~  
 ~~7. how to use zone entry & exit data?~~  
 
 ### d3.js chart block
 
-1. adjust zone chart 4-6 
-2. year 2018,19 change to slider 10-12 
-3. solve the size of svg (always minimize sidebar) 4-6 
+1. year 2018,19 change to slider 10-12 
 
 #### Bing Maps  
 
