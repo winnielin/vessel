@@ -322,13 +322,13 @@
                           <span class="nav-tabs-title"><h4>My Fleet</h4></span>
                           <ul class="nav nav-tabs" data-tabs="tabs">
                             <li class="nav-item">
-                              <a class="nav-link active" href="#planned" data-toggle="tab">
+                              <a class="nav-link active" href="#planned" data-toggle="tab" value="planned">
                                 <i class="material-icons">schedule</i> Planned
                                 <div class="ripple-container"></div>
                               </a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="#actual" data-toggle="tab">
+                              <a class="nav-link" href="#actual" data-toggle="tab" value="actual">
                                 <i class="material-icons">my_locations</i> Actual
                                 <div class="ripple-container"></div>
                               </a>
@@ -716,7 +716,7 @@
                       <td>
                         <div class="form-check">
                           <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="kimiActual" id="kimiActual"  onclick="GetKimiActualRoute()">
+                            <input class="form-check-input" type="checkbox" value="kimiActual" id="kimiActual" onclick="GetKimiActualRoute()">
                             <span class="form-check-sign">
                               <span class="check"></span>
                             </span>
@@ -1308,27 +1308,15 @@
   
   <script>
   var map, polygons;
+  var plannedKimiLayer, plannedJinguLayer, plannedShohjinLayer;
+  var actualKimiLayer, actualJinguLayer, actualShohjinLayer;
+
             function GetMap() {
                 map = new Microsoft.Maps.Map('#myMap', {
                     center: new Microsoft.Maps.Location(23.34454, 40.66896),
                     mapTypeId: Microsoft.Maps.MapTypeId.aerial,
                     zoom: 4
                 });
-
-                // //Load the GeoJSON and HeatMap modules.
-                // Microsoft.Maps.loadModule(['Microsoft.Maps.GeoJson', 'Microsoft.Maps.HeatMap'], function () {
-                // Microsoft.Maps.GeoJson.readFromUrl(usgsEarthquakeUrl, function (shapes) {
-                //   var heatmap = new Microsoft.Maps.HeatMapLayer(shapes, { radius: 5 });
-                //   map.layers.insert(heatmap);
-                //   });
-                // });
-
-                // Marine area
-                // Microsoft.Maps.loadModule('Microsoft.Maps.GeoXml', function () {
-                //     var layer = new Microsoft.Maps.GeoXmlLayer('http://geo.vliz.be/geoserver/wfs?request=getfeature&service=wfs&version=1.1.0&typename=MarineRegions:iho&outputformat=GML3&filter=%3CPropertyIsEqualTo%3E%3CPropertyName%3Eid%3C%2FPropertyName%3E%3CLiteral%3E37%3C%2FLiteral%3E%3C%2FPropertyIsEqualTo%3Ehttps://raw.githubusercontent.com/winnielin/vessel/master/redSea.xml');
-                //     console.log(layer);
-                //     map.layers.insert(layer);
-                // });
                 
             }
                 function GetKimiActualRoute() {
@@ -1338,15 +1326,15 @@
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
 
+                    actualKimiLayer = new Microsoft.Maps.Layer("actualKimiLayer");
                     //Create custom Pushpin current location for the vessel
                     var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(15.94309, 53.74743),
                     {
                       icon: 'assets/img/vesselCurrentLoc.png',
                     });
 
-                    //Add the pushpin to the map
-                    map.entities.push(pin);
-
+                    //Add the pushpin to the layer
+                    actualKimiLayer.add(pin);
 
                     d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherKIMI.csv")
                       .then(function(data) {
@@ -1375,7 +1363,7 @@
                                        + "Temperature: " + data[i].Temperature + " °C</br>"
                                        + "Wind Speed: " + data[i].Wind_Speed + " m/s"
                           };
-                          map.entities.push(pin);
+                          actualKimiLayer.add(pin);
                           //Add mouse events to the pushpin
                           Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
                             if (e.targetType == "pushpin") {
@@ -1406,11 +1394,10 @@
                                        + "Temperature: " + data[i].Temperature + " °C</br>"
                                        + "Wind Speed: " + data[i].Wind_Speed + " m/s"
                           };
-                          map.entities.push(pin);
+                          actualKimiLayer.add(pin);
                           //Add mouse events to the pushpin
                           Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
                             if (e.targetType == "pushpin") {
-                            console.log(e.target.getLocation());
                           // if (e.target.metadata) {
                           //Set the infobox options with the metadata of the pushpin.
                             infobox.setOptions({
@@ -1424,40 +1411,23 @@
                       }
                     }
                         
-            
                     var line = new Microsoft.Maps.Polyline(list, {
                       strokeColor: 'red',
                       strokeThickness: 2,
                       });
-                      map.entities.push(line);
+                      actualKimiLayer.add(line);
 
                     }); 
 
-                    //vessel in vicinity
-                    //Load the spatial math module
-                    Microsoft.Maps.loadModule("Microsoft.Maps.SpatialMath", function () {
-                      
-                      var loc = new Microsoft.Maps.Location(position.coords.latitude, position.coords.longitude);
-                      //Create an accuracy circle
-                      var path = Microsoft.Maps.SpatialMath.getRegularPolygon(loc, position.coords.accuracy, 36,  Microsoft.Maps.SpatialMath.Meters);
-                      var poly = new Microsoft.Maps.Polygon(path);
-                      map.entities.push(poly);
-                    });
+                    map.layers.insert(actualKimiLayer);
 
                   } else {
-                    for (var i = map.entities.getLength() - 1; i >= 0; i--) {
-                      var polyline = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Polyline) {
-                            map.entities.removeAt(i);
-                        }
-                      var pushpin = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Pushpin) {
-                            map.entities.removeAt(i);
-                        }
-                      
-                    }
+                    if(actualKimiLayer){
+                      actualKimiLayer.clear();
+                  }
                   }
                 }
+
                 function GetJinguActualRoute() {
                 // Get the checkbox
                 var checkBox = document.getElementById("jinguActual");
@@ -1465,14 +1435,15 @@
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
 
+                    actualJinguLayer = new Microsoft.Maps.Layer("actualJinguLayer");
                     //Create custom Pushpin current location for the vessel
                     var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(12.64903, 58.91744),
                     {
                       icon: 'assets/img/vesselCurrentLoc.png',
                     });
 
-                    //Add the pushpin to the map
-                    map.entities.push(pin);
+                    //Add the pushpin to the layer
+                    actualJinguLayer.add(pin);
 
                     d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherJINGU.csv")
                       .then(function(data) {
@@ -1501,7 +1472,7 @@
                                        + "Temperature: " + data[i].Temperature + " °C</br>"
                                        + "Wind Speed: " + data[i].Wind_Speed + " m/s"
                           };
-                          map.entities.push(pin);
+                          actualJinguLayer.add(pin);
                           //Add mouse events to the pushpin
                           Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
                             if (e.targetType == "pushpin") {
@@ -1527,10 +1498,10 @@
                 
                           var polygon = new Microsoft.Maps.Polygon(list, {
                             fillColor: 'transparent',
-                            strokeColor: 'brown',
+                            strokeColor: 'purple',
                             strokeThickness: 2,
                         });
-                        map.entities.push(polygon);
+                        actualJinguLayer.add(polygon);
                   });
                       } else {
                         pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude), {
@@ -1548,11 +1519,10 @@
                                        + "Temperature: " + data[i].Temperature + " °C</br>"
                                        + "Wind Speed: " + data[i].Wind_Speed + " m/s"
                           };
-                          map.entities.push(pin);
+                          actualJinguLayer.add(pin);
                           //Add mouse events to the pushpin
                           Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
                             if (e.targetType == "pushpin") {
-                            console.log(e.target.getLocation());
                           // if (e.target.metadata) {
                           //Set the infobox options with the metadata of the pushpin.
                             infobox.setOptions({
@@ -1569,24 +1539,17 @@
                       strokeColor: 'blue',
                       strokeThickness: 2,
                       });
-                      map.entities.push(line);
+                      actualJinguLayer.add(line);
                     });
-                    
+                    map.layers.insert(actualJinguLayer);
 
                   } else {
-                    for (var i = map.entities.getLength() - 1; i >= 0; i--) {
-                      var polyline = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Polyline) {
-                            map.entities.removeAt(i);
-                        }
-                      var pushpin = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Pushpin) {
-                            map.entities.removeAt(i);
-                        }
-                      
-                    }
+                    if(actualJinguLayer){
+                      actualJinguLayer.clear();
                   }
                 }
+                }
+                
                 function GetShohjinActualRoute() {
                 // Get the checkbox
                 var checkBox = document.getElementById("shohjinActual");
@@ -1594,6 +1557,7 @@
                 // If the checkbox is checked, display the output text
                   if (checkBox.checked == true){
 
+                    actualShohjinLayer = new Microsoft.Maps.Layer("actualShohjinLayer");
                     //Create custom Pushpin current location for the vessel
                     var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(12.23666, 60.72469),
                     {
@@ -1601,7 +1565,7 @@
                     });
 
                     //Add the pushpin to the map
-                    map.entities.push(pin);
+                    actualShohjinLayer.add(pin);
 
                     d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherSHOHJIN.csv")
                       .then(function(data) {
@@ -1630,7 +1594,7 @@
                                        + "Temperature: " + data[i].Temperature + " °C</br>"
                                        + "Wind Speed: " + data[i].Wind_Speed + " m/s"
                           };
-                          map.entities.push(pin);
+                          actualShohjinLayer.add(pin);
                           //Add mouse events to the pushpin
                           Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
                             if (e.targetType == "pushpin") {
@@ -1661,11 +1625,10 @@
                                        + "Temperature: " + data[i].Temperature + " °C</br>"
                                        + "Wind Speed: " + data[i].Wind_Speed + " m/s"
                           };
-                          map.entities.push(pin);
+                          actualShohjinLayer.add(pin);
                           //Add mouse events to the pushpin
                           Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
                             if (e.targetType == "pushpin") {
-                            console.log(e.target.getLocation());
                           // if (e.target.metadata) {
                           //Set the infobox options with the metadata of the pushpin.
                             infobox.setOptions({
@@ -1682,7 +1645,7 @@
                       strokeColor: 'green',
                       strokeThickness: 2,
                       });
-                      map.entities.push(line);
+                      actualShohjinLayer.add(line);
                     });
                     
                     map.setView ({
@@ -1697,7 +1660,7 @@
                     });
 
                     //Add the pushpin to the map
-                    map.entities.push(pin);
+                    actualShohjinLayer.add(pin);
 
                     var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(12.03666, 60.72469),
                     {
@@ -1705,14 +1668,14 @@
                     });
 
                     //Add the pushpin to the map
-                    map.entities.push(pin);
+                    actualShohjinLayer.add(pin);
                     
                     //Load the spatial math module
                     Microsoft.Maps.loadModule("Microsoft.Maps.SpatialMath", function () {
                         var center = map.getCenter();
                         //Create an accuracy circle
                         var circle = createCircle(center, 17, 'rgba(0,0,150,0.3)');
-                        map.entities.push(circle);
+                        actualShohjinLayer.add(circle);
 
                         //Create a blue circle that has a 10 pixel radius as a pushpin and add to map.
                         var labelPin = createCirclePushpin(new Microsoft.Maps.Location(12.23666, 60.72469), 10, 'rgba(0,0,150,0.1)');
@@ -1721,21 +1684,15 @@
                         circle.metadata = { label: labelPin };    
 
                         //Add the label pushpin to the map.
-                        map.entities.push(labelPin);
+                        actualShohjinLayer.add(labelPin);
                         });
 
+                        map.layers.insert(actualShohjinLayer);
+
                   } else {
-                    for (var i = map.entities.getLength() - 1; i >= 0; i--) {
-                      var polyline = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Polyline) {
-                            map.entities.removeAt(i);
-                        }
-                      var pushpin = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Pushpin) {
-                            map.entities.removeAt(i);
-                        }
-                      
-                    }
+                    if(actualShohjinLayer){
+                      actualShohjinLayer.clear();
+                  }
                   }
                 }
 
@@ -1767,6 +1724,8 @@
 
                 // If the checkbox is checked, display the output text
                 if (checkBox.checked == true){
+
+                  plannedKimiLayer = new Microsoft.Maps.Layer("plannedKimiLayer");
                   //Create custom Pushpin current location for the vessel
                   var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(36.59544, 36.18998),
                     {
@@ -1774,7 +1733,7 @@
                     });
 
                     //Add the pushpin to the map
-                    map.entities.push(pin);
+                    plannedKimiLayer.add(pin);
                   
                   d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherKIMI.csv")
                   .then(function(data) {
@@ -1789,7 +1748,7 @@
                       strokeColor: 'red',
                       strokeThickness: 2,
                   });
-                  map.entities.push(line);
+                  plannedKimiLayer.add(line);
               });
 
               //show zones        
@@ -1800,15 +1759,13 @@
                             for (i=0; i < len; i++) {
                               zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
                               list.push(zone);
-                          
                             }
-                      
                       var polygon = new Microsoft.Maps.Polygon(list, {
                           fillColor: 'transparent',
-                          strokeColor: 'brown',
+                          strokeColor: 'purple',
                           strokeThickness: 2,
                       });
-                      map.entities.push(polygon);
+                      plannedKimiLayer.add(polygon);
                   });
 
                   d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ERITREA.csv").then(function(data) {
@@ -1818,15 +1775,13 @@
                             for (i=0; i < len; i++) {
                               zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
                               list.push(zone);
-                          
                             }
-                      
                       var polygon = new Microsoft.Maps.Polygon(list, {
                           fillColor: 'transparent',
-                          strokeColor: 'brown',
+                          strokeColor: 'purple',
                           strokeThickness: 2,
                       });
-                      map.entities.push(polygon);
+                      plannedKimiLayer.add(polygon);
                   });
 
                   d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_YEMEN.csv").then(function(data) {
@@ -1836,15 +1791,13 @@
                             for (i=0; i < len; i++) {
                               zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
                               list.push(zone);
-                          
                             }
-                      
                       var polygon = new Microsoft.Maps.Polygon(list, {
                           fillColor: 'transparent',
-                          strokeColor: 'brown',
+                          strokeColor: 'purple',
                           strokeThickness: 2,
                       });
-                      map.entities.push(polygon);
+                      plannedKimiLayer.add(polygon);
                   });
                           
                           d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SA.csv").then(function(data) {
@@ -1854,27 +1807,20 @@
                             for (i=0; i < len; i++) {
                               zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
                               list.push(zone);
-                          
                             }
-                      
                       var polygon = new Microsoft.Maps.Polygon(list, {
                           fillColor: 'transparent',
-                          strokeColor: 'brown',
+                          strokeColor: 'purple',
                           strokeThickness: 2,
                       });
-                      map.entities.push(polygon);
+                      plannedKimiLayer.add(polygon);
                   });
+
+                  map.layers.insert(plannedKimiLayer);
                 
               } else {
-                  for (var i = map.entities.getLength() - 1; i >= 0; i--) {
-                      var polyline = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Polyline) {
-                            map.entities.removeAt(i);
-                        }
-                      var pushpin = map.entities.get(i);
-                        if (pushpin instanceof Microsoft.Maps.Pushpin) {
-                            map.entities.removeAt(i);
-                        }
+                if(plannedKimiLayer){
+                    plannedKimiLayer.clear();
                   }
           }
       }
@@ -1884,14 +1830,13 @@
 
                 // If the checkbox is checked, display the output text
                 if (checkBox.checked == true){
+                  plannedJinguLayer = new Microsoft.Maps.Layer("plannedJinguLayer");
                   //Create custom Pushpin current location for the vessel
                   var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(29.53157, 34.94194),
                     {
                       icon: 'assets/img/vesselCurrentLoc.png',
                     });
-
-                    //Add the pushpin to the map
-                    map.entities.push(pin);
+                    plannedJinguLayer.add(pin);
                   
                   d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherJINGU.csv")
                   .then(function(data) {
@@ -1906,7 +1851,7 @@
                       strokeColor: 'blue',
                       strokeThickness: 2,
                   });
-                  map.entities.push(line);
+                  plannedJinguLayer.add(line);
               });
 
               //show zones        
@@ -1925,19 +1870,14 @@
                           strokeColor: 'purple',
                           strokeThickness: 2,
                       });
-                      map.entities.push(polygon);
+                      plannedJinguLayer.add(polygon);
                   });
+
+                  map.layers.insert(plannedJinguLayer);
                 
               } else {
-                  for (var i = map.entities.getLength() - 1; i >= 0; i--) {
-                      var polyline = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Polyline) {
-                            map.entities.removeAt(i);
-                        }
-                      var pushpin = map.entities.get(i);
-                        if (pushpin instanceof Microsoft.Maps.Pushpin) {
-                            map.entities.removeAt(i);
-                        }
+                if(plannedJinguLayer){
+                    plannedJinguLayer.clear();
                   }
           }
       }
@@ -1947,14 +1887,13 @@
 
                 // If the checkbox is checked, display the output text
                 if (checkBox.checked == true){
+                  plannedShohjinLayer = new Microsoft.Maps.Layer("plannedShohjinLayer");
                   //Create custom Pushpin current location for the vessel
                   var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(29.50292, 34.93681),
                     {
                       icon: 'assets/img/vesselCurrentLoc.png',
                     });
-
-                    //Add the pushpin to the map
-                    map.entities.push(pin);
+                    plannedShohjinLayer.add(pin);
                   
                   d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/BasicPositionHistoryWithWeatherSHOHJIN.csv")
                   .then(function(data) {
@@ -1969,21 +1908,15 @@
                       strokeColor: 'green',
                       strokeThickness: 2,
                   });
-                  map.entities.push(line);
+                  plannedShohjinLayer.add(line);
               });
 
+              map.layers.insert(plannedShohjinLayer);
                 
               } else {
-                  for (var i = map.entities.getLength() - 1; i >= 0; i--) {
-                      var polyline = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Polyline) {
-                            map.entities.removeAt(i);
-                        }
-                      var pushpin = map.entities.get(i);
-                        if (pushpin instanceof Microsoft.Maps.Pushpin) {
-                            map.entities.removeAt(i);
-                        }
-                  }
+                if(plannedShohjinLayer){
+                    plannedShohjinLayer.clear();
+                }
           }
       }
                 function ShowWeather() {
@@ -2005,16 +1938,9 @@
                 map.layers.insert(katrinaTileLayer);
                   
               } else {
-                  for (var i = map.entities.getLength() - 1; i >= 0; i--) {
-                      var polyline = map.entities.get(i);
-                        if (polyline instanceof Microsoft.Maps.Polyline) {
-                            map.entities.removeAt(i);
-                        }
-                      var pushpin = map.entities.get(i);
-                        if (pushpin instanceof Microsoft.Maps.Pushpin) {
-                            map.entities.removeAt(i);
-                        }
-                  }
+                if(katrinaTileLayer){
+                  katrinaTileLayer.clear();
+                }
           }
       }
   </script>
@@ -2669,8 +2595,9 @@
           }
         }); 
       }); 
-          $(document).ready(function(){
-          $("select.selectpicker[value=client]").change(function(){
+
+      $(document).ready(function(){
+        $("select.selectpicker[value=client]").change(function(){
           if($(this).children("option:selected").val() == "BB"){
                   $("#aa").remove();
                   $("#cc").remove();
@@ -2715,9 +2642,9 @@
                   );
                 }
           });
-        });
+      });
 
-        $(document).ready(function(){
+      $(document).ready(function(){
         $("a.nav-link[value=zones]").click(function(){
           if($("select.selectpicker[value=client]").children("option:selected").val() == "BB"){
                   $("#aa").remove();
@@ -2764,10 +2691,39 @@
                 }
         }); 
       }); 
+
+      $(document).ready(function(){
+        $("a.nav-link[value=planned]").click(function(){
+          $("#kimiActual").prop("checked", false);
+          $("#jinguActual").prop("checked", false);
+          $("#shohjinActual").prop("checked", false);
+          $("#kimi").remove();
+          $("#jingu").remove();
+          $("#shohjin").remove();
+          actualKimiLayer.clear();
+          actualJinguLayer.clear();
+          actualShohjinLayer.clear();
+        }); 
+      });
+
+      $(document).ready(function(){
+        $("a.nav-link[value=actual]").click(function(){
+          $("#kimiPlanned").prop("checked", false);
+          $("#jinguPlanned").prop("checked", false);
+          $("#shohjinPlanned").prop("checked", false);
+          $("#kimi").remove();
+          $("#jingu").remove();
+          $("#shohjin").remove();
+          plannedKimiLayer.clear();
+          plannedJinguLayer.clear();
+          plannedShohjinLayer.clear();
+        }); 
+      });  
+
     </script>
 
 <script>
-    //valuation chart
+    //chart
     (function chart1(){
       var speed = 0;
 
@@ -2942,10 +2898,8 @@
           chart.update = update;   
       };
   }())
-      </script>
 
-<script>
-  (function chart2(){
+    (function chart2(){
     //zones chart
     var speed = 0;
 
