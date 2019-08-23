@@ -337,6 +337,7 @@
                         </div>
                       </div>
                 </div>
+                
                 <div class="card-body table-responsive" style="overflow:scroll; height:350px;">
                   <div class="tab-content">
                     <div class="tab-pane active" id="planned">
@@ -1263,6 +1264,7 @@
       </footer>
     </div>
   </div>
+</div>
   <!--   Core JS Files   -->
   <script src="assets/js/core/jquery.min.js"></script>
   <script src="assets/js/core/popper.min.js"></script>
@@ -1307,7 +1309,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
   
   <script>
-  var map, polygons;
+  var map, polygons, weatherLayer;
   var plannedKimiLayer, plannedJinguLayer, plannedShohjinLayer;
   var actualKimiLayer, actualJinguLayer, actualShohjinLayer;
 
@@ -1925,21 +1927,16 @@
 
                 // If the checkbox is checked, display the output text
                 if (checkBox.checked == true){
-                  // Custom tiles of Hurricane Katrina for zoom level 1-10
-                var katrinaTileSource = new Microsoft.Maps.TileSource({
-                    uriConstructor: 'https://bingmapsisdk.blob.core.windows.net/katrinatiles/{quadkey}.png',
-                    minZoom: 1,
-                    maxZoom: 10,
-                    bounds: Microsoft.Maps.LocationRect.fromEdges(35.176, -101.065, 14.01, -80.538)
-                });
-                var katrinaTileLayer = new Microsoft.Maps.TileLayer({
-                    mercator: katrinaTileSource,
-                });
-                map.layers.insert(katrinaTileLayer);
+                  console.log("hi");
+                  //source: https://lance.modaps.eosdis.nasa.gov/cgi-bin/imagery/gallery.cgi
+                  Microsoft.Maps.loadModule('Microsoft.Maps.GeoXml', function () {
+                          weatherLayer = new Microsoft.Maps.GeoXmlLayer("data/Mekunu.A2018143.0700.2km.kml");
+                          map.layers.insert(weatherLayer);
+                      });
                   
               } else {
-                if(katrinaTileLayer){
-                  katrinaTileLayer.clear();
+                if(weatherLayer){
+                  weatherLayer.clear();
                 }
           }
       }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.1">
+<Document>
+	<name>Mekunu.A2018143.0700.2km.jpg</name>
+	<LookAt id="khLookAtMekunu">
+		<longitude>  55.30</longitude>
+		<latitude>  11.60</latitude>
+		<altitude>0.00</altitude>
+		<range>1212260.0</range>
+		<tilt>   0.0</tilt>
+		<heading>   0.0</heading>
+	</LookAt>
+	<Style id="caption">
+		<BalloonStyle>
+		<text>$[description]</text>
+		</BalloonStyle>
+	</Style>
+	<Snippet></Snippet>
+	<description><![CDATA[
+Tropical Cyclone Mekunu (02A) off the Horn of Africa
+]]>
+	</description>
+	<GroundOverlay>
+		<name>Mekunu.A2018143.0700.2km.jpg</name>
+		<Icon>
+			<href>https://lance-modis.eosdis.nasa.gov/imagery/gallery/2018143-0523/Mekunu.A2018143.0700.2km.jpg</href>
+		</Icon>
+		<LatLonBox id="khLatLonBoxMekunu">
+			<north>22.164900</north>
+			<south>1.030800</south>
+			<east>63.519900</east>
+			<west>47.082400</west>
+			<rotation>   0.00</rotation>
+		</LatLonBox>
+	</GroundOverlay>
+	<ScreenOverlay>
+		<name>Rapid Response Gallery, NASA Goddard Space Flight Center</name>
+		<Icon>
+			<href>https://lance-modis.eosdis.nasa.gov/images/mrr_banner.png</href>
+		</Icon>
+		<overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+		<screenXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+		<rotationXY x="0" y="0" xunits="fraction" yunits="fraction"/>
+		<size x="0" y="0" xunits="fraction" yunits="fraction"/>
+	</ScreenOverlay>
+</Document>
+</kml>
