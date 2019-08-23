@@ -1419,7 +1419,73 @@
                       });
                       actualKimiLayer.add(line);
 
-                    }); 
+                    });
+
+                  //show zones        
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_HRA.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                            }
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      actualKimiLayer.add(polygon);
+                  });
+
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ERITREA.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                            }
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      actualKimiLayer.add(polygon);
+                  });
+
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_YEMEN.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                            }
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      actualKimiLayer.add(polygon);
+                  });
+                          
+                          d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SA.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                            }
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      actualKimiLayer.add(polygon);
+                  });  
+                     
 
                     map.layers.insert(actualKimiLayer);
 
@@ -1543,6 +1609,62 @@
                       });
                       actualJinguLayer.add(line);
                     });
+
+                    //show zones        
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_HRA.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      actualJinguLayer.add(polygon);
+                  });
+
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SA.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      actualJinguLayer.add(polygon);
+                  });
+
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ISRAEL.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      actualJinguLayer.add(polygon);
+                  });
+
                     map.layers.insert(actualJinguLayer);
 
                   } else {
@@ -1649,6 +1771,60 @@
                       });
                       actualShohjinLayer.add(line);
                     });
+
+                    d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SA.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      actualShohjinLayer.add(polygon);
+                  });
+
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ISRAEL.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      actualShohjinLayer.add(polygon);
+                  });
+
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_YEMEN.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      actualShohjinLayer.add(polygon);
+                  });
                     
                     map.setView ({
                         center: new Microsoft.Maps.Location(12.23666, 60.72469),
@@ -1875,6 +2051,42 @@
                       plannedJinguLayer.add(polygon);
                   });
 
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SA.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      plannedJinguLayer.add(polygon);
+                  });
+
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ISRAEL.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      plannedJinguLayer.add(polygon);
+                  });
+
                   map.layers.insert(plannedJinguLayer);
                 
               } else {
@@ -1912,6 +2124,60 @@
                   });
                   plannedShohjinLayer.add(line);
               });
+
+              d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_SA.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      plannedShohjinLayer.add(polygon);
+                  });
+
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_ISRAEL.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      plannedShohjinLayer.add(polygon);
+                  });
+
+                  d3.csv("https://raw.githubusercontent.com/winnielin/vessel/master/data/WarZones_YEMEN.csv").then(function(data) {
+                            var list = [];
+                            var zone = "";
+                            var len = data.length;
+                            for (i=0; i < len; i++) {
+                              zone = new Microsoft.Maps.Location(data[i].Latitude, data[i].Longitude);
+                              list.push(zone);
+                          
+                            }
+                      
+                      var polygon = new Microsoft.Maps.Polygon(list, {
+                          fillColor: 'transparent',
+                          strokeColor: 'purple',
+                          strokeThickness: 2,
+                      });
+                      plannedShohjinLayer.add(polygon);
+                  });
 
               map.layers.insert(plannedShohjinLayer);
                 
